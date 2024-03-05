@@ -204,15 +204,45 @@
       <article class="post-article">
         
           Cute HTTP File Server过Cute HTTP File Server存在的几个漏洞读取flag，如：目录遍历、任意目录移动、任意文 件移动、任意目录下载。 
-
 要用http
 抓下载的包是
-
 放包的时候发现了
-
 可以猜到有目录遍历漏洞
 
+        
+      </article>
+    </div>
+  </div>
 
+
+  
+  
+  <div class="post-wrap-right wow fadeInUp">
+    
+    <a class="post-link" href="/2024/02/25/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E6%B3%A8%E5%85%A5/"></a>
+    
+    <div class="post-cover-right">
+      
+        
+        
+          <img data-src="/images/banner.jpg" data-sizes="auto" alt="" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2024-02-25</span>
+        <span><span class="icon-pencil"></span>1.5k words</span>
+        <span><span class="icon-clock"></span>6 mins</span>
+      </div>
+      <h2 class="post-title"></h2>
+      <article class="post-article">
+        
+          环境变量注入执行命令 p神 
+学习知识起始是想利用这一段代码
+1234567&amp;lt;?phpforeach($_REQUEST[&amp;#x27;envs&amp;#x27;] as $key =&amp;gt; $val) &amp;#123;    putenv(&amp;quot;&amp;#123;$key&amp;#125;=&amp;#123;$val&amp;#125;&amp;quot;);&amp;#125;//... 一些其他代码system(&amp;#x27;echo hello&amp;#x27;);?&amp;gt;
+
+接着看了system  PHP的底层函数，是调用 popen() , popen最终执行的是这个spawn_process, 最终执行的是命令sh -c &amp;
         
       </article>
     </div>
@@ -236,7 +266,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>Posts</div>
-    <div class="sidebar-state-number">1</div>
+    <div class="sidebar-state-number">2</div>
   </div>
   <div class="sidebar-state-category">
     <div>Categories</div>
@@ -309,10 +339,10 @@
       
         <div>
           <span class="icon-brush"></span>
-          68
+          1.5k
           &nbsp;|&nbsp;
           <span class="icon-coffee"></span>
-          00:01
+          00:07
         </div>
       
       
@@ -345,7 +375,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>Posts</div>
-    <div class="sidebar-state-number">1</div>
+    <div class="sidebar-state-number">2</div>
   </div>
   <div class="sidebar-state-category">
     <div>Categories</div>
