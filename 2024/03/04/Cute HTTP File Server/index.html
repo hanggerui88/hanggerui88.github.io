@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://i.postimg.cc/zDTRFSvf/1.png">
 <meta property="og:image" content="https://i.postimg.cc/D0c0k64d/image.png">
 <meta property="article:published_time" content="2024-03-04T14:29:47.939Z">
-<meta property="article:modified_time" content="2024-03-05T11:33:53.264Z">
+<meta property="article:modified_time" content="2024-03-05T12:46:25.276Z">
 <meta property="article:author" content="hanggerui88">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.postimg.cc/MH5XB5D3/image.png">
@@ -218,6 +218,8 @@
 <p>然后就看到了梦寐以求的flag</p>
 <p><img src="https://i.postimg.cc/D0c0k64d/image.png"></p>
 <p>VNCTF{564e406840636b3156315f6764676d}</p>
+<p>[还有种思路：]( <a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/13730?time__1311=mqmxnQKCw40D9DBLPx2B3fH1ADBDWTwD&alichlgref=https://cn.bing.com/">VNCTF2024 writeup(含cve-2024-0603漏洞分析) - 先知社区 (aliyun.com)</a> )</p>
+<p> 修改路径为<code>/chfs/downloaddir/../../../../flag</code>就能够成功获取<code>flag</code>目录的所有内容,包括<code>flag</code> </p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>知识点:</p>
 <p>Cute HTTP File Server存在几个漏洞,目录遍历、任意目录移动、任意文件移动、任意目录下载。 </p>
 <p>题目最开始给你一个文件下载漏洞,然后根据自己又发现的移动文件漏洞,下载flag</p>
@@ -370,7 +372,7 @@
       
         <div>
           <span class="icon-brush"></span>
-          1.8k
+          1.9k
           &nbsp;|&nbsp;
           <span class="icon-coffee"></span>
           00:07
