@@ -183,6 +183,104 @@
   
   <div class="post-wrap-left wow fadeInUp">
     
+      <a class="post-link" href="/2024/04/20/%E6%B8%97%E9%80%8F%E5%AD%A6%E4%B9%A0/%E6%B8%97%E9%80%8F%E5%AD%A6%E4%B9%A0-2-Multimaster/" aria-label="渗透学习-2-Multimaster"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        
+        
+          <img data-src="/images/banner.jpg" data-sizes="auto" alt="渗透学习-2-Multimaster" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2024-04-20</span>
+        <span><span class="icon-pencil"></span>4.4k words</span>
+        <span><span class="icon-clock"></span>22 mins</span>
+      </div>
+      <h2 class="post-title">渗透学习-2-Multimaster</h2>
+      <article class="post-article">
+        
+          Multimaster扫描端口1./fscan -h 10.10.10.179
+
+
+开启了80端口，默认开启了http服务，进行访问，有一个员工查找的功能
+1nmap -sC -sV -p- 10.10.10.179 -T4 -oA 
+
+
+|   NetBIOS_Computer_Name: MULTIMASTER 
+|   DNS_Domain_Name: MEGACORP.LOCAL 
+
+
+进行抓包
+
+在我输入的name为空的时候，会显示所有员工的信息，现在要把信息收集起来，可以用curl命令收集用户和邮箱信息
+1curl -XPOST -S --data-binary &amp;#x27;&amp;#1
+        
+      </article>
+    </div>
+  </div>
+
+
+  
+  
+  <div class="post-wrap-right wow fadeInUp">
+    
+    <a class="post-link" href="/2024/04/18/%E6%B8%97%E9%80%8F%E5%AD%A6%E4%B9%A0/VulnHubDC%E2%80%94DC-1%E9%9D%B6%E5%9C%BA/"></a>
+    
+    <div class="post-cover-right">
+      
+        
+        
+          <img data-src="/images/banner.jpg" data-sizes="auto" alt="VulnHubDC—DC-1靶场" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2024-04-18</span>
+        <span><span class="icon-pencil"></span>1.3k words</span>
+        <span><span class="icon-clock"></span>6 mins</span>
+      </div>
+      <h2 class="post-title">VulnHubDC—DC-1靶场</h2>
+      <article class="post-article">
+        
+          VulnHubDC—DC-1靶场配置下载地址
+左上角：
+文件-&amp;gt;打开，导入文件选择下载的文件
+在网络里面进行如下配置：
+
+如下所示就是成功了：
+
+打靶机
+因为选择net模式，可以查看和主机同一网络下的ip
+
+
+192.168.205.128 是自己的ip
+1，2，254都是网关，所以靶机就是 192.168.205.136
+
+端口扫描
+
+12┌──(root㉿Sinead)-[/home/kail/Desktop/tool/fscan]└─# ./fscan -h 192.168.205.136 
+
+
+开启了 22 和80 端口
+
+查看使用了什么服务
+
+12345678910111213
+        
+      </article>
+    </div>
+  </div>
+
+
+  
+  
+  <div class="post-wrap-left wow fadeInUp">
+    
       <a class="post-link" href="/2024/04/07/%E6%B8%97%E9%80%8F%E5%AD%A6%E4%B9%A0/%E6%B8%97%E9%80%8F%E5%AD%A6%E4%B9%A0-1-forest-1/" aria-label="渗透学习-1-forest"></a>
     
     
@@ -487,7 +585,7 @@ Cute HTTP File Server2024 vnctf  CutePath抓包，是一个share目录
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>Posts</div>
-    <div class="sidebar-state-number">18</div>
+    <div class="sidebar-state-number">20</div>
   </div>
   <div class="sidebar-state-category">
     <div>Categories</div>
@@ -495,7 +593,7 @@ Cute HTTP File Server2024 vnctf  CutePath抓包，是一个share目录
   </div>
   <div class="sidebar-state-tag">
     <div>Tags</div>
-    <div class="sidebar-state-number">18</div>
+    <div class="sidebar-state-number">19</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -560,10 +658,10 @@ Cute HTTP File Server2024 vnctf  CutePath抓包，是一个share目录
       
         <div>
           <span class="icon-brush"></span>
-          24.1k
+          26.3k
           &nbsp;|&nbsp;
           <span class="icon-coffee"></span>
-          01:50
+          02:00
         </div>
       
       
@@ -596,7 +694,7 @@ Cute HTTP File Server2024 vnctf  CutePath抓包，是一个share目录
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>Posts</div>
-    <div class="sidebar-state-number">18</div>
+    <div class="sidebar-state-number">20</div>
   </div>
   <div class="sidebar-state-category">
     <div>Categories</div>
@@ -604,7 +702,7 @@ Cute HTTP File Server2024 vnctf  CutePath抓包，是一个share目录
   </div>
   <div class="sidebar-state-tag">
     <div>Tags</div>
-    <div class="sidebar-state-number">18</div>
+    <div class="sidebar-state-number">19</div>
   </div>
 </div>
 <div class="sidebar-social">

@@ -183,6 +183,94 @@
   
   <div class="post-wrap-left wow fadeInUp">
     
+      <a class="post-link" href="/2024/04/27/wp/DASCTF%20X%20GFCTF%202024%EF%BD%9C%E5%9B%9B%E6%9C%88%E5%BC%80%E5%90%AF%E7%AC%AC%E4%B8%80%E5%B1%80/" aria-label="DASCTF X GFCTF 2024"></a>
+    
+    
+    <div class="post-cover-left">
+      
+        
+        
+          <img data-src="/images/banner.jpg" data-sizes="auto" alt="DASCTF X GFCTF 2024" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2024-04-27</span>
+        <span><span class="icon-pencil"></span>124 words</span>
+        <span><span class="icon-clock"></span>1 min</span>
+      </div>
+      <h2 class="post-title">DASCTF X GFCTF 2024</h2>
+      <article class="post-article">
+        
+          DASCTF X GFCTF 2024｜四月开启第一局cool_index看到这里会用parseInt()解析index内容：
+
+有个小tick:
+
+发包获得flag
+
+EasySignin注册登录，在修改密码这里可以更改用户为admin
+
+重新登录admin账号，查看图片发现url跳转
+
+猜测是ssrf
+file协议被过滤：
+
+用http进行端口探测，开放3306端口：
+
+解码显示，使用的是mysql,使用gopherus进行攻击：
+
+返回结果显示，没有表
+用load_file就加载进来了：
+
+
+
+
+        
+      </article>
+    </div>
+  </div>
+
+
+  
+  
+  <div class="post-wrap-right wow fadeInUp">
+    
+    <a class="post-link" href="/2024/04/25/ssrf-ctfhub/"></a>
+    
+    <div class="post-cover-right">
+      
+        
+        
+          <img data-src="/images/banner.jpg" data-sizes="auto" alt="ssrf-ctfhub" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2024-04-25</span>
+        <span><span class="icon-pencil"></span>2.1k words</span>
+        <span><span class="icon-clock"></span>9 mins</span>
+      </div>
+      <h2 class="post-title">ssrf-ctfhub</h2>
+      <article class="post-article">
+        
+          ssrf-ctfhub什么是 SSRF?攻击者从外网通过 SSRF 攻击访问到内网，接着对内网的应用展开攻击，这些应用包括但不限于 MySQL，redis，SMTP 等等 ……
+SSRF (全称：Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF 攻击的目标是从外网无法访问的内部系统。
+
+正是因为它是由服务端发起的，所以它能够请求到与它相连而与外网隔离的内部系统。
+
+ssrf 漏洞产生原因SSRF 形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。比如从
+        
+      </article>
+    </div>
+  </div>
+
+
+  
+  
+  <div class="post-wrap-left wow fadeInUp">
+    
       <a class="post-link" href="/2024/04/22/java/3jdbc%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" aria-label="jdbc反序列化"></a>
     
     
@@ -218,9 +306,42 @@
   
   <div class="post-wrap-right wow fadeInUp">
     
-    <a class="post-link" href="/2024/04/22/java/1fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"></a>
+    <a class="post-link" href="/2024/04/22/java/2Jackson/"></a>
     
     <div class="post-cover-right">
+      
+        
+        
+          <img data-src="/images/banner.jpg" data-sizes="auto" alt="POJONode#toString" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2024-04-22</span>
+        <span><span class="icon-pencil"></span>1.3k words</span>
+        <span><span class="icon-clock"></span>5 mins</span>
+      </div>
+      <h2 class="post-title">POJONode#toString</h2>
+      <article class="post-article">
+        
+          POJONode#toString调用getter方法原理前言前面说到了在fastjson中的原生的一个反序列化调用任意类的getter方法的原理与细节
+从最开始的fastjson &amp;lt; 1.2.48下的在JSONObject / JSONArray类反序列化过程没有安全检查的情况下通过BadAttributeValueExpException#readObject调用JSONObject#toString / JSONArray#toString方法也即是JSON#toString方法触发getter
+再到fastjson &amp;gt;&amp;#x3D; 1.2.48下的存在有SecureObje
+        
+      </article>
+    </div>
+  </div>
+
+
+  
+  
+  <div class="post-wrap-left wow fadeInUp">
+    
+      <a class="post-link" href="/2024/04/22/java/1fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" aria-label="fastjson反序列化"></a>
+    
+    
+    <div class="post-cover-left">
       
         
         
@@ -249,12 +370,11 @@
 
   
   
-  <div class="post-wrap-left wow fadeInUp">
+  <div class="post-wrap-right wow fadeInUp">
     
-      <a class="post-link" href="/2024/04/22/java/5TemplatesImpl_base64%E5%AD%97%E8%8A%82%E7%A0%81/" aria-label="TemplatesImpl 链子"></a>
+    <a class="post-link" href="/2024/04/22/java/5TemplatesImpl_base64%E5%AD%97%E8%8A%82%E7%A0%81/"></a>
     
-    
-    <div class="post-cover-left">
+    <div class="post-cover-right">
       
         
         
@@ -275,38 +395,6 @@
 
 defineClass一般我们不能使用，newTransformer就可以外调了，但是也可以getOutputProperties
 POC1234567891
-        
-      </article>
-    </div>
-  </div>
-
-
-  
-  
-  <div class="post-wrap-right wow fadeInUp">
-    
-    <a class="post-link" href="/2024/04/22/java/2Jackson/"></a>
-    
-    <div class="post-cover-right">
-      
-        
-        
-          <img data-src="/images/banner.jpg" data-sizes="auto" alt="POJONode#toString" class="lazyload">
-        
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-04-22</span>
-        <span><span class="icon-pencil"></span>1.3k words</span>
-        <span><span class="icon-clock"></span>5 mins</span>
-      </div>
-      <h2 class="post-title">POJONode#toString</h2>
-      <article class="post-article">
-        
-          POJONode#toString调用getter方法原理前言前面说到了在fastjson中的原生的一个反序列化调用任意类的getter方法的原理与细节
-从最开始的fastjson &amp;lt; 1.2.48下的在JSONObject / JSONArray类反序列化过程没有安全检查的情况下通过BadAttributeValueExpException#readObject调用JSONObject#toString / JSONArray#toString方法也即是JSON#toString方法触发getter
-再到fastjson &amp;gt;&amp;#x3D; 1.2.48下的存在有SecureObje
         
       </article>
     </div>
@@ -351,28 +439,28 @@ classAnnotations表示和类相关的Annotation的描述信息，这里的数据
   
   <div class="post-wrap-right wow fadeInUp">
     
-    <a class="post-link" href="/2024/04/22/java/%E5%9F%BA%E7%A1%80/ClassLoader%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6#/"></a>
+    <a class="post-link" href="/2024/04/22/java/%E5%9F%BA%E7%A1%80/RMI/"></a>
     
     <div class="post-cover-right">
       
         
         
-          <img data-src="/images/banner.jpg" data-sizes="auto" alt="ClassLoader类加载机制" class="lazyload">
+          <img data-src="/images/banner.jpg" data-sizes="auto" alt="RMI" class="lazyload">
         
       
     </div>
     <div class="post-info">
       <div class="post-meta">
         <span><span class="icon-calendar"></span>2024-04-22</span>
-        <span><span class="icon-pencil"></span>605 words</span>
+        <span><span class="icon-pencil"></span>479 words</span>
         <span><span class="icon-clock"></span>2 mins</span>
       </div>
-      <h2 class="post-title">ClassLoader类加载机制</h2>
+      <h2 class="post-title">RMI</h2>
       <article class="post-article">
         
-          ClassLoader类加载机制Java程序在运行前需要先编译成class文件，Java类初始化的时候会调用java.lang.ClassLoader加载类字节码，ClassLoader会调用JVM的native方法(defineClass0/1/2)来定义一个java.lang.Class实例。
-ClassLoader包含以下几个ClassLoader：- Bootstrap ClassLoader (引导类加载器) 该类加载器实现于JVM层，采用C++编写- Extension ClassLoader (扩展类加载器)- App ClassLoader (系统类加载器) 默认的类加载器
-C
+          RMI简介Java的RMI远程调用是指，一个JVM中的代码可以通过网络实现远程调用另一个JVM的某个方法。RMI是Remote Method Invocation的缩写。提供服务的一方我们称之为服务器，而实现远程调用的一方我们称之为客户端。
+远程调用的方法需要- 一个继承了java.rmi.Remote的接口
+123456import java.rmi.Remote;import java.rmi.RemoteException;public interface RemoteHelloWorld extends Remote &amp;#123;    public String hello() th
         
       </article>
     </div>
@@ -417,126 +505,28 @@ JAVA IO 文件系统Java抽象出了一个文件系统的对象:java.io.FileSyst
   
   <div class="post-wrap-right wow fadeInUp">
     
-    <a class="post-link" href="/2024/04/22/java/%E5%9F%BA%E7%A1%80/RMI/"></a>
+    <a class="post-link" href="/2024/04/22/java/%E5%9F%BA%E7%A1%80/ClassLoader%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6#/"></a>
     
     <div class="post-cover-right">
       
         
         
-          <img data-src="/images/banner.jpg" data-sizes="auto" alt="RMI" class="lazyload">
+          <img data-src="/images/banner.jpg" data-sizes="auto" alt="ClassLoader类加载机制" class="lazyload">
         
       
     </div>
     <div class="post-info">
       <div class="post-meta">
         <span><span class="icon-calendar"></span>2024-04-22</span>
-        <span><span class="icon-pencil"></span>479 words</span>
+        <span><span class="icon-pencil"></span>605 words</span>
         <span><span class="icon-clock"></span>2 mins</span>
       </div>
-      <h2 class="post-title">RMI</h2>
+      <h2 class="post-title">ClassLoader类加载机制</h2>
       <article class="post-article">
         
-          RMI简介Java的RMI远程调用是指，一个JVM中的代码可以通过网络实现远程调用另一个JVM的某个方法。RMI是Remote Method Invocation的缩写。提供服务的一方我们称之为服务器，而实现远程调用的一方我们称之为客户端。
-远程调用的方法需要- 一个继承了java.rmi.Remote的接口
-123456import java.rmi.Remote;import java.rmi.RemoteException;public interface RemoteHelloWorld extends Remote &amp;#123;    public String hello() th
-        
-      </article>
-    </div>
-  </div>
-
-
-  
-  
-  <div class="post-wrap-left wow fadeInUp">
-    
-      <a class="post-link" href="/2024/04/20/%E6%B8%97%E9%80%8F%E5%AD%A6%E4%B9%A0/%E6%B8%97%E9%80%8F%E5%AD%A6%E4%B9%A0-2-Multimaster/" aria-label="渗透学习-2-Multimaster"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        
-        
-          <img data-src="/images/banner.jpg" data-sizes="auto" alt="渗透学习-2-Multimaster" class="lazyload">
-        
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-04-20</span>
-        <span><span class="icon-pencil"></span>4.4k words</span>
-        <span><span class="icon-clock"></span>22 mins</span>
-      </div>
-      <h2 class="post-title">渗透学习-2-Multimaster</h2>
-      <article class="post-article">
-        
-          Multimaster扫描端口1./fscan -h 10.10.10.179
-
-
-开启了80端口，默认开启了http服务，进行访问，有一个员工查找的功能
-1nmap -sC -sV -p- 10.10.10.179 -T4 -oA 
-
-
-|   NetBIOS_Computer_Name: MULTIMASTER 
-|   DNS_Domain_Name: MEGACORP.LOCAL 
-
-
-进行抓包
-
-在我输入的name为空的时候，会显示所有员工的信息，现在要把信息收集起来，可以用curl命令收集用户和邮箱信息
-1curl -XPOST -S --data-binary &amp;#x27;&amp;#1
-        
-      </article>
-    </div>
-  </div>
-
-
-  
-  
-  <div class="post-wrap-right wow fadeInUp">
-    
-    <a class="post-link" href="/2024/04/18/%E6%B8%97%E9%80%8F%E5%AD%A6%E4%B9%A0/VulnHubDC%E2%80%94DC-1%E9%9D%B6%E5%9C%BA/"></a>
-    
-    <div class="post-cover-right">
-      
-        
-        
-          <img data-src="/images/banner.jpg" data-sizes="auto" alt="VulnHubDC—DC-1靶场" class="lazyload">
-        
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-04-18</span>
-        <span><span class="icon-pencil"></span>1.3k words</span>
-        <span><span class="icon-clock"></span>6 mins</span>
-      </div>
-      <h2 class="post-title">VulnHubDC—DC-1靶场</h2>
-      <article class="post-article">
-        
-          VulnHubDC—DC-1靶场配置下载地址
-左上角：
-文件-&amp;gt;打开，导入文件选择下载的文件
-在网络里面进行如下配置：
-
-如下所示就是成功了：
-
-打靶机
-因为选择net模式，可以查看和主机同一网络下的ip
-
-
-192.168.205.128 是自己的ip
-1，2，254都是网关，所以靶机就是 192.168.205.136
-
-端口扫描
-
-12┌──(root㉿Sinead)-[/home/kail/Desktop/tool/fscan]└─# ./fscan -h 192.168.205.136 
-
-
-开启了 22 和80 端口
-
-查看使用了什么服务
-
-12345678910111213
+          ClassLoader类加载机制Java程序在运行前需要先编译成class文件，Java类初始化的时候会调用java.lang.ClassLoader加载类字节码，ClassLoader会调用JVM的native方法(defineClass0/1/2)来定义一个java.lang.Class实例。
+ClassLoader包含以下几个ClassLoader：- Bootstrap ClassLoader (引导类加载器) 该类加载器实现于JVM层，采用C++编写- Extension ClassLoader (扩展类加载器)- App ClassLoader (系统类加载器) 默认的类加载器
+C
         
       </article>
     </div>
@@ -565,7 +555,7 @@ JAVA IO 文件系统Java抽象出了一个文件系统的对象:java.io.FileSyst
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>Posts</div>
-    <div class="sidebar-state-number">18</div>
+    <div class="sidebar-state-number">20</div>
   </div>
   <div class="sidebar-state-category">
     <div>Categories</div>
@@ -573,7 +563,7 @@ JAVA IO 文件系统Java抽象出了一个文件系统的对象:java.io.FileSyst
   </div>
   <div class="sidebar-state-tag">
     <div>Tags</div>
-    <div class="sidebar-state-number">18</div>
+    <div class="sidebar-state-number">19</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -638,10 +628,10 @@ JAVA IO 文件系统Java抽象出了一个文件系统的对象:java.io.FileSyst
       
         <div>
           <span class="icon-brush"></span>
-          24.1k
+          26.3k
           &nbsp;|&nbsp;
           <span class="icon-coffee"></span>
-          01:50
+          02:00
         </div>
       
       
@@ -674,7 +664,7 @@ JAVA IO 文件系统Java抽象出了一个文件系统的对象:java.io.FileSyst
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>Posts</div>
-    <div class="sidebar-state-number">18</div>
+    <div class="sidebar-state-number">20</div>
   </div>
   <div class="sidebar-state-category">
     <div>Categories</div>
@@ -682,7 +672,7 @@ JAVA IO 文件系统Java抽象出了一个文件系统的对象:java.io.FileSyst
   </div>
   <div class="sidebar-state-tag">
     <div>Tags</div>
-    <div class="sidebar-state-number">18</div>
+    <div class="sidebar-state-number">19</div>
   </div>
 </div>
 <div class="sidebar-social">
