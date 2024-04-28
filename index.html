@@ -412,43 +412,10 @@ ssrf 漏洞产生原因SSRF 形成的原因大都是由于服务端提供了从�
   
   <div class="post-wrap-left wow fadeInUp">
     
-      <a class="post-link" href="/2024/04/22/java/5TemplatesImpl_base64%E5%AD%97%E8%8A%82%E7%A0%81/" aria-label="TemplatesImpl 链子"></a>
+      <a class="post-link" href="/2024/04/22/java/3jdbc%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" aria-label="jdbc反序列化"></a>
     
     
     <div class="post-cover-left">
-      
-        
-        
-          <img data-src="/images/banner.jpg" data-sizes="auto" alt="TemplatesImpl 链子" class="lazyload">
-        
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-04-22</span>
-        <span><span class="icon-pencil"></span>397 words</span>
-        <span><span class="icon-clock"></span>2 mins</span>
-      </div>
-      <h2 class="post-title">TemplatesImpl 链子</h2>
-      <article class="post-article">
-        
-          TemplatesImpl 链子12345TemplatesImpl#getOutputProperties() -&amp;gt; TemplatesImpl#newTransformer() -&amp;gt; TemplatesImpl#getTransletInstance() -&amp;gt; TemplatesImpl#defineTransletClasses() -&amp;gt; TransletClassLoader#defineClass()
-
-defineClass一般我们不能使用，newTransformer就可以外调了，但是也可以getOutputProperties
-POC1234567891
-        
-      </article>
-    </div>
-  </div>
-
-
-  
-  
-  <div class="post-wrap-right wow fadeInUp">
-    
-    <a class="post-link" href="/2024/04/22/java/3jdbc%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"></a>
-    
-    <div class="post-cover-right">
       
         
         
@@ -470,6 +437,39 @@ POC1234567891
 
 如下是简单使用，主要是利用DriverManager.getConnection进行连接
 123456789101112131415161718192021package
+        
+      </article>
+    </div>
+  </div>
+
+
+  
+  
+  <div class="post-wrap-right wow fadeInUp">
+    
+    <a class="post-link" href="/2024/04/22/java/5TemplatesImpl_base64%E5%AD%97%E8%8A%82%E7%A0%81/"></a>
+    
+    <div class="post-cover-right">
+      
+        
+        
+          <img data-src="/images/banner.jpg" data-sizes="auto" alt="TemplatesImpl 链子" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2024-04-22</span>
+        <span><span class="icon-pencil"></span>397 words</span>
+        <span><span class="icon-clock"></span>2 mins</span>
+      </div>
+      <h2 class="post-title">TemplatesImpl 链子</h2>
+      <article class="post-article">
+        
+          TemplatesImpl 链子12345TemplatesImpl#getOutputProperties() -&amp;gt; TemplatesImpl#newTransformer() -&amp;gt; TemplatesImpl#getTransletInstance() -&amp;gt; TemplatesImpl#defineTransletClasses() -&amp;gt; TransletClassLoader#defineClass()
+
+defineClass一般我们不能使用，newTransformer就可以外调了，但是也可以getOutputProperties
+POC1234567891
         
       </article>
     </div>
