@@ -25,12 +25,12 @@
   
 <link rel="stylesheet" href="/css/loader.css">
 
-  <meta name="description" content="2024_xyctf_wpezhttp一步一步做就可以：   warm up  利用： preg_replace 使⽤了 &#x2F;e 模式，导致可以代码执⾏   ezMake看文档：  1echo $(shell cat flag)   题目代码是这样子的： 1234567891011121314151617181920212223242526272829303132333435&lt;?ph">
+  <meta name="description" content="2024_xyctf_wpezhttp一步一步做就可以：   warm up  利用： preg_replace 使⽤了 &#x2F;e 模式，导致可以代码执⾏   ezMake看文档：  1echo $(shell cat flag)   ez?Make$被禁，还可以这样使用shell语法： 1变量名 &#x3D; &#96;linux命令&#96;  flag的四个字母全被禁用，base64编码不行，a被禁用，这里用到">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2024_xyctf">
 <meta property="og:url" content="https://hanggerui88.github.io/2024/04/28/wp/2024_xyctf/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="2024_xyctf_wpezhttp一步一步做就可以：   warm up  利用： preg_replace 使⽤了 &#x2F;e 模式，导致可以代码执⾏   ezMake看文档：  1echo $(shell cat flag)   题目代码是这样子的： 1234567891011121314151617181920212223242526272829303132333435&lt;?ph">
+<meta property="og:description" content="2024_xyctf_wpezhttp一步一步做就可以：   warm up  利用： preg_replace 使⽤了 &#x2F;e 模式，导致可以代码执⾏   ezMake看文档：  1echo $(shell cat flag)   ez?Make$被禁，还可以这样使用shell语法： 1变量名 &#x3D; &#96;linux命令&#96;  flag的四个字母全被禁用，base64编码不行，a被禁用，这里用到">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404272110808.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404272108783.png">
@@ -55,7 +55,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404282231908.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404272112195.jpg">
 <meta property="article:published_time" content="2024-04-28T14:18:12.000Z">
-<meta property="article:modified_time" content="2024-04-28T17:09:08.835Z">
+<meta property="article:modified_time" content="2024-04-28T17:13:15.026Z">
 <meta property="article:author" content="hanggerui88">
 <meta property="article:tag" content="2024_xyctf">
 <meta name="twitter:card" content="summary">
@@ -236,14 +236,6 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $(shell cat flag)</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404272051837.png"></p>
-<p>题目代码是这样子的：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">waf</span>(<span class="params"><span class="variable">$cmd</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/\/|\n|\r|\;|\|/i&#x27;</span>, <span class="variable">$cmd</span>)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$cmd</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$cmd</span> = <span class="title function_ invoke__">waf</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]);</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$cmd</span> === <span class="literal">false</span>) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="keyword">array</span>(<span class="string">&#x27;makefileContent&#x27;</span> =&gt; <span class="string">&#x27;failed&#x27;</span>, <span class="string">&#x27;output&#x27;</span> =&gt; <span class="string">&#x27;nonono&#x27;</span>));</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable">$makefileContent</span> = <span class="string">&lt;&lt;&lt;EOD</span></span><br><span class="line"><span class="string">SHELL := /bin/bash</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">ifndef PATH</span></span><br><span class="line"><span class="string">override PATH :=</span></span><br><span class="line"><span class="string">else</span></span><br><span class="line"><span class="string">override PATH :=</span></span><br><span class="line"><span class="string">endif</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">.PHONY: FLAG</span></span><br><span class="line"><span class="string">FLAG: ./flag</span></span><br><span class="line"><span class="string">\t<span class="subst">$cmd</span></span></span><br><span class="line"><span class="string">EOD</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">file_put_contents</span>(<span class="string">&#x27;Makefile&#x27;</span>, <span class="variable">$makefileContent</span>) !== <span class="literal">false</span>) &#123;</span><br><span class="line">        <span class="variable">$command</span> = <span class="string">&quot;make -f Makefile 2&gt;&amp;1&quot;</span>;</span><br><span class="line">        <span class="variable">$output</span> = <span class="title function_ invoke__">shell_exec</span>(<span class="variable">$command</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="keyword">array</span>(<span class="string">&#x27;makefileContent&#x27;</span> =&gt; <span class="variable">$makefileContent</span>, <span class="string">&#x27;output&#x27;</span> =&gt; <span class="variable">$output</span>));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="keyword">array</span>(<span class="string">&#x27;makefileContent&#x27;</span> =&gt; <span class="string">&#x27;failed&#x27;</span>, <span class="string">&#x27;output&#x27;</span> =&gt; <span class="string">&#x27;failed&#x27;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>学长写的：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@echo `echo &#x27;&lt;?php if(system(&quot;cat flag&quot;))&#123;&#125;&#x27;&gt;1.php`</span><br></pre></td></tr></table></figure>
-
-
-
 <h2><span id="ezmake">ez?Make</span></h2><p>$被禁，还可以这样使用shell语法：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">变量名 = `linux命令`</span><br></pre></td></tr></table></figure>
 
@@ -398,7 +390,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hanggerui88.github.io/2024/04/28/wp/2024_xyctf/" data-id="clvjsf4y1000lzghqhlff6r2b" data-title="2024_xyctf" class="article-share-link">Share</a>
+      <a data-url="https://hanggerui88.github.io/2024/04/28/wp/2024_xyctf/" data-id="clvjshkt2000f44hqclh25vlf" data-title="2024_xyctf" class="article-share-link">Share</a>
       
       
       
@@ -538,10 +530,10 @@
       
         <div>
           <span class="icon-brush"></span>
-          30.8k
+          30.6k
           &nbsp;|&nbsp;
           <span class="icon-coffee"></span>
-          02:24
+          02:23
         </div>
       
       

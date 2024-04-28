@@ -197,8 +197,8 @@
     <div class="post-info">
       <div class="post-meta">
         <span><span class="icon-calendar"></span>2024-04-28</span>
-        <span><span class="icon-pencil"></span>3.2k words</span>
-        <span><span class="icon-clock"></span>17 mins</span>
+        <span><span class="icon-pencil"></span>3k words</span>
+        <span><span class="icon-clock"></span>16 mins</span>
       </div>
       <h2 class="post-title">2024_xyctf</h2>
       <article class="post-article">
@@ -215,8 +215,11 @@ ezMake看文档：
 1echo $(shell cat flag)
 
 
-题目代码是这样子的：
-1234567891011121314151617181920212223242526272829303132333435&amp;lt;?phpfunction waf($cmd)&amp;#123;    if (preg_match(&amp;#x27;/\/|\n|\r|\;|\|/i&amp;#x27;, $cmd)) &amp;#123;        retu
+ez?Make$被禁，还可以这样使用shell语法：
+1变量名 = `linux命令`
+
+flag的四个字母全被禁用，base64编码不行，a被禁用，这里用到了 xxd命令:
+1234┌──(root㉿Sinead)-[/home/kail/Desktop]└─# echo -n &amp;quot;cat /flag&amp;quot; | xxd -p63617420
         
       </article>
     </div>
@@ -637,10 +640,10 @@ C
       
         <div>
           <span class="icon-brush"></span>
-          30.8k
+          30.6k
           &nbsp;|&nbsp;
           <span class="icon-coffee"></span>
-          02:24
+          02:23
         </div>
       
       
