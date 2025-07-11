@@ -1,0 +1,766 @@
+
+  <!DOCTYPE html>
+  <html lang="en"  
+    
+      data-theme-mode="auto"
+    
+  >
+  <head>
+  
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_0khxww3tj3q9';window.REIMU_CONFIG.clipboard_tips = {"success":{"en":"Copy successfully (*^▽^*)","zh-CN":"复制成功 (*^▽^*)","zh-TW":"複製成功 (*^▽^*)","ja":"コピー成功 (*^▽^*)"},"fail":{"en":"Copy failed (ﾟ⊿ﾟ)ﾂ","zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ","zh-TW":"複製失敗 (ﾟ⊿ﾟ)ﾂ","ja":"コピー失敗 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = 'All articles on this blog are licensed under the BY-NC-SA license agreement unless otherwise stated. Please indicate the source when reprinting!';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'http://example.com';</script>
+  
+  <title>
+    豆瓣图书爬虫学习笔记 |
+    
+    Hexo
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_0khxww3tj3q9.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="豆瓣图书爬虫学习笔记（附源码）从豆瓣图书按标签分类爬取图书信息，保存到CSV文件并存储到MySQL数据库。 依赖123456789import csvimport jsonimport osimport timeimport pandas as pd  # 数据处理import pymysql       # MySQL操作import requests      # HTTP请求import r">
+<meta property="og:type" content="article">
+<meta property="og:title" content="豆瓣图书爬虫学习笔记">
+<meta property="og:url" content="http://example.com/2025/07/11/%E8%B1%86%E7%93%A3%E5%9B%BE%E4%B9%A6%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="豆瓣图书爬虫学习笔记（附源码）从豆瓣图书按标签分类爬取图书信息，保存到CSV文件并存储到MySQL数据库。 依赖123456789import csvimport jsonimport osimport timeimport pandas as pd  # 数据处理import pymysql       # MySQL操作import requests      # HTTP请求import r">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-11T10:53:54.000Z">
+<meta property="article:modified_time" content="2025-07-11T13:00:26.181Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="爬虫">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL&#x2F;toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx&#x2F;1oA&#x2F;0l8ysE" crossorigin="anonymous">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css" integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous">
+
+  
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      
+      
+        
+      
+      <div class="loading-word">Loading...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+<div id="heatmap-tooltip"></div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/">Home</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/archives">Archives</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/about">About</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/friend">Friend</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
+    
+    
+    
+  </nav>
+  
+</div>
+<header id="header">
+  
+    
+      
+        <picture>
+          
+        </picture>
+        
+          <img  fetchpriority="high" src="/images/banner.webp" alt="豆瓣图书爬虫学习笔记">
+        
+      
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">豆瓣图书爬虫学习笔记</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
+  
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        
+          <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B1%86%E7%93%A3%E5%9B%BE%E4%B9%A6%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E9%99%84%E6%BA%90%E7%A0%81%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">豆瓣图书爬虫学习笔记（附源码）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96"><span class="toc-number">1.1.</span> <span class="toc-text">依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spider%E7%B1%BB"><span class="toc-number">1.2.</span> <span class="toc-text">Spider类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Data%E7%B1%BB-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="toc-number">1.3.</span> <span class="toc-text">Data类 - 数据库操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E7%A8%8B%E5%BA%8F%E6%B5%81%E7%A8%8B"><span class="toc-number">1.4.</span> <span class="toc-text">主程序流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.5.</span> <span class="toc-text">数据库设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%A6%E7%BB%86%E4%BB%A3%E7%A0%81"><span class="toc-number">1.6.</span> <span class="toc-text">详细代码</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="John Doe" class="lazyload">
+  <div class="sidebar-author-name">John Doe</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Post</div>
+    <div class="sidebar-state-number">22</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Category</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tag</div>
+    <div class="sidebar-state-number">20</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="Home"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Home</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="Archives"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Archives</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="About"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">About</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="Friend"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Friend</div>
+      </div>
+    
+  
+</div>
+</div>
+        
+      
+      
+        
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+        
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+  
+</aside>
+
+          <section id="main"><article id="post-豆瓣图书爬虫学习笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-07-11T10:53:54.000Z" itemprop="datePublished">2025-07-11</time>
+    <time style="display: none;" id="post-update-time">2025-07-11</time>
+  </span>
+</div>
+
+      
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h1 id="豆瓣图书爬虫学习笔记（附源码）"><a href="#豆瓣图书爬虫学习笔记（附源码）" class="headerlink" title="豆瓣图书爬虫学习笔记（附源码）"></a>豆瓣图书爬虫学习笔记（附源码）</h1><p>从豆瓣图书按标签分类爬取图书信息，保存到CSV文件并存储到MySQL数据库。</p>
+<h2 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd  <span class="comment"># 数据处理</span></span><br><span class="line"><span class="keyword">import</span> pymysql       <span class="comment"># MySQL操作</span></span><br><span class="line"><span class="keyword">import</span> requests      <span class="comment"># HTTP请求</span></span><br><span class="line"><span class="keyword">import</span> re            <span class="comment"># 正则表达式</span></span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree  <span class="comment"># XML/HTML解析</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Spider类"><a href="#Spider类" class="headerlink" title="Spider类"></a>Spider类</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">spider</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, page, tag</span>):</span><br><span class="line">        <span class="comment"># 构造目标URL: https://book.douban.com/tag/&#123;tag&#125;?start=&#123;page&#125;&amp;type=T</span></span><br><span class="line">        <span class="variable language_">self</span>.page = page * <span class="number">20</span></span><br><span class="line">        <span class="variable language_">self</span>.tag = tag</span><br><span class="line">        <span class="variable language_">self</span>.url = <span class="string">f&quot;https://book.douban.com/tag/<span class="subst">&#123;self.tag&#125;</span>?start=<span class="subst">&#123;self.page&#125;</span>&amp;type=T&quot;</span></span><br><span class="line">        <span class="variable language_">self</span>.headers = &#123;...&#125;  <span class="comment"># 包含cookie的请求头</span></span><br></pre></td></tr></table></figure>
+
+<p>对每个详情页解析:</p>
+<ul>
+<li>标题：<code>//span[@property=&quot;v:itemreviewed&quot;]/text()</code></li>
+<li>作者：<code>//div[@id=&quot;info&quot;]/span[1]/a/text()</code></li>
+<li>封面：<code>//img[@rel=&quot;v:photo&quot;]/@src</code></li>
+<li>出版年份：使用正则<code>(\d&#123;4&#125;-\d&#123;1,2&#125;)</code></li>
+<li>价格：正则匹配<code>(\d+)\.\d+元?</code></li>
+<li>评分：<code>//strong[@property=&quot;v:average&quot;]/text()</code></li>
+<li>评论：JSON格式存储评论时间和内容</li>
+</ul>
+<hr>
+<h2 id="Data类-数据库操作"><a href="#Data类-数据库操作" class="headerlink" title="Data类 - 数据库操作"></a>Data类 - 数据库操作</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">data</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># MySQL连接配置</span></span><br><span class="line">        <span class="variable language_">self</span>.conn = pymysql.connect(</span><br><span class="line">            host=<span class="string">&#x27;127.0.0.1&#x27;</span>,</span><br><span class="line">            user=<span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">            password=<span class="string">&#x27;1111&#x27;</span>,</span><br><span class="line">            database=<span class="string">&#x27;spider&#x27;</span></span><br><span class="line">        )</span><br></pre></td></tr></table></figure>
+
+<h2 id="主程序流程"><a href="#主程序流程" class="headerlink" title="主程序流程"></a>主程序流程</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    tags = [<span class="string">&#x27;小说&#x27;</span>, <span class="string">&#x27;文学&#x27;</span>]  <span class="comment"># 目标标签</span></span><br><span class="line">    page = <span class="number">2</span>               <span class="comment"># 每个标签爬取2页</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 创建爬虫实例</span></span><br><span class="line">    newspider = spider(<span class="number">0</span>,<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 分标签分页爬取</span></span><br><span class="line">    <span class="keyword">for</span> tag <span class="keyword">in</span> tags:</span><br><span class="line">        time.sleep(<span class="number">10</span>)  <span class="comment"># 防封策略</span></span><br><span class="line">        <span class="keyword">for</span> page_num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, page+<span class="number">1</span>):</span><br><span class="line">            spider_ins = spider(page_num, tag)</span><br><span class="line">            spider_ins.csv_init()</span><br><span class="line">            spider_ins.get_detail(tag)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 写入数据库</span></span><br><span class="line">    db = data()</span><br><span class="line">    db.write_to_database(<span class="string">&#x27;./temp.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> book (</span><br><span class="line">    b_id <span class="type">INT</span>(<span class="number">10</span>) AUTO_INCREMENT <span class="keyword">PRIMARY KEY</span>,</span><br><span class="line">    tag <span class="type">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">    title <span class="type">VARCHAR</span>(<span class="number">200</span>),</span><br><span class="line">    author <span class="type">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    <span class="keyword">year</span> <span class="type">CHAR</span>(<span class="number">10</span>),</span><br><span class="line">    cover <span class="type">VARCHAR</span>(<span class="number">300</span>),</span><br><span class="line">    rate <span class="type">FLOAT</span>,</span><br><span class="line">    price <span class="type">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">    comment JSON,  <span class="comment">-- 存储JSON格式评论数据</span></span><br><span class="line">    crawl_time <span class="type">TIMESTAMP</span> <span class="keyword">DEFAULT</span> <span class="built_in">CURRENT_TIMESTAMP</span></span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4;</span><br></pre></td></tr></table></figure>
+
+<h2 id="详细代码"><a href="#详细代码" class="headerlink" title="详细代码"></a>详细代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">spider</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,page,tag</span>):</span><br><span class="line">        <span class="variable language_">self</span>.page=page*<span class="number">20</span></span><br><span class="line">        <span class="variable language_">self</span>.tag=tag</span><br><span class="line">        <span class="variable language_">self</span>.url=<span class="string">f&quot;https://book.douban.com/tag/<span class="subst">&#123;self.tag&#125;</span>?start=<span class="subst">&#123;self.page&#125;</span>&amp;type=T&quot;</span></span><br><span class="line">        <span class="variable language_">self</span>.headers = &#123;</span><br><span class="line">            <span class="string">&#x27;Host&#x27;</span>: <span class="string">&#x27;book.douban.com&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;Accept&#x27;</span>: <span class="string">&#x27;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;Accept-Language&#x27;</span>: <span class="string">&#x27;zh-CN,zh;q=0.9,en;q=0.8&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;Connection&#x27;</span>: <span class="string">&#x27;keep-alive&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;Referer&#x27;</span>: <span class="string">&#x27;https://book.douban.com/tag/&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;Cache-Control&#x27;</span>: <span class="string">&#x27;max-age=0&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;cookie&#x27;</span>:<span class="string">&#x27;bid=Cd8aG6FKDYM; _vwo_uuid_v2=D697E510D4963B643F816125CE52A87EA|d0a2a804f89c858482dcd73706529ff7; _pk_id.100001.3ac3=6738a9674717d69b.1750754636.; __yadk_uid=V4gvX8vwQveX2ZOOr2SkQbbjK47buWzx; dbcl2=&quot;289542484:ynYE5qHg9kg&quot;; push_noty_num=0; push_doumail_num=0; ct=y; __utmv=30149280.28954; ll=&quot;118137&quot;; ck=ZOht; ap_v=0,6.0; _pk_ref.100001.3ac3=%5B%22%22%2C%22%22%2C1750813492%2C%22https%3A%2F%2Fcn.bing.com%2F%22%5D; _pk_ses.100001.3ac3=1; __utma=30149280.1340771599.1750754635.1750767699.1750813493.4; __utmc=30149280; __utmz=30149280.1750813493.4.2.utmcsr=cn.bing.com|utmccn=(referral)|utmcmd=referral|utmcct=/; __utmt_douban=1; __utma=81379588.1482404396.1750754635.1750767699.1750813493.4; __utmc=81379588; __utmz=81379588.1750813493.4.2.utmcsr=cn.bing.com|utmccn=(referral)|utmcmd=referral|utmcct=/; __utmt=1; __utmb=30149280.3.10.1750813493; __utmb=81379588.3.10.1750813493&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_detail</span>(<span class="params">self,tag</span>):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            req = requests.get(<span class="variable language_">self</span>.url, headers=<span class="variable language_">self</span>.headers)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;爬取的页面：&#x27;</span> + <span class="variable language_">self</span>.url)</span><br><span class="line">            req_xpath = etree.HTML(req.text)</span><br><span class="line">            li_xpath = req_xpath.xpath(<span class="string">&#x27;//ul[@class=&quot;subject-list&quot;]/li/div[@class=&quot;info&quot;]/h2/a/@href&#x27;</span>)</span><br><span class="line">            href = []  <span class="comment"># 详情链接</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> li_xpath:</span><br><span class="line">                href.append(i)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> href:</span><br><span class="line">                req_detail = requests.get(i, headers=<span class="variable language_">self</span>.headers)</span><br><span class="line">                req_detailxpath = etree.HTML(req_detail.text)</span><br><span class="line"></span><br><span class="line">                title = req_detailxpath.xpath(<span class="string">&#x27;//span[@property=&quot;v:itemreviewed&quot;]/text()&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line">                <span class="comment"># / text()：提取所选 &lt; span &gt; 标签内部的文本内容</span></span><br><span class="line">                author = req_detailxpath.xpath(<span class="string">&#x27;//div[@id=&quot;info&quot;]/span[1]/a/text()&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line">                cover = req_detailxpath.xpath(<span class="string">&#x27;//img[@rel=&quot;v:photo&quot;]/@src&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line">                info_text = <span class="string">&#x27;&#x27;</span>.join(req_detailxpath.xpath(<span class="string">&#x27;//div[@id=&quot;info&quot;]/text()&#x27;</span>))</span><br><span class="line">                year_match = re.search(<span class="string">r&#x27;(\d&#123;4&#125;-\d&#123;1,2&#125;)&#x27;</span>, info_text)</span><br><span class="line">                year = year_match.group(<span class="number">1</span>) <span class="keyword">if</span> year_match <span class="keyword">else</span> <span class="string">&quot;未知年份&quot;</span></span><br><span class="line"></span><br><span class="line">                <span class="comment"># 安全获取价格 - 更健壮的正则表达式</span></span><br><span class="line">                price_match = re.search(<span class="string">r&#x27;(\d+)\.\d+元?&#x27;</span>, info_text)</span><br><span class="line">                price = price_match.group(<span class="number">1</span>) <span class="keyword">if</span> price_match <span class="keyword">else</span> <span class="string">&quot;0&quot;</span></span><br><span class="line">                <span class="comment"># 评分</span></span><br><span class="line">                rate_match = req_detailxpath.xpath(<span class="string">&#x27;//strong[@property=&quot;v:average&quot;]/text()&#x27;</span>)[<span class="number">0</span>].strip()</span><br><span class="line">                rate = rate_match <span class="keyword">if</span> rate_match <span class="keyword">else</span> <span class="string">&quot;无&quot;</span></span><br><span class="line">                comment = []</span><br><span class="line">                <span class="keyword">for</span> path <span class="keyword">in</span> req_detailxpath.xpath(<span class="string">&#x27;//ul/li[@class=&quot;comment-item&quot;]&#x27;</span>):</span><br><span class="line">                    comment_content = path.xpath(<span class="string">&#x27;.//p[@class=&quot;comment-content&quot;]/span[1]/text()&#x27;</span>)</span><br><span class="line">                    <span class="comment"># // 表示任意深度的后代节点</span></span><br><span class="line">                    comment_time = path.xpath(<span class="string">&#x27;.//span[@class=&quot;comment-info&quot;]//a[@class=&quot;comment-time&quot;]/text()&#x27;</span>)</span><br><span class="line"></span><br><span class="line">                    comment.append(&#123;</span><br><span class="line">                        <span class="string">&quot;comment_time&quot;</span>: comment_time,</span><br><span class="line">                        <span class="string">&quot;comment_content&quot;</span>: comment_content</span><br><span class="line">                    &#125;)</span><br><span class="line">                comment = json.dumps(comment)</span><br><span class="line">                <span class="variable language_">self</span>.write_to_csv([tag,title, author, year, cover, rate, price, comment])</span><br><span class="line">                <span class="built_in">print</span>( &#123;</span><br><span class="line">                    <span class="string">&#x27;tag&#x27;</span>:tag <span class="keyword">if</span> tag <span class="keyword">else</span> <span class="string">&quot;未知标签&quot;</span>,</span><br><span class="line">                    <span class="string">&#x27;title&#x27;</span>: title <span class="keyword">if</span> title <span class="keyword">else</span> <span class="string">&quot;未知题目&quot;</span>,</span><br><span class="line">                    <span class="string">&#x27;author&#x27;</span>: author <span class="keyword">if</span> author <span class="keyword">else</span> <span class="string">&quot;未知作者&quot;</span>,</span><br><span class="line">                    <span class="string">&#x27;year&#x27;</span>: year <span class="keyword">if</span> year <span class="keyword">else</span> <span class="string">&quot;未知年份&quot;</span>,</span><br><span class="line">                    <span class="string">&#x27;cover&#x27;</span>: cover <span class="keyword">if</span> cover <span class="keyword">else</span> <span class="string">&quot;未知封面&quot;</span>,</span><br><span class="line">                    <span class="string">&#x27;rate&#x27;</span>: rate <span class="keyword">if</span> rate <span class="keyword">else</span> <span class="string">&quot;未知评分&quot;</span>,</span><br><span class="line">                    <span class="string">&#x27;price&#x27;</span>: price <span class="keyword">if</span> price <span class="keyword">else</span> <span class="string">&quot;未知价格&quot;</span>,</span><br><span class="line">                    <span class="string">&#x27;comment&#x27;</span>: comment <span class="keyword">if</span> comment <span class="keyword">else</span> <span class="string">&quot;未知评论&quot;</span></span><br><span class="line">                &#125;)</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;爬取失败：<span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># GEI后就存csv,然后存到数据库</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">write_to_csv</span>(<span class="params">self,data</span>):</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;./temp.csv&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,newline=<span class="string">&#x27;&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            writer=csv.writer(f)</span><br><span class="line">            writer.writerow(data)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">csv_init</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(<span class="string">&#x27;./temp.csv&#x27;</span>):</span><br><span class="line">            <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;./temp.csv&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,newline=<span class="string">&#x27;&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>)<span class="keyword">as</span> f:</span><br><span class="line">                writer=csv.writer(f)</span><br><span class="line">                writer.writerow([<span class="string">&#x27;tag&#x27;</span>,<span class="string">&#x27;title&#x27;</span>,<span class="string">&#x27;author&#x27;</span>,<span class="string">&#x27;year&#x27;</span>,<span class="string">&#x27;cover&#x27;</span>,<span class="string">&#x27;rate&#x27;</span>,<span class="string">&#x27;price&#x27;</span>,<span class="string">&#x27;comment&#x27;</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">data</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.conn = pymysql.connect(host=<span class="string">&#x27;127.0.0.1&#x27;</span>, user=<span class="string">&#x27;root&#x27;</span>, passwd=<span class="string">&#x27;1111&#x27;</span>, port=<span class="number">3306</span>, database=<span class="string">&#x27;spider&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">write_to_database</span>(<span class="params">self,csv</span>):</span><br><span class="line">        df = pd.read_csv(csv)</span><br><span class="line">        df = df.where(df.notnull(), <span class="literal">None</span>)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">with</span> <span class="variable language_">self</span>.conn.cursor() <span class="keyword">as</span> cursor:</span><br><span class="line">                insert_sql = <span class="string">&quot;insert into book(tag,title,author,year,cover,rate,price,comment) &quot;</span> \</span><br><span class="line">                             <span class="string">&quot;values (%(tag)s,%(title)s, %(author)s, %(year)s, %(cover)s, %(rate)s, %(price)s, %(comment)s)&quot;</span></span><br><span class="line">                insert_data = []</span><br><span class="line">                <span class="keyword">for</span> _, row <span class="keyword">in</span> df.iterrows():</span><br><span class="line">                    <span class="comment"># if pd.isna(row[&#x27;tag&#x27;]|row[&#x27;title&#x27;]|row[&#x27;author&#x27;]|row[&#x27;year&#x27;]|row[&#x27;cover&#x27;]|row[&#x27;rate&#x27;]|row[&#x27;price&#x27;]|row[&#x27;comment&#x27;]):</span></span><br><span class="line">                        <span class="comment"># 处理缺失值</span></span><br><span class="line">                        <span class="comment"># insert_data.append(None)</span></span><br><span class="line">                    insert_data.append(&#123;</span><br><span class="line">                        <span class="string">&#x27;tag&#x27;</span>: row[<span class="string">&#x27;tag&#x27;</span>] <span class="keyword">if</span> row[<span class="string">&#x27;tag&#x27;</span>] <span class="keyword">else</span> <span class="literal">None</span>,</span><br><span class="line">                        <span class="string">&#x27;title&#x27;</span>: row[<span class="string">&#x27;title&#x27;</span>] <span class="keyword">if</span> row[<span class="string">&#x27;title&#x27;</span>] <span class="keyword">else</span> <span class="literal">None</span>,</span><br><span class="line">                        <span class="string">&#x27;author&#x27;</span>: row[<span class="string">&#x27;author&#x27;</span>] <span class="keyword">if</span> row[<span class="string">&#x27;author&#x27;</span>] <span class="keyword">else</span> <span class="literal">None</span>,</span><br><span class="line">                        <span class="string">&#x27;year&#x27;</span>: row[<span class="string">&#x27;year&#x27;</span>] <span class="keyword">if</span> row[<span class="string">&#x27;year&#x27;</span>] <span class="keyword">else</span> <span class="literal">None</span>,</span><br><span class="line">                        <span class="string">&#x27;cover&#x27;</span>: row[<span class="string">&#x27;cover&#x27;</span>] <span class="keyword">if</span> row[<span class="string">&#x27;cover&#x27;</span>] <span class="keyword">else</span> <span class="literal">None</span>,</span><br><span class="line">                        <span class="string">&#x27;rate&#x27;</span>: row[<span class="string">&#x27;rate&#x27;</span>] <span class="keyword">if</span> row[<span class="string">&#x27;rate&#x27;</span>] <span class="keyword">else</span> <span class="literal">None</span>,</span><br><span class="line">                        <span class="string">&#x27;price&#x27;</span>: row[<span class="string">&#x27;price&#x27;</span>] <span class="keyword">if</span> row[<span class="string">&#x27;price&#x27;</span>] <span class="keyword">else</span> <span class="literal">None</span>,</span><br><span class="line">                        <span class="string">&#x27;comment&#x27;</span>: row[<span class="string">&#x27;comment&#x27;</span>] <span class="keyword">if</span> row[<span class="string">&#x27;comment&#x27;</span>] <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line">                    &#125;)</span><br><span class="line"></span><br><span class="line">                batch_size = <span class="number">40</span></span><br><span class="line">                total_rows = <span class="built_in">len</span>(insert_data)</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, total_rows, batch_size):</span><br><span class="line">                    batch = insert_data[i:i + batch_size]</span><br><span class="line">                    cursor.executemany(insert_sql, batch)</span><br><span class="line">                    <span class="variable language_">self</span>.conn.commit()</span><br><span class="line">                <span class="variable language_">self</span>.conn.commit()</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;数据库错误：<span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    newspider=spider(<span class="number">0</span>,<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    tags = [<span class="string">&#x27;小说&#x27;</span>, <span class="string">&#x27;文学&#x27;</span>]</span><br><span class="line">    page=<span class="number">2</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> tags:</span><br><span class="line">        time.sleep(<span class="number">10</span>)  <span class="comment"># 每爬取一段时间数据休息 30 s， 防止被爬虫系统检测到</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,page+<span class="number">1</span>):</span><br><span class="line">            newspider=spider(j,i)</span><br><span class="line">            newspider.csv_init()</span><br><span class="line">            newspider.get_detail(i)</span><br><span class="line">    db=data()</span><br><span class="line">    db.write_to_database(<span class="string">&#x27;./temp.csv&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># CREATE TABLE IF NOT EXISTS book (</span></span><br><span class="line"><span class="comment"># b_id  int(10) AUTO_INCREMENT PRIMARY KEY,</span></span><br><span class="line"><span class="comment">#                     tag VARCHAR(20),</span></span><br><span class="line"><span class="comment">#                     title VARCHAR(200),</span></span><br><span class="line"><span class="comment">#                     author VARCHAR(100),</span></span><br><span class="line"><span class="comment">#                     year CHAR(10),</span></span><br><span class="line"><span class="comment">#                     cover VARCHAR(300),</span></span><br><span class="line"><span class="comment">#                     rate FLOAT,</span></span><br><span class="line"><span class="comment">#                     price VARCHAR(20),</span></span><br><span class="line"><span class="comment">#                     comment JSON,</span></span><br><span class="line"><span class="comment">#                     crawl_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP</span></span><br><span class="line"><span class="comment">#                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</span></span><br><span class="line"><span class="comment"># delete from book;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>学的b站视频：</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ta1yYfEis/?buvid=XXE052DEF87809FC60A50A244DE5EFCCF7B29&is_story_h5=false&mid=Dz9tedHPLI0nxRpU5K2V9g==&p=8&plat_id=168&share_from=ugc&share_medium=android&share_plat=android&share_session_id=e230cb0a-a5f4-441c-8c32-d0712aec35c2&share_source=WEIXIN&share_tag=s_i&spmid=main.my-history-search-result.option-more.0&timestamp=1750752022&unique_k=c1vPdbt&up_id=384650805&vd_source=a3d4488494e8456375bd6d1e86850642">https://www.bilibili.com/video/BV1ta1yYfEis/?buvid=XXE052DEF87809FC60A50A244DE5EFCCF7B29&amp;is_story_h5=false&amp;mid=Dz9tedHPLI0nxRpU5K2V9g%3D%3D&amp;p=8&amp;plat_id=168&amp;share_from=ugc&amp;share_medium=android&amp;share_plat=android&amp;share_session_id=e230cb0a-a5f4-441c-8c32-d0712aec35c2&amp;share_source=WEIXIN&amp;share_tag=s_i&amp;spmid=main.my-history-search-result.option-more.0&amp;timestamp=1750752022&amp;unique_k=c1vPdbt&amp;up_id=384650805&amp;vd_source=a3d4488494e8456375bd6d1e86850642</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="/images/banner.webp" data-sizes="auto" alt="django·blog" class="lazyload">
+          
+        
+        <a href="/2025/07/11/sinead%C2%B7django%C2%B7blog/"></a>
+        <div class="article-nav-caption">Newer</div>
+        <h3 class="article-nav-title">
+          
+            django·blog
+          
+        </h3>
+      </div>
+    
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/banner.webp" data-sizes="auto" alt="携程酒店数据爬虫笔记" class="lazyload">
+        
+      
+      <a href="/2025/07/11/%E6%90%BA%E7%A8%8B%E9%85%92%E5%BA%97%E6%95%B0%E6%8D%AE%E7%88%AC%E8%99%AB/"></a>
+      <div class="article-nav-caption">Older</div>
+      <h3 class="article-nav-title">
+        
+          携程酒店数据爬虫笔记
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+
+
+
+
+</section>
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      
+      
+      
+        2020-2025
+      
+      <span class="footer-info-sep rotate"></span>
+      John Doe
+    </div>
+    
+      <div>
+        Powered by&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        23.8k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        01:47
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">Number of visits&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">Number of visitors&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B1%86%E7%93%A3%E5%9B%BE%E4%B9%A6%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E9%99%84%E6%BA%90%E7%A0%81%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">豆瓣图书爬虫学习笔记（附源码）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96"><span class="toc-number">1.1.</span> <span class="toc-text">依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spider%E7%B1%BB"><span class="toc-number">1.2.</span> <span class="toc-text">Spider类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Data%E7%B1%BB-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="toc-number">1.3.</span> <span class="toc-text">Data类 - 数据库操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E7%A8%8B%E5%BA%8F%E6%B5%81%E7%A8%8B"><span class="toc-number">1.4.</span> <span class="toc-text">主程序流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.5.</span> <span class="toc-text">数据库设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%A6%E7%BB%86%E4%BB%A3%E7%A0%81"><span class="toc-number">1.6.</span> <span class="toc-text">详细代码</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="John Doe" class="lazyload">
+  <div class="sidebar-author-name">John Doe</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Post</div>
+    <div class="sidebar-state-number">22</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Category</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tag</div>
+    <div class="sidebar-state-number">20</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="Home"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Home</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="Archives"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Archives</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="About"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">About</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="Friend"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Friend</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+    
+  </div>
+  
+    
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+    
+  
+</nav>
+
+    </div>
+    
+    
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js" integrity="sha384-8LyaidD9GPxQQgLJO&#x2F;WRw&#x2F;O2h3BoNq&#x2F;ApI&#x2F;ecpvM6RsrCz2qP2ppBXUKihP4V&#x2F;2d" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "John Doe",
+          title: "豆瓣图书爬虫学习笔记",
+          url: "http://example.com/2025/07/11/%E8%B1%86%E7%93%A3%E5%9B%BE%E4%B9%A6%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/",
+          excerpt: "",
+          description: "",
+          stripContent: "豆瓣图书爬虫学习笔记（附源码）从豆瓣图书按标签分类爬取图书信息，保存到CSV文件并存储到MySQL数据库。 依赖123456789import csvimport jsonimport osimport timeimport pandas as pd  # 数据处理import pymysql       # MySQL操作import requests      # HTTP请求import re            # 正则表达式from lxml import etree  # XML/",
+          date: "Fri Jul 11 2025 18:53:54 GMT+0800",
+          updated: "Fri Jul 11 2025 21:00:26 GMT+0800",
+          cover: "/images/banner.webp",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+        
+
+
+
+
+
+
+
+
+      
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.9.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+  </html>
+

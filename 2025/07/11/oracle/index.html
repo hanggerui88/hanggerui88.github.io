@@ -1,0 +1,965 @@
+
+  <!DOCTYPE html>
+  <html lang="en"  
+    
+      data-theme-mode="auto"
+    
+  >
+  <head>
+  
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_0khxww3tj3q9';window.REIMU_CONFIG.clipboard_tips = {"success":{"en":"Copy successfully (*^▽^*)","zh-CN":"复制成功 (*^▽^*)","zh-TW":"複製成功 (*^▽^*)","ja":"コピー成功 (*^▽^*)"},"fail":{"en":"Copy failed (ﾟ⊿ﾟ)ﾂ","zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ","zh-TW":"複製失敗 (ﾟ⊿ﾟ)ﾂ","ja":"コピー失敗 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = 'All articles on this blog are licensed under the BY-NC-SA license agreement unless otherwise stated. Please indicate the source when reprinting!';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'http://example.com';</script>
+  
+  <title>
+    
+    Hexo
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_0khxww3tj3q9.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="oracle理论六十年代末，计算机科学的重要分支，信息系统  要知道这四个基本概念 数据需要一组，或者给他特定含义，例如，学生的数学语文英语成绩分别是多少，不是单个的12，34  数据库是长期存储在计算机内，有组织，可共享的大量数据的集合，数据库的基本特征，数据按一定的数据模型组织，描述和存储，可为各种用户共享，冗余度小，数据独立性较高，易扩展 database  数据库管理系统，database">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2025/07/11/oracle/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="oracle理论六十年代末，计算机科学的重要分支，信息系统  要知道这四个基本概念 数据需要一组，或者给他特定含义，例如，学生的数学语文英语成绩分别是多少，不是单个的12，34  数据库是长期存储在计算机内，有组织，可共享的大量数据的集合，数据库的基本特征，数据按一定的数据模型组织，描述和存储，可为各种用户共享，冗余度小，数据独立性较高，易扩展 database  数据库管理系统，database">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406182221951.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406191619840.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406191619163.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406191620919.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406191632277.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406191638844.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406191638634.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406191639795.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201417801.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201424510.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201708736.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201718607.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406191639690.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406191640601.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201722453.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201723069.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201723653.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201724029.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201943887.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201943678.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202017840.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201943829.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201944615.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202111758.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202113423.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202112709.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201944654.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202125912.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202125372.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202125679.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202139272.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202126917.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202140840.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406211457285.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406211458258.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202140925.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202141837.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202141793.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202141527.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202142312.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406211838710.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406211839938.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406211845399.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406211840988.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406211840669.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406211842204.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406281853581.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406281856453.png">
+<meta property="article:published_time" content="2025-07-11T13:48:58.001Z">
+<meta property="article:modified_time" content="2024-07-01T03:06:18.000Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406182221951.jpg">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL&#x2F;toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx&#x2F;1oA&#x2F;0l8ysE" crossorigin="anonymous">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css" integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous">
+
+  
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate">
+        
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+        
+      </div>
+      
+      
+        
+      
+      <div class="loading-word">Loading...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+<div id="heatmap-tooltip"></div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/">Home</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/archives">Archives</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/about">About</a>
+        </span>
+      
+        <span class="main-nav-link-wrap">
+          <div class="main-nav-icon icon rotate">
+             
+              &#xe62b;
+             
+          </div>
+          <a class="main-nav-link" href="/friend">Friend</a>
+        </span>
+      
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
+    
+    
+    
+  </nav>
+  
+</div>
+<header id="header">
+  
+    
+      
+        <picture>
+          
+        </picture>
+        
+          <img  fetchpriority="high" src="/images/banner.webp" alt="">
+        
+      
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">Hexo</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content"  class="sidebar-right" >
+          <aside id="sidebar">
+  
+  
+  
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        
+          <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#oracle"><span class="toc-number">1.</span> <span class="toc-text">oracle</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%90%86%E8%AE%BA"><span class="toc-number">1.1.</span> <span class="toc-text">理论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">应用</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="John Doe" class="lazyload">
+  <div class="sidebar-author-name">John Doe</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Post</div>
+    <div class="sidebar-state-number">22</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Category</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tag</div>
+    <div class="sidebar-state-number">20</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="Home"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Home</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="Archives"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Archives</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="About"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">About</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="Friend"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Friend</div>
+      </div>
+    
+  
+</div>
+</div>
+        
+      
+      
+        
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+        
+      
+    </div>
+  </div>
+
+  <div class="sidebar-widget">
+  
+  </div>
+  
+</aside>
+
+          <section id="main"><article id="post-oracle" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-07-11T13:48:58.001Z" itemprop="datePublished">2025-07-11</time>
+    <time style="display: none;" id="post-update-time">2024-07-01</time>
+  </span>
+</div>
+
+      
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <h1 id="oracle"><a href="#oracle" class="headerlink" title="oracle"></a>oracle</h1><h2 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h2><p>六十年代末，计算机科学的重要分支，信息系统</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406182221951.jpg"></p>
+<p>要知道这四个基本概念</p>
+<p>数据需要一组，或者给他特定含义，例如，学生的数学语文英语成绩分别是多少，不是单个的12，34</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406191619840.jpg"></p>
+<p>数据库是长期存储在计算机内，有组织，可共享的大量数据的集合，数据库的基本特征，数据按一定的数据模型组织，描述和存储，可为各种用户共享，冗余度小，数据独立性较高，易扩展 database</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406191619163.jpg"></p>
+<p>数据库管理系统，database manger system dbms 位于用户与操作系统之间的一层数据管理软件，是基础软件，是一个大型复杂的软件系统</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406191620919.jpg"></p>
+<p>数据库系统 dbs 数据库系统的构成，数据库，数据库管理系统，应用程序，数据库管理员</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406191632277.jpg"></p>
+<p>数据库系统的特点，数据结构化，数据的共享性高，冗余度低且易扩充数据独立性高</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406191638844.jpg"></p>
+<ul>
+<li>1</li>
+</ul>
+<p>数据独立性包括物理独立性和逻辑独立性，物理独立性是指用户的应用程序与存储磁盘上的数据库中的数据是相互独立的，即，数据在磁盘上怎么样存储是由数据库管理系统管理，用户不需要了解，应用程序要处理的只是数据的逻辑结构，数据的物理内存改变了，应用程序不需要改变 <em><strong>比如说：从物理上来看，数据存储在磁盘上的任意位置会变来变去，但要用到他的数据应用程序是不用变位置的（应用程序也在磁盘上）</strong></em> </p>
+<p>(1) 改变存储设备或引进新的存储设备。</p>
+<p>(2) 改变数据的存储位置，例如把它们从一个区域迁移到另一个区域。</p>
+<p>(3) 改变物理记录的体积。</p>
+<p>(4) 改变数据物理组织方式，例如增加索引，改变Hash函数，或从一种结构改变为另一种结构。</p>
+<p>逻辑独立性是指，用户的应用程序与数据库的逻辑结构是相互独立的，数据的逻辑结构改变，应用程序可以不变，也就是说，数据库在逻辑上的结构与应用程序可以相互分离，相互结合，qq的数据库可以进行适量删删减减，而不发生程序无法运行情况</p>
+<ol>
+<li>在模式中增加新的记录类型，只要不破坏原有记录类型之间的联系。</li>
+<li>在原有记录类型之间增加新的联系。</li>
+<li>在某些记录类型中增加新的数据项。</li>
+</ol>
+<ul>
+<li>2</li>
+</ul>
+<p>从模式角度来看，物理数据独立性是指db的内模式改变尽量不影响逻辑模式，或物理逻辑结构的改变尽量不影响应用程序，外模式&#x2F;模式映像保证了数据库系统中的数据具有较高的逻辑独立性，模式&#x2F;内模式映像保证了数据库系统中的数据具有较高的物理独立性</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406191638634.jpg"></p>
+<p>数据模型是数据库系统的核心和基础</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406191639795.jpg"></p>
+<p>数据模型分为两类，概念模型，也称信息模型，按用户的观点对数据和信息建模，用于数据库设计，逻辑模型和物理模型，逻辑模型主要包括网状模型，层次模型，关系模型</p>
+<ul>
+<li>层次数据模型</li>
+</ul>
+<p>其实层次数据模型的图形表示就是一个倒立生长的树，有二叉树可知，每棵树都有且仅有一个根节点，其余的节点都是非根节点</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201417801.png"></p>
+<p>优点，简单，效率高；缺点，单板缺乏灵活性，必须知道双亲结点才能知道下一个节点，限制了数据库存取路径的控制</p>
+<ul>
+<li>网状数据模型</li>
+</ul>
+<p>可以看作放松层次数据模型的约束性的一种扩展。网状数据模型中所有节点允许脱离父节点而存在</p>
+<p>优点，方便表示很多复杂的关系,效率高，缺点，复杂，不利于维护和重建</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201424510.png"></p>
+<ul>
+<li>关系型数据模型</li>
+</ul>
+<p>应用最多的数据库，使用表格表示实体和实体之间的关系，关系型数据库中，无论是实体还是实体之间的联系都被映射成统一的关系，一张二维表，操作对象和结果都是一张二维表。关系型数据库可用于表示多对多的关系</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201708736.png"></p>
+<p>将图映射为关系型数据库中的表格如图四 ，sut_id和cour_id分别是引用学生表和课程表的cour_id的外键 。优点结构鲜明操作方便，缺点查询效率低</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201718607.png"></p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406191639690.jpg"></p>
+<p>实体之间有一对一，一对多，多对多等多种类型</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406191640601.jpg"></p>
+<p>数据模型的组成要素，数据结构，数据操作，数据的完整性约束条件</p>
+<p>关系型数据模型定义了三种约束完整性：实体完整性（关系必须含有主键，且主键不能重复，不能为空），参照完整性（以外键的形式维护实体间的引用关系，可以为空或者值为被参照关系的主键值）以及用户定义完整性（用户由应用环境决定的针对具体关系数据库的约束）</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201722453.jpg"></p>
+<ul>
+<li>关系模型</li>
+</ul>
+<p>关系模型的数据结构是二维表结构，是关系型数据库的基础，关系的每一个分量必须是一个不可分的数据项，不许表中还有表</p>
+<p>关系模型的基本概念，关系，一张表。元组，表中的一行记录。属性，表中的一列，有属性名和属性值（分量）。分量，元组中的一个属性值。分量，元组中的一个属性值。关系模式，对关系的描述，通常有几张表就有几个关系模式。域，属性值的取值范围。键。超键（关键字），在关系中唯一标识元组的属性集。候选键，不含有多余属性的超键，少一个属性都够不成一个元组。主键，用户选作元组标识的候选键。外键，如果关系模式r中属性k是其他关系模式的主键，那么k是r的外键。主属性，只要在任何一个候选键中出现，这个属性就是主属性。非主属性，与上面的相反</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201723069.jpg"></p>
+<p>数据操作是集合操作，操作对象和操作结果都是关系select,insert,delete.updata</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201723653.jpg"></p>
+<p>关系的完整性约束条件，实体完整性，参照完整性，用户定义完整性</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201724029.jpg"></p>
+<p>dbms在三层之间提供了两层映像，外模式&#x2F;模式映像，模式&#x2F;内模式映像  </p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201943887.jpg"></p>
+<p>笛卡尔积，所有域（类似定义域）取值的组合</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201943678.jpg"></p>
+<p>基本关系的性质，</p>
+<ul>
+<li>列是同质的，</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202017840.png"></p>
+<ul>
+<li>不同的列可出自同一个域，其中，每一列称为一个属性，不同的属性要给予不同的属性名</li>
+<li>列&#x2F;行的顺序无所谓，列&#x2F;行的次序可以任意交换</li>
+<li>任意两个元组候选码不能相同</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201943829.jpg"></p>
+<p>关系模式的符号 R，关系名，包括以下全部。u，组成该关系的属性名集合。D，u中属性所来自的域的集合。DOM，属性向域的映像集合。F,属性间数据的依赖关系的集合</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201944615.jpg"></p>
+<p>基本的关系操作</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202111758.png"></p>
+<ul>
+<li>并</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202113423.png"></p>
+<ul>
+<li>差</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202112709.png"></p>
+<ul>
+<li><p>笛卡尔积</p>
+</li>
+<li><p>选择  相当于：<strong>select * from 表名 where 条件</strong>。</p>
+</li>
+<li><p>投影 用于从R中选择出若干属性列组成新的关系(<strong>默认去重</strong>)</p>
+</li>
+</ul>
+<p>关系操作的特点，对象和结果都是集合方式，一次一集合</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406201944654.jpg"></p>
+<p>考试的时候创建一个类似的关系（表）</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202125912.jpg"></p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202125372.jpg"></p>
+<p>函数依赖，就是知道了学号就可以知道他的姓名，除非定义两个人不重名</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202125679.jpg"></p>
+<ul>
+<li>平凡依赖</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202139272.png"></p>
+<ul>
+<li>反之非平凡</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202126917.jpg"></p>
+<p>完全函数依赖，例子，学生数学成绩完全由该学生学号和数学课程决定，所以数学课成绩完全依赖于学号和数学课</p>
+<p>部分函数依赖：学生学号和姓名可以完全决定唯一的学生，但是学号也可以决定唯一学生</p>
+<p>传递函数依赖：书的出版编号是唯一，版权归出版社所有，所以只能由该出版社出版，书的出版编号-》出版社名，出版社名-》出版社地址，但出版社名不能决定唯一的出版书编号（除非出版社只出版这一本书），则出版书编号传递依赖于出版社地址</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202140840.jpg"></p>
+<p>范式是符合某一种级别的关系模式的集合。数据冗余是指各个数据文件存在重复的数据，<font color='red'>当存在传递依赖或者部份依赖时，必然会存在数据冗余</font>，我们依据关系范式进行数据表分解，从而减轻冗余</p>
+<p>第一范式1NF：表中的每一列都是不可分解的基本数据项，每一个属性不可拥有多个值</p>
+<p>第二范式2NF：前提是满足第一范式。，没有部分依赖</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406211457285.png"></p>
+<p>（出现意外，插入，删除，更改都费劲的话就把一个表拆分成若干个表）</p>
+<p>第三范式：没有传递依赖，没有部份依赖</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406211458258.png"></p>
+<p>BC范式BCNF，主属性不能依赖于主属性，不能存在主键的一部分被另一部分或者非主键的其他部分所决定（右侧全部为候选键）</p>
+<p>第四范式：没有多对多关系</p>
+<p>第五范式：从最终结构重新建立原始结构</p>
+<p>各种范式之间存在联系：1nf&gt;2nf&gt;3nf&gt;4nf&gt;5nf</p>
+<p>低一级的关系模式通过模式分解可以转化为一个高一级范式的关系模式，过程叫做规范化</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202140925.jpg"></p>
+<p>2nf完全依赖于主键</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202141837.jpg"></p>
+<p>3nf没有传递依赖</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202141793.jpg"></p>
+<p>bcnf:主键不被别的决定</p>
+<p> BCNF由Boyce与Codd提出，通常被认为是修正的第三范式 </p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202141527.jpg"></p>
+<p>3nf和BCNF是在函数依赖的条件下对模式分解所能达到的分离程度的测度</p>
+<p>一个模式中的关系模式如果都属于bcnf，那么在函数依赖范畴内，它以实现了彻底的分离，以消除插入和删除的异常，3nf不彻底</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406202142312.jpg"></p>
+<p>码是可以确定一个元组所有信息的属性名，例如{a,b,c,d}知道a或者{a,b}的值就可以确定abcd，{a},{ab}就是码</p>
+<p>候选码的真子集中不存在码，就是候选码里面不存在码,例如{a}</p>
+<p>主码就是主键，是任意一个候选码</p>
+<p> 把同一表内的多对多关系删除 </p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406211838710.jpg"></p>
+<p>消除，主属性对码的部分函数依赖，消除非主属性对码的传递函数依赖，消除主属性对码的部分和传递依赖，消除非平凡且非函数依赖的多值依赖</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406211839938.jpg"></p>
+<p>求范式步骤：</p>
+<p>1.求闭包（）候选码</p>
+<p>2.候选码，主属性</p>
+<p>3.判断范式</p>
+<p>4.分解(一范式分解成二三范式)：分成多个表</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406211845399.jpg"></p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406211840988.jpg"></p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406211840669.jpg"></p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406211842204.jpg"></p>
+<ul>
+<li>实体使用长方形，属性用椭圆型表示，关系用菱形表示</li>
+<li>会er图也得会把er图转化为关系模式</li>
+</ul>
+<p>假设教学管理规定：<br>一个学生可选修多门课，一门课有若干学生选修；<br>一个教师可讲授多门课，一门课只有一个教师讲授；<br>一个学生选修一门课，仅有一个成绩。<br>学生的属性有学号、学生姓名；教师的属性有教师编号，教师姓名；课程的属性有课程号、课程名。</p>
+<p>要求：根据上述语义画出ER 图，要求在图中画出实体的属性并注明联系的类型。</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406281853581.png"></p>
+<p>先看仓库和商品之间是M:N的关系，于是我们首先想到的应该是把联系 库存转换为库存实体。<br>库存 （仓库号，商品号，日期，库存量）<br>然后是商品实体和仓库实体<br>商品（商品号，商品名，单价）<br>仓库（仓库号，仓库名，地址）</p>
+<p>除此之外仓库和商品还有一个供应关系，同样是M:N关系：<br>供应 （仓库号，商品号 ，月份，月供应量）</p>
+<p>在上图的商店和仓库之间的关系可能写漏了，但是它们应该也是M:N的关系，一个商店可以被多个仓库供应，一个仓库也可以供应多个商店。上面已经创建了供应实体，现在只需在供应实体中假如商店号即可，也就是商店实体的主键。</p>
+<p>供应（仓库号，商品号，商店号 ，月份，月供应量）<br>商店（商店号，商店名，地址）</p>
+<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202406281856453.png"></p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><ul>
+<li>DDL(data defintition language)</li>
+</ul>
+<p>对<font color='red'>数据库内部对象</font>进行改变表的结构，数据类型，表之间的连接操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">create table ()</span><br><span class="line">alter table 表名 add 列名 数据类型 ;//添加一个列</span><br><span class="line">alter table 表名 change 列明 新列明 新数据类型;//修改列明</span><br><span class="line">alter table 表名 drop 列明;</span><br><span class="line">drop table 表名；</span><br><span class="line">drop database 数据库名;</span><br><span class="line">truncate//删除表中全部行 </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>DML(data manipulation language)</li>
+</ul>
+<p>数据库操纵语言，对<font color='red'>表内数据</font>增删改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">insert into 表名(字段) values (某值);</span><br><span class="line">update 表名 set 列明=新值 where 条件；</span><br><span class="line">delete from 表名 where 限定条件;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>DQL(data query language)</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 列明 from 表名 where 限定条件;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>DCL(data control language)</li>
+</ul>
+<p>设置更改数据库权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grant</span><br><span class="line">revoke</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+  <nav id="article-nav" data-aos="fade-up">
+    
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/banner.webp" data-sizes="auto" alt="住宿登记辅助系统" class="lazyload">
+        
+      
+      <a href="/2025/07/11/%E4%BD%8F%E5%AE%BF%E7%99%BB%E8%AE%B0%E8%BE%85%E5%8A%A9%E7%B3%BB%E7%BB%9F/"></a>
+      <div class="article-nav-caption">Older</div>
+      <h3 class="article-nav-title">
+        
+          住宿登记辅助系统
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+</article>
+
+
+
+
+
+
+
+
+
+
+</section>
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      
+      
+      
+        2020-2025
+      
+      <span class="footer-info-sep rotate"></span>
+      John Doe
+    </div>
+    
+      <div>
+        Powered by&nbsp;<a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener external nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        23.8k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        01:47
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">Number of visits&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">Number of visitors&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#oracle"><span class="toc-number">1.</span> <span class="toc-text">oracle</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%90%86%E8%AE%BA"><span class="toc-number">1.1.</span> <span class="toc-text">理论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">应用</span></a></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="John Doe" class="lazyload">
+  <div class="sidebar-author-name">John Doe</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Post</div>
+    <div class="sidebar-state-number">22</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Category</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tag</div>
+    <div class="sidebar-state-number">20</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="Home"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Home</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="Archives"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Archives</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="About"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">About</div>
+      </div>
+    
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="Friend"></a>
+        <div class="sidebar-menu-icon icon rotate">
+          
+            &#xe62b;
+          
+        </div>
+        <div class="sidebar-menu-link">Friend</div>
+      </div>
+    
+  
+</div>
+</div>
+      
+    
+  </div>
+  
+    
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+    
+  
+</nav>
+
+    </div>
+    
+    
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js" integrity="sha384-8LyaidD9GPxQQgLJO&#x2F;WRw&#x2F;O2h3BoNq&#x2F;ApI&#x2F;ecpvM6RsrCz2qP2ppBXUKihP4V&#x2F;2d" crossorigin="anonymous"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+    
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "John Doe",
+          title: "",
+          url: "http://example.com/2025/07/11/oracle/",
+          excerpt: "",
+          description: "",
+          stripContent: "oracle理论六十年代末，计算机科学的重要分支，信息系统  要知道这四个基本概念 数据需要一组，或者给他特定含义，例如，学生的数学语文英语成绩分别是多少，不是单个的12，34  数据库是长期存储在计算机内，有组织，可共享的大量数据的集合，数据库的基本特征，数据按一定的数据模型组织，描述和存储，可为各种用户共享，冗余度小，数据独立性较高，易扩展 database  数据库管理系统，database manger system dbms 位于用户与操作系统之间的一层数据管理软件，是基础软件，是一个",
+          date: "Fri Jul 11 2025 21:48:58 GMT+0800",
+          updated: "Mon Jul 01 2024 11:06:18 GMT+0800",
+          cover: "/images/banner.webp",
+        };
+      </script>
+       
+    
+    
+      
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+        
+      
+    
+    
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        
+        const pswp = () => {
+          if (_$$('.article-entry a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-entry',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+            new PhotoSwipeLightbox({
+              gallery: '.article-gallery',
+              children: 'a.article-gallery-item',
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+      
+        
+
+
+
+
+
+
+
+
+      
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.9.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+  </html>
+
