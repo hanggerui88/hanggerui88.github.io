@@ -18,7 +18,7 @@
   
   <title>
     
-    Hexo
+    Blog
   </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   
@@ -35,17 +35,17 @@
   
   
     <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="Blog">
 <meta property="og:url" content="http://example.com/page/2/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Blog">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/banner.webp">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="hanggerui88">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/banner.webp">
   
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/images/favicon.ico">
@@ -196,7 +196,7 @@
         
         
           <a href="/" id="logo">
-            <h1 data-aos="slide-up">Hexo</h1>
+            <h1 data-aos="slide-up">Blog</h1>
           </a>
         
       
@@ -219,8 +219,8 @@
     <div class="sidebar-wrap" data-aos="fade-up">
       
         <div class="sidebar-author">
-  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="John Doe" class="lazyload">
-  <div class="sidebar-author-name">John Doe</div>
+  <img data-src="/avatar/avatar.png" data-sizes="auto" alt="hanggerui88" class="lazyload">
+  <div class="sidebar-author-name">hanggerui88</div>
   <div class="sidebar-description"></div>
 </div>
 <div class="sidebar-state">
@@ -473,10 +473,43 @@ ClassLoader#包含以下几个ClassLoader：- Bootstrap ClassLoader (引导类�
       <div class="post-wrapper">
   <div class="post-wrap-right" data-aos="fade-up">
     
-      <a class="post-link" href="/2024/04/22/JAVA%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F#/" aria-label="JAVA文件系统"></a>
+      <a class="post-link" href="/2024/04/22/RMI/" aria-label="RMI"></a>
     
     
     <div class="post-cover-right">
+      
+        
+        
+          <img data-src="/images/banner.webp" data-sizes="auto" alt="RMI" class="lazyload">
+        
+      
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2024-04-22</span>
+        <span><span class="icon-pencil"></span>481 words</span>
+        <span><span class="icon-clock"></span>2 mins</span>
+      </div>
+      <h2 class="post-title">RMI</h2>
+      <article class="post-article">
+        
+          RMI原文简介Java的RMI远程调用是指，一个JVM中的代码可以通过网络实现远程调用另一个JVM的某个方法。RMI是Remote Method Invocation的缩写。提供服务的一方我们称之为服务器，而实现远程调用的一方我们称之为客户端。
+远程调用的方法需要- 一个继承了java.rmi.Remote的接口
+123456import java.rmi.Remote;import java.rmi.RemoteException;public interface RemoteHelloWorld extends Remote &amp;#123;    public String hello() 
+        
+      </article>
+    </div>
+  </div>
+</div>
+      
+    
+      <div class="post-wrapper">
+  <div class="post-wrap-left" data-aos="fade-up">
+    
+      <a class="post-link" href="/2024/04/22/JAVA%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F#/" aria-label="JAVA文件系统"></a>
+    
+    
+    <div class="post-cover-left">
       
         
         
@@ -497,39 +530,6 @@ ClassLoader#包含以下几个ClassLoader：- Bootstrap ClassLoader (引导类�
 
 JAVA IO 文件系统Java抽象出了一个文件系统的对象:java.io.FileSystem，不同的操作系统有不一样的文件系统,例如Windows和Unix就是两种不一样的文件系统： java.io.UnixFileSystem、java.io.WinNTFileSystemjava.io.FileSystem是一个抽象类，它抽象了对文件的操作，不同操作系统版本的JDK会实现其抽象的方法从而也就实现了跨平台的文件的访问操作。
 需要注意的点有：\1. 并不是所有的文
-        
-      </article>
-    </div>
-  </div>
-</div>
-      
-    
-      <div class="post-wrapper">
-  <div class="post-wrap-left" data-aos="fade-up">
-    
-      <a class="post-link" href="/2024/04/22/RMI/" aria-label="RMI"></a>
-    
-    
-    <div class="post-cover-left">
-      
-        
-        
-          <img data-src="/images/banner.webp" data-sizes="auto" alt="RMI" class="lazyload">
-        
-      
-    </div>
-    <div class="post-info">
-      <div class="post-meta">
-        <span><span class="icon-calendar"></span>2024-04-22</span>
-        <span><span class="icon-pencil"></span>481 words</span>
-        <span><span class="icon-clock"></span>2 mins</span>
-      </div>
-      <h2 class="post-title">RMI</h2>
-      <article class="post-article">
-        
-          RMI原文简介Java的RMI远程调用是指，一个JVM中的代码可以通过网络实现远程调用另一个JVM的某个方法。RMI是Remote Method Invocation的缩写。提供服务的一方我们称之为服务器，而实现远程调用的一方我们称之为客户端。
-远程调用的方法需要- 一个继承了java.rmi.Remote的接口
-123456import java.rmi.Remote;import java.rmi.RemoteException;public interface RemoteHelloWorld extends Remote &amp;#123;    public String hello() 
         
       </article>
     </div>
@@ -663,7 +663,7 @@ catalina 就是Tomcat服务器使用的 Apache实现的servlet容器的 名字�
         2020-2025
       
       <span class="footer-info-sep rotate"></span>
-      John Doe
+      hanggerui88
     </div>
     
       <div>
@@ -706,8 +706,8 @@ catalina 就是Tomcat服务器使用的 Apache实现的servlet容器的 名字�
   <div class="sidebar-wrap">
     
       <div class="sidebar-author">
-  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="John Doe" class="lazyload">
-  <div class="sidebar-author-name">John Doe</div>
+  <img data-src="/avatar/avatar.png" data-sizes="auto" alt="hanggerui88" class="lazyload">
+  <div class="sidebar-author-name">hanggerui88</div>
   <div class="sidebar-description"></div>
 </div>
 <div class="sidebar-state">
