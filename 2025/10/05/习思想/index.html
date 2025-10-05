@@ -17,7 +17,7 @@
   <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_0khxww3tj3q9';window.REIMU_CONFIG.clipboard_tips = {"success":{"en":"Copy successfully (*^▽^*)","zh-CN":"复制成功 (*^▽^*)","zh-TW":"複製成功 (*^▽^*)","ja":"コピー成功 (*^▽^*)"},"fail":{"en":"Copy failed (ﾟ⊿ﾟ)ﾂ","zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ","zh-TW":"複製失敗 (ﾟ⊿ﾟ)ﾂ","ja":"コピー失敗 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = 'All articles on this blog are licensed under the BY-NC-SA license agreement unless otherwise stated. Please indicate the source when reprinting!';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'http://example.com';</script>
   
   <title>
-    JAVA文件系统 |
+    习思想 |
     
     Blog|部分个人学习记录
   </title>
@@ -35,21 +35,20 @@
 
   
   
-    <meta name="description" content="JAVA文件系统JAVA SE内置了两类文件系统:：java.io和java.nio，java.nio的实现是sun.nio  JAVA IO 文件系统Java抽象出了一个文件系统的对象:java.io.FileSystem，不同的操作系统有不一样的文件系统,例如Windows和Unix就是两种不一样的文件系统： java.io.UnixFileSystem、java.io.WinNTFileSy">
+    <meta name="description" content="习思想  差不多就做到这吧，还有二十大部分没有细看，还有一些细节没有补充🐫">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JAVA文件系统">
-<meta property="og:url" content="http://example.com/2024/04/22/JAVA%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F#/index.html">
+<meta property="og:title" content="习思想">
+<meta property="og:url" content="http://example.com/2025/10/05/%E4%B9%A0%E6%80%9D%E6%83%B3/index.html">
 <meta property="og:site_name" content="Blog|部分个人学习记录">
-<meta property="og:description" content="JAVA文件系统JAVA SE内置了两类文件系统:：java.io和java.nio，java.nio的实现是sun.nio  JAVA IO 文件系统Java抽象出了一个文件系统的对象:java.io.FileSystem，不同的操作系统有不一样的文件系统,例如Windows和Unix就是两种不一样的文件系统： java.io.UnixFileSystem、java.io.WinNTFileSy">
+<meta property="og:description" content="习思想  差不多就做到这吧，还有二十大部分没有细看，还有一些细节没有补充🐫">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="d:%5C%E6%96%87%E6%A1%A3%5Cctf%5C%E5%9B%BE%E7%89%87%5C20210707110121.png">
-<meta property="og:image" content="https://tuchuang-1300339532.cos.ap-chengdu.myqcloud.com/img/20210707110434.png">
-<meta property="article:published_time" content="2024-04-22T13:18:08.000Z">
-<meta property="article:modified_time" content="2025-07-11T12:29:06.401Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/picture/pic/202510052124899.png">
+<meta property="article:published_time" content="2025-10-05T13:18:08.000Z">
+<meta property="article:modified_time" content="2025-10-05T13:26:28.591Z">
 <meta property="article:author" content="hanggerui88">
-<meta property="article:tag" content="JAVA文件系统">
+<meta property="article:tag" content="习思想">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="d:%5C%E6%96%87%E6%A1%A3%5Cctf%5C%E5%9B%BE%E7%89%87%5C20210707110121.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/hanggerui88/picture/pic/202510052124899.png">
   
   
     <link rel="alternate" href="/atom.xml" title="Blog|部分个人学习记录" type="application/atom+xml">
@@ -194,7 +193,7 @@
           
         </picture>
         
-          <img  fetchpriority="high" src="/images/banner.webp" alt="JAVA文件系统">
+          <img  fetchpriority="high" src="/images/banner.webp" alt="习思想">
         
       
     
@@ -205,7 +204,7 @@
         
         
           <a href="/" id="logo">
-            <h1 data-aos="slide-up">JAVA文件系统</h1>
+            <h1 data-aos="slide-up">习思想</h1>
           </a>
         
       
@@ -232,7 +231,7 @@
   <h3 class="toc-title">Contents</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JAVA%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.</span> <span class="toc-text">JAVA文件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#JAVA-IO-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.1.</span> <span class="toc-text">JAVA IO 文件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FileInputStream"><span class="toc-number">1.1.1.</span> <span class="toc-text">FileInputStream</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FileOutputStream"><span class="toc-number">1.1.2.</span> <span class="toc-text">FileOutputStream</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JAVA-NIO-2-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.2.</span> <span class="toc-text">JAVA NIO.2 文件系统</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B9%A0%E6%80%9D%E6%83%B3"><span class="toc-number">1.</span> <span class="toc-text">习思想</span></a></li></ol>
       
   </div>
 </div>
@@ -324,13 +323,13 @@
   
 </aside>
 
-          <section id="main"><article id="post-JAVA文件系统#" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+          <section id="main"><article id="post-习思想" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner" data-aos="fade-up">
     <div class="article-meta">
       <div class="article-date">
   <span class="article-date-link" data-aos="zoom-in">
-    <time datetime="2024-04-22T13:18:08.000Z" itemprop="datePublished">2024-04-22</time>
-    <time style="display: none;" id="post-update-time">2025-07-11</time>
+    <time datetime="2025-10-05T13:18:08.000Z" itemprop="datePublished">2025-10-05</time>
+    <time style="display: none;" id="post-update-time">2025-10-05</time>
   </span>
 </div>
 
@@ -343,19 +342,10 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
       
-        <h1 id="JAVA文件系统"><a href="#JAVA文件系统" class="headerlink" title="JAVA文件系统"></a>JAVA文件系统</h1><p>JAVA SE内置了两类文件系统:：<code>java.io</code>和<code>java.nio</code>，<code>java.nio</code>的实现是<code>sun.nio</code></p>
-<p><img src="D:%5C%E6%96%87%E6%A1%A3%5Cctf%5C%E5%9B%BE%E7%89%87%5C20210707110121.png"></p>
-<h2 id="JAVA-IO-文件系统"><a href="#JAVA-IO-文件系统" class="headerlink" title="JAVA IO 文件系统"></a>JAVA IO 文件系统</h2><p>Java抽象出了一个文件系统的对象:<code>java.io.FileSystem</code>，不同的操作系统有不一样的文件系统,例如<code>Windows</code>和<code>Unix</code>就是两种不一样的文件系统： <code>java.io.UnixFileSystem</code>、<code>java.io.WinNTFileSystem</code><br><img src="https://tuchuang-1300339532.cos.ap-chengdu.myqcloud.com/img/20210707110434.png" alt="img"><br><code>java.io.FileSystem</code>是一个抽象类，它抽象了对文件的操作，不同操作系统版本的JDK会实现其抽象的方法从而也就实现了跨平台的文件的访问操作。</p>
-<p>需要注意的点有：<br>\1. 并不是所有的文件操作都在<code>java.io.FileSystem</code>中定义,文件的读取最终调用的是<code>java.io.FileInputStream#read0、readBytes</code>、<code>java.io.RandomAccessFile#read0、readBytes</code>,而写文件调用的是<code>java.io.FileOutputStream#writeBytes</code>、<code>java.io.RandomAccessFile#write0</code>。<br>\2. Java有两类文件系统API！一个是基于<code>阻塞模式的IO</code>的文件系统，另一是JDK7+基于<code>NIO.2</code>的文件系统。</p>
-<h3 id="FileInputStream"><a href="#FileInputStream" class="headerlink" title="FileInputStream#"></a>FileInputStream<a target="_blank" rel="noopener" href="https://longlone.top/%E5%AE%89%E5%85%A8/java/JavaWeb%E5%AE%89%E5%85%A8-%E6%96%87%E7%AB%A0%E5%A4%8D%E7%8E%B0/JAVA%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/#fileinputstream">#</a></h3><p>示例代码如下。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> top.longlone;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.ByteArrayOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FileStudy</span> &#123;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line"><span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;C:\Users\11624\Desktop\test.txt&quot;</span>);</span><br><span class="line"><span class="type">FileInputStream</span> <span class="variable">fileInputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(file);</span><br><span class="line"><span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="type">byte</span>[] bytes = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line"><span class="type">ByteArrayOutputStream</span> <span class="variable">byteArrayOutputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line"><span class="keyword">while</span> ((a = fileInputStream.read(bytes)) != -<span class="number">1</span>) &#123;java</span><br><span class="line">byteArrayOutputStream.write(bytes, <span class="number">0</span>, a);</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(byteArrayOutputStream.toString());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="FileOutputStream"><a href="#FileOutputStream" class="headerlink" title="FileOutputStream"></a>FileOutputStream</h3><p>示例代码如下。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> top.longlone;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.nio.charset.StandardCharsets;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FileStudy</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;C:\\Users\\11624\\Desktop\\test2.txt&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">content</span> <span class="operator">=</span> <span class="string">&quot;Hello world.&quot;</span>;</span><br><span class="line">        <span class="type">FileOutputStream</span> <span class="variable">fileOutputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(file);</span><br><span class="line">        fileOutputStream.write(content.getBytes(StandardCharsets.UTF_8));</span><br><span class="line">        fileOutputStream.flush();</span><br><span class="line">        fileOutputStream.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="JAVA-NIO-2-文件系统"><a href="#JAVA-NIO-2-文件系统" class="headerlink" title="JAVA NIO.2 文件系统#"></a>JAVA NIO.2 文件系统<a target="_blank" rel="noopener" href="https://longlone.top/%E5%AE%89%E5%85%A8/java/JavaWeb%E5%AE%89%E5%85%A8-%E6%96%87%E7%AB%A0%E5%A4%8D%E7%8E%B0/JAVA%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/#java-nio2-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F">#</a></h2><p>Java 7提出了一个基于NIO的文件系统，这个NIO文件系统和阻塞IO文件系统两者是完全独立的。<code>java.nio.file.spi.FileSystemProvider</code>对文件的封装和<code>java.io.FileSystem</code>同理。<br>NIO的文件操作在不同的系统的最终实现类也是不一样的，比如Mac的实现类是: <code>sun.nio.fs.UnixNativeDispatcher</code>,而Windows的实现类是<code>sun.nio.fs.WindowsNativeDispatcher</code>。<br>合理的利用NIO文件系统这一特性我们可以绕过某些只是防御了<code>java.io.FileSystem</code>的<code>WAF</code>&#x2F;<code>RASP</code></p>
+        <h1 id="习思想"><a href="#习思想" class="headerlink" title="习思想"></a>习思想</h1><p><img src="https://raw.githubusercontent.com/hanggerui88/picture/pic/202510052124899.png"></p>
+<blockquote>
+<p>差不多就做到这吧，还有二十大部分没有细看，还有一些细节没有补充🐫</p>
+</blockquote>
 
       
     </div>
@@ -369,7 +359,7 @@
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/JAVA%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" rel="tag">JAVA文件系统</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E4%B9%A0%E6%80%9D%E6%83%B3/" rel="tag">习思想</a></li></ul>
 
 
     </footer>
@@ -377,37 +367,20 @@
   
   <nav id="article-nav" data-aos="fade-up">
     
-      
-      <div class="article-nav-link-wrap article-nav-link-left">
-        
-          
-          
-            <img data-src="/images/banner.webp" data-sizes="auto" alt="TemplatesImpl 链子" class="lazyload">
-          
-        
-        <a href="/2024/04/22/5TemplatesImpl_base64%E5%AD%97%E8%8A%82%E7%A0%81/"></a>
-        <div class="article-nav-caption">Newer</div>
-        <h3 class="article-nav-title">
-          
-            TemplatesImpl 链子
-          
-        </h3>
-      </div>
-    
     
     
     <div class="article-nav-link-wrap article-nav-link-right">
       
         
         
-          <img data-src="/images/banner.webp" data-sizes="auto" alt="classAnnotations" class="lazyload">
+          <img data-src="/images/banner.webp" data-sizes="auto" alt="党史" class="lazyload">
         
       
-      <a href="/2024/04/22/7classAnnotations#/"></a>
+      <a href="/2025/10/04/%E5%85%9A%E5%8F%B2/"></a>
       <div class="article-nav-caption">Older</div>
       <h3 class="article-nav-title">
         
-          classAnnotations
+          党史
         
       </h3>
     </div>
@@ -489,7 +462,7 @@
   <h3 class="toc-title">Contents</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JAVA%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.</span> <span class="toc-text">JAVA文件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#JAVA-IO-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.1.</span> <span class="toc-text">JAVA IO 文件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FileInputStream"><span class="toc-number">1.1.1.</span> <span class="toc-text">FileInputStream</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FileOutputStream"><span class="toc-number">1.1.2.</span> <span class="toc-text">FileOutputStream</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JAVA-NIO-2-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.2.</span> <span class="toc-text">JAVA NIO.2 文件系统</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B9%A0%E6%80%9D%E6%83%B3"><span class="toc-number">1.</span> <span class="toc-text">习思想</span></a></li></ol>
       
   </div>
 </div>
@@ -646,13 +619,13 @@
       <script data-pjax>
         window.REIMU_POST = {
           author: "hanggerui88",
-          title: "JAVA文件系统",
-          url: "http://example.com/2024/04/22/JAVA%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F#/",
+          title: "习思想",
+          url: "http://example.com/2025/10/05/%E4%B9%A0%E6%80%9D%E6%83%B3/",
           excerpt: "",
           description: "",
-          stripContent: "JAVA文件系统JAVA SE内置了两类文件系统:：java.io和java.nio，java.nio的实现是sun.nio  JAVA IO 文件系统Java抽象出了一个文件系统的对象:java.io.FileSystem，不同的操作系统有不一样的文件系统,例如Windows和Unix就是两种不一样的文件系统： java.io.UnixFileSystem、java.io.WinNTFileSystemjava.io.FileSystem是一个抽象类，它抽象了对文件的操作，不同操作系统版本的J",
-          date: "Mon Apr 22 2024 21:18:08 GMT+0800",
-          updated: "Fri Jul 11 2025 20:29:06 GMT+0800",
+          stripContent: "习思想  差不多就做到这吧，还有二十大部分没有细看，还有一些细节没有补充🐫  ",
+          date: "Sun Oct 05 2025 21:18:08 GMT+0800",
+          updated: "Sun Oct 05 2025 21:26:28 GMT+0800",
           cover: "/images/banner.webp",
         };
       </script>
